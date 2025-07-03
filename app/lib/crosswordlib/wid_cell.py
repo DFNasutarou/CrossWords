@@ -2,12 +2,11 @@
 from PyQt5.QtWidgets import (
     QPushButton,
     QWidget,
-    QGridLayout,
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QPainter, QPen
 from .const_color import Col
-
+from ..formlib.layouts import TableLaout
 
 Cell_Default = -1
 Cell_White = 0
@@ -29,29 +28,33 @@ class CellBoard(QWidget):
         super().__init__()
         if not (4 <= n <= 9):
             raise ValueError("サイズは4～9の範囲で指定してください")
-        self.n = n
+
         self.widget: list[list[CellWidget]] = [
             [CellWidget(r, c, self) for c in range(MAX_BOARD_SIZE)]
             for r in range(MAX_BOARD_SIZE)
         ]
-        # self.setFixedHeight(size)
 
-        layout = QGridLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
+        self.board = TableLaout(self)
 
-        for r in range(self.n):
-            for c in range(self.n):
-                layout.addWidget(self.widget[r][c], r, c)
+        for r in range(MAX_BOARD_SIZE):
+            for c in range(MAX_BOARD_SIZE):
+                self.board.addWidget(self.widget[r][c], r, c)
 
         self.row_list = []
         self.col_list = []
-        self.resize()
+        self.resize(n)
 
         self.listener = listener
 
-    def resize(self):
+    def set_margine(self, margine=[0, 0, 0, 0], size=400):
+        self.board.setContentsMargins(*margine)
+        self.setFixedHeight(size)
+        self.resize(self.n)
+
+    def resize(self, n):
         # 盤面の大きさに合わせてウィジェットの大きさを変える
+        self.n = n
+
         cell_size = self.height() // self.n
         all_size = self.n * cell_size
         for r in range(MAX_BOARD_SIZE):
@@ -61,7 +64,6 @@ class CellBoard(QWidget):
                     self.widget[r][c].show()
                 else:
                     self.widget[r][c].hide()
-        self.setFixedSize(all_size, all_size)
 
     def reset(self):
         # 盤面リセット
@@ -108,12 +110,12 @@ class CellBoard(QWidget):
         return save_data
 
     def load(self, load_data):
-        self.n = load_data[BOARD_SIZE]
+        n = load_data[BOARD_SIZE]
         grid = load_data[GRID_DATA]
         for r in range(self.n):
             for c in range(self.n):
                 self.widget[r][c].set_state(grid[r][c])
-        self.resize()
+        self.resize(n)
         self.reset()
 
     def get_num_list(self):
@@ -134,7 +136,7 @@ class CellBoard(QWidget):
         if num not in self.col_pos:
             print("未知のエラー: col-", num)
             return
-        r, c = self.row_pos[num]
+        r, c = self.col_pos[num]
         st = list(text)[::-1]
         for i in range(c, self.n):
             if self.widget[r][i].is_black():
@@ -159,13 +161,17 @@ class CellWidget(QPushButton):
         self.number = None
         self.c = ""
 
+        self.square_par = 5
+        self.number_par = 20
+        self.char_par = 60
+
     def mousePressEvent(self, event):
         # --- 右クリックなら二重四角 ---
-        if event.button() == Qt.RightButton:
+        if event.button() == Qt.MouseButton.RightButton:
             self.state = Cell_Double
 
         # --- 左クリックなら白⇔黒 ---
-        elif event.button() == Qt.LeftButton:
+        elif event.button() == Qt.MouseButton.LeftButton:
             # 二重四角からでも「白」に戻したいなら以下のように
             if self.is_black():
                 self.state = Cell_White
@@ -178,11 +184,6 @@ class CellWidget(QPushButton):
 
         # 状態変更後の共通処理
         self.p.notify()  # 親に通知
-        # self.update()     # paintEvent を呼び出す
-
-    # def toggle_state(self):
-    #     self.state = (self.state + 1) % 3
-    #     self.p.notify()
 
     def paintEvent(self, event):
         super().paintEvent(event)
@@ -201,22 +202,26 @@ class CellWidget(QPushButton):
         painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
         if self.state == Cell_Double:
             # 二重四角を描画
-            rect = self.rect().adjusted(4, 4, -4, -4)
+            n = self.height() * self.square_par // 100
+            n = max(n, 1)
+            rect = self.rect().adjusted(n, n, -n, -n)
             painter.drawRect(rect)
 
         # 数字設定
         if self.number != None:
             font = QFont()
-            font.setPointSize(20)
+            n = self.height() * self.number_par // 100
+            font.setPointSize(n)
             painter.setFont(font)
-            painter.drawText(2, 22, str(self.number))
+            painter.drawText(2, n + 2, str(self.number))
 
         # 文字設定
         if self.c != "":
             font = QFont()
-            font.setPointSize(70)
+            n = self.height() * self.char_par // 100
+            font.setPointSize(n)
             painter.setFont(font)
-            painter.drawText(10, 80, self.c)
+            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, self.c)
 
         painter.end()
 

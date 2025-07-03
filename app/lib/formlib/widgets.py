@@ -3,11 +3,19 @@ from PyQt5.QtWidgets import (
     QLabel,
     QScrollArea,
     QWidget,
-    QHBoxLayout,
     QLineEdit,
 )
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QPixmap, QFont, QPalette, QPainter, QPen, QColor
+from PyQt5.QtGui import (
+    QPixmap,
+    QFont,
+    QPalette,
+    QPainter,
+    QPen,
+    QDoubleValidator,
+    QColor,
+)
+from ..formlib.layouts import RowLayout, ColLayout
 
 
 class ClickableLabel(QLabel):
@@ -63,6 +71,82 @@ class ScrollArea(QScrollArea):
         self.setFixedWidth(width)
 
 
+class RangeSetter(QWidget):
+    def __init__(self, listener, valid: list[float] = [0, 100, 4]):
+        super().__init__()
+        base = ColLayout(self)
+        self.lf = QLineEdit(self)
+        self.rg = QLineEdit(self)
+        self.lf.setText(str(valid[0]))
+        self.rg.setText(str(valid[0]))
+        self.lf.setFixedWidth(60)
+        self.rg.setFixedWidth(60)
+        self.lf.textChanged.connect(self.on_text_changed)
+        self.rg.textChanged.connect(self.on_text_changed)
+        txt = QLabel(self)
+        txt.setText("～")
+        base.addWidget(self.lf)
+        base.addWidget(txt)
+        base.addWidget(self.rg)
+        self.listener = listener
+
+        float_validator = QDoubleValidator(
+            valid[0], valid[1], int(valid[2]), self
+        )  # 小数点以下桁数も指定
+        float_validator.setNotation(QDoubleValidator.Notation.StandardNotation)
+        self.lf.setValidator(float_validator)
+        self.rg.setValidator(float_validator)
+
+        self.valid = valid
+
+    def on_text_changed(self):
+        self.listener.notify()
+
+    def set_range(self, rng: list[float]):
+        self.lf.setText(str(rng[0]))
+        self.rg.setText(str(rng[1]))
+
+    def get_range(self):
+        s = self.lf.text()
+        e = self.rg.text()
+        try:
+            s = float(s)
+        except:
+            s = self.valid[0]
+        try:
+            e = float(e)
+        except:
+            e = self.valid[1]
+        return [s, e]
+
+
+class SquareSetter(QWidget):
+    def __init__(self, listener, validx, validy):
+        super().__init__()
+        base = RowLayout(self)
+        self.xrange = RangeSetter(self, validx)
+        self.yrange = RangeSetter(self, validy)
+        width_txt = QLabel(self)
+        width_txt.setText("幅")
+        height_txt = QLabel(self)
+        height_txt.setText("高さ")
+        base.addWidget(width_txt)
+        base.addWidget(self.xrange)
+        base.addWidget(height_txt)
+        base.addWidget(self.yrange)
+        self.listener = listener
+
+    def notify(self):
+        self.listener.notify()
+
+    def get_square(self):
+        return [self.xrange.get_range(), self.yrange.get_range()]
+
+    def set_square(self, square: list[list[float]]):
+        self.xrange.set_range(square[0])
+        self.yrange.set_range(square[1])
+
+
 class EditableTextWidget(QWidget):
     """
     クリックするとテキスト入力可能になるウィジェット。
@@ -72,8 +156,7 @@ class EditableTextWidget(QWidget):
     def __init__(self, text="", listner=None, col=Qt.black):
         super().__init__(None)
         self.listner = listner
-        base = QHBoxLayout(self)
-        base.setContentsMargins(0, 0, 0, 0)
+        base = ColLayout(self)
         self.label = QLabel(text, self)
         self.edit = QLineEdit(text, self)
         self.edit.hide()
@@ -101,6 +184,9 @@ class EditableTextWidget(QWidget):
         self.label.setFont(font)
         self.edit.setFont(font)
 
+    def get_font(self):
+        return self.label.font().pointSize()
+
     def paintEvent(self, event):
         super().paintEvent(event)
         # ペン設定
@@ -109,6 +195,19 @@ class EditableTextWidget(QWidget):
         painter.setPen(pen)
         painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
         painter.end()
+
+    def set_setAlignment(self, type):
+        match type:
+            case 4:
+                self.label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            case 5:
+                self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            case 6:
+                self.label.setAlignment(Qt.AlignmentFlag.AlignRight)
+
+    def set_minimum_length(self, width):
+        self.label.setMinimumWidth(width)
+        self.edit.setMinimumWidth(width)
 
     def _start_edit(self, event) -> None:
         self.label.hide()
