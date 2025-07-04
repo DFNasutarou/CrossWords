@@ -1,5 +1,6 @@
 # layouts.py
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QGridLayout, QLayout
+from PyQt5.QtCore import Qt
 
 
 class ColLayout(QHBoxLayout):
@@ -13,6 +14,15 @@ class ColLayout(QHBoxLayout):
         self.setContentsMargins(0, 0, 0, 0)
         self.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
 
+    def set_setAlignment(self, type):
+        match type:
+            case 4:
+                self.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            case 5:
+                self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            case 6:
+                self.setAlignment(Qt.AlignmentFlag.AlignRight)
+
 
 class RowLayout(QVBoxLayout):
     """
@@ -24,6 +34,15 @@ class RowLayout(QVBoxLayout):
         self.setSpacing(0)
         self.setContentsMargins(0, 0, 0, 0)
         self.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+
+    def set_setAlignment(self, type):
+        match type:
+            case 4:
+                self.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            case 5:
+                self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            case 6:
+                self.setAlignment(Qt.AlignmentFlag.AlignRight)
 
 
 class TableLaout(QGridLayout):
@@ -37,3 +56,12 @@ class TableLaout(QGridLayout):
         self.setSpacing(0)
         self.setContentsMargins(0, 0, 0, 0)
         self.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+
+    def set_setAlignment(self, type):
+        match type:
+            case 4:
+                self.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            case 5:
+                self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            case 6:
+                self.setAlignment(Qt.AlignmentFlag.AlignRight)

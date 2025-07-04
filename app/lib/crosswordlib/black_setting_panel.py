@@ -13,16 +13,55 @@ from ..formlib.layouts import RowLayout, ColLayout
 from .wid_key import KeyGroup, BlackOutText
 
 
+class KeyData:
+    def __init__(self, keyname: BlackOutText, textstr: BlackOutText):
+        super().__init__()
+        num = keyname.get_text()
+        text = textstr.get_text()
+        if num != "":
+            disp = num + " " + text[:5]
+        else:
+            disp = text[:5]
+
+        self.disp = disp
+        self.keyname = keyname
+        self.textstr = textstr
+
+        self.exist_keyname = keyname.get_text() != ""
+
+    @staticmethod
+    def clone_key_data(kg: KeyGroup):
+        keyname = KeyData.clone_blackout_text(kg.keyname)
+        textstr = KeyData.clone_blackout_text(kg.text)
+        keyname.set_black(1)
+        textstr.set_black(1)
+        return KeyData(keyname, textstr)
+
+    @staticmethod
+    def clone_blackout_text(bt: BlackOutText):
+        nbt = BlackOutText(bt.get_text())
+        nbt.add_squares(bt.get_square())
+        nbt.set_font(bt.get_font())
+        return nbt
+
+    @staticmethod
+    def copy_keydata_setting_to_keygroup(kg: KeyGroup, kd: "KeyData"):
+        kg.keyname.reset_square(kd.keyname.get_square())
+        kg.keyname.set_text(kd.keyname.get_text())
+        kg.text.reset_square(kd.textstr.get_square())
+        kg.text.set_text(kd.textstr.get_text())
+
+
 class BlackPanelForm(QDialog):
     # このシグナルで文字列を親に送信できる
     submitted = pyqtSignal(str)
 
-    def __init__(self, kg_list: list[KeyGroup], parent=None):
+    def __init__(self, kd_list: list[KeyData], parent=None):
         super().__init__(parent)
         self.setWindowTitle("黒塗り設定")
         self.resize(1000, 600)
 
-        if kg_list == []:
+        if kd_list == []:
             return
         base = ColLayout(self)
 
@@ -33,26 +72,25 @@ class BlackPanelForm(QDialog):
         base.addWidget(key_list)
 
         stack = QStackedWidget()
-        for kg in kg_list:
-            kd = KeyData(kg)
-            key_list.addItem(kd.text())
+        for kd in kd_list:
+            key_list.addItem(kd.disp)
 
-            page = BlackEditor(kg)
+            page = BlackEditor(kd)
             stack.addWidget(page)
 
         lay.addWidget(stack)
-        self.op = OperatorPanel(kg_list[0], self)
+        self.op = OperatorPanel(kd_list[0], self)
         lay.addWidget(self.op)
 
         key_list.currentRowChanged.connect(stack.setCurrentIndex)
         key_list.currentRowChanged.connect(self.row_changed)
 
-        self.kg_list = kg_list
         self.stack = stack
+        self.kd_list = kd_list
 
     def row_changed(self):
-        kg = self.kg_list[self.stack.currentIndex()]
-        self.op.set_kg(kg)
+        kd = self.kd_list[self.stack.currentIndex()]
+        self.op.set_kg(kd)
 
     def on_send(self):
         text = self.input.text()
@@ -64,33 +102,29 @@ class BlackPanelForm(QDialog):
 
 
 class OperatorPanel(QWidget):
-    def __init__(self, kg: KeyGroup, parent: BlackPanelForm):
+    def __init__(self, kd: KeyData, parent: BlackPanelForm):
         super().__init__()
         self.p = parent
 
         base = ColLayout(self)
 
-        self.key_op = BlackOperation(kg.keyname, "カギ番号：")
-        self.text_op = BlackOperation(kg.text, "問題文：")
+        self.key_op = BlackOperation(kd.keyname, "カギ番号：")
+        self.text_op = BlackOperation(kd.textstr, "問題文：")
 
         base.addWidget(self.key_op)
         base.addWidget(self.text_op)
 
-        if kg.keyname.get_text() == "":
+        if not kd.exist_keyname:
             self.key_op.hide()
 
-        # btn_end = QPushButton("終了", self)
-        # btn_end.clicked.connect(self.on_end)
-        # base.addWidget(btn_end)
+    def set_kg(self, kd: KeyData):
+        self.key_op.set_bk(kd.keyname)
+        self.text_op.set_bk(kd.textstr)
 
-    def set_kg(self, kg: KeyGroup):
-        self.key_op.set_bk(kg.keyname)
-        self.text_op.set_bk(kg.text)
-
-        if kg.keyname.get_text() == "":
-            self.key_op.hide()
-        else:
+        if kd.exist_keyname:
             self.key_op.show()
+        else:
+            self.key_op.hide()
 
     def on_end(self):
         self.p.on_end()
@@ -202,32 +236,12 @@ class BlackList(QListWidget):
 
 
 class BlackEditor(QWidget):
-    def __init__(self, kg: KeyGroup):
+    def __init__(self, kd: KeyData):
         super().__init__()
-        self.kg = kg
-        self.keyname = BlackOutText(kg.keyname.get_text())
-        self.textstr = BlackOutText(kg.text.get_text())
-        self.keyname.add_squares(kg.keyname.get_square())
-        self.textstr.add_squares(kg.text.get_square())
-        self.keyname.set_font(kg.keyname.get_font())
-        self.textstr.set_font(kg.text.get_font())
-        self.keyname.set_black(1)
-        self.textstr.set_black(1)
 
         base = ColLayout(self)
-        if self.keyname.get_text() != "":
-            base.addWidget(self.keyname)
-        base.addWidget(self.textstr)
+        if kd.exist_keyname:
+            base.addWidget(kd.keyname)
+        base.addWidget(kd.textstr)
 
-
-class KeyData(QLabel):
-    def __init__(self, kg: KeyGroup):
-        super().__init__()
-        num = kg.keyname.get_text()
-        text = kg.text.get_text()
-        if num != "":
-            disp = num + " " + text[:5]
-        else:
-            disp = text[:5]
-
-        self.setText(disp)
+        # self.kg = kg

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (
     QInputDialog,
 )
 from .lib.formlib.jsonio import JsonFileBuilder
+from PyQt5.QtGui import QPixmap
 
 WORK_SPACE = "workspace"
 PROJECT = "project"
@@ -85,12 +86,28 @@ class WorkSpace:
     def load_project(self):
         builder = JsonFileBuilder()
         file = os.path.join(self.project, DATA_FILE_NAME)
-        print(self.project, file)
         data = builder.load(file)
         if type(data) == dict and "data" in data:
             return data["data"]
         else:
             return None
+
+    def save_capture(self, cap: QPixmap):
+        file_name, ok = QInputDialog.getText(
+            None,
+            "ファイル名を指定",
+            "作成するファイル名を入力してください：",
+        )
+        if not ok or not file_name.strip():
+            return  # キャンセルまたは空文字
+
+        picture_dir = os.path.join(self.project, PICTURE_FOLDER_NAME)
+        picture_file = os.path.join(picture_dir, file_name)
+        success = cap.save(picture_file + ".png", "PNG")
+        if success:
+            print(file_name + ".png に保存しました")
+        else:
+            print("保存に失敗しました")
 
     def update_init_file(self):
         pass

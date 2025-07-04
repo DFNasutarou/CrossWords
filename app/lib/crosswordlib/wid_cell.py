@@ -56,7 +56,6 @@ class CellBoard(QWidget):
         self.n = n
 
         cell_size = self.height() // self.n
-        all_size = self.n * cell_size
         for r in range(MAX_BOARD_SIZE):
             for c in range(MAX_BOARD_SIZE):
                 self.widget[r][c].resize(cell_size)
@@ -112,8 +111,8 @@ class CellBoard(QWidget):
     def load(self, load_data):
         n = load_data[BOARD_SIZE]
         grid = load_data[GRID_DATA]
-        for r in range(self.n):
-            for c in range(self.n):
+        for r in range(n):
+            for c in range(n):
                 self.widget[r][c].set_state(grid[r][c])
         self.resize(n)
         self.reset()

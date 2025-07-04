@@ -18,6 +18,24 @@ from PyQt5.QtGui import (
 from ..formlib.layouts import RowLayout, ColLayout
 
 
+class WidgetSetting:
+    MARGIN = "margin"
+    SPACE = "space"
+    SIZE = "size"
+
+    def __init__(self, size):
+        self.data = {}
+        self.data[WidgetSetting.MARGIN] = 0
+        self.data[WidgetSetting.SPACE] = 0
+        self.data[WidgetSetting.SIZE] = size
+
+    def save(self):
+        return self.data
+
+    def load(self, data):
+        self.data = data
+
+
 class ClickableLabel(QLabel):
     """
     QLabel を継承し、クリック時に 'clicked' シグナルを発行するウィジェット。
@@ -153,6 +171,8 @@ class EditableTextWidget(QWidget):
     ラベル表示から QLineEdit に切り替えて編集できる。
     """
 
+    guaid = 1
+
     def __init__(self, text="", listner=None, col=Qt.black):
         super().__init__(None)
         self.listner = listner
@@ -170,6 +190,15 @@ class EditableTextWidget(QWidget):
         palette = self.label.palette()
         palette.setColor(QPalette.WindowText, col)
         self.label.setPalette(palette)
+
+    def save(self):
+        # 現在の情報を書き出す
+        data = self.get_text()
+        return data
+
+    def load(self, data):
+        # 情報を読み取る
+        self.set_text(data)
 
     def get_text(self):
         return self.label.text()
@@ -189,12 +218,12 @@ class EditableTextWidget(QWidget):
 
     def paintEvent(self, event):
         super().paintEvent(event)
-        # ペン設定
-        painter = QPainter(self)
-        pen = QPen(QColor("#999999"), 2)
-        painter.setPen(pen)
-        painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
-        painter.end()
+        if EditableTextWidget.guaid:
+            painter = QPainter(self)
+            pen = QPen(QColor("#999999"), 2)
+            painter.setPen(pen)
+            painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
+            painter.end()
 
     def set_setAlignment(self, type):
         match type:

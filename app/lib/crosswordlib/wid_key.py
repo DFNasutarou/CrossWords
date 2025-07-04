@@ -6,7 +6,7 @@ from PyQt5.QtGui import (
     QPainter,
 )
 from PyQt5.QtCore import QRect, Qt
-from ..formlib.widgets import EditableTextWidget
+from ..formlib.widgets import EditableTextWidget, WidgetSetting
 from .const_color import Col
 from ..formlib.layouts import RowLayout, ColLayout
 
@@ -30,99 +30,92 @@ TYPE_KEY = "type_key"
 class KeyWidget(QWidget):
     def __init__(self, listener):
         super().__init__()
-        self.default_setting()
         self.listener = listener
 
-        self.widget_row = [
+        self.data = {}
+        self.default_setting()
+
+        base = RowLayout(self)
+        base.addWidget(self.rowkeytext)
+        for i in range(KEY_NUMBER):
+            base.addWidget(self.rows[i])
+        base.addWidget(self.colkeytext)
+        for i in range(KEY_NUMBER):
+            base.addWidget(self.cols[i])
+        base.addStretch()
+
+    def setting_update(
+        self,
+        key_title_setting: WidgetSetting | None = None,
+        key_setting: WidgetSetting | None = None,
+    ) -> None:
+        if key_title_setting != None:
+            self.rowkeytext.read_setting(key_title_setting)
+            self.colkeytext.read_setting(key_title_setting)
+        if key_setting != None:
+            for i in range(KEY_NUMBER):
+                self.rows[i].read_setting(key_setting)
+                self.cols[i].read_setting(key_setting)
+
+    def default_setting(self):
+        self.data[STR_ROW_KEY_TITLE] = "タテのカギ"
+        self.data[STR_ROW_KEY_TITLE_SIZE] = -1
+        self.rows = [
             KeyGroup(TYPE_ROW, i, self, str(i), "test")
             for i in range(KEY_NUMBER)
         ]
-        self.widget_col = [
+        self.data[STR_ROW_KEY] = [w.save() for w in self.rows]
+        self.data[STR_ROW_KEY_SIZE] = -1
+        self.data[STR_COL_KEY_TITLE] = "ヨコのカギ"
+        self.data[STR_COL_KEY_TITLE_SIZE] = -1
+        self.cols = [
             KeyGroup(TYPE_COL, i, self, str(i), "test")
             for i in range(KEY_NUMBER)
         ]
-        self.rowkeytext = KeyGroup(TYPE_KEY, 0, None, text=self.row_title)
-        self.rowkeytext.set_visible(False, True, False)
-        self.colkeytext = KeyGroup(TYPE_KEY, 0, None, text=self.col_title)
-        self.colkeytext.set_visible(False, True, False)
+        self.data[STR_COL_KEY] = [w.save() for w in self.cols]
+        self.data[STR_COL_KEY_SIZE] = -1
+        self.data[KEY_NAME_LENGTH] = -1
 
-        base = RowLayout(self)
-        base.setSpacing(0)
-        base.addWidget(self.rowkeytext)
-        for i in range(KEY_NUMBER):
-            base.addWidget(self.widget_row[i])
-        base.addWidget(self.colkeytext)
-        for i in range(KEY_NUMBER):
-            base.addWidget(self.widget_col[i])
-        base.addStretch()
-        self.setting_update()
-
-    def setting_update(self):
-        self.rowkeytext.set_font(self.row_title_size)
-        self.colkeytext.set_font(self.col_title_size)
-        key = self.key_name_length
-        text = 200
+        key = 32
+        text = 480
         answer = 100
         for i in range(KEY_NUMBER):
-            self.widget_row[i].set_font(self.row_key_size)
-            self.widget_row[i].set_min_size(key, text, answer)
-            self.widget_col[i].set_font(self.col_key_size)
-            self.widget_col[i].set_min_size(key, text, answer)
+            self.rows[i].set_min_size(key, text, answer)
+            self.cols[i].set_min_size(key, text, answer)
 
-    def default_setting(self):
-        self.row_title = "タテのカギ"
-        self.row_title_size = 20
-        self.row_key_size = 16
-        self.col_title = "ヨコのカギ"
-        self.col_title_size = 20
-        self.col_key_size = 16
-        self.key_name_length = 30
+        self.rowkeytext = KeyGroup(
+            TYPE_KEY, 0, None, text=self.data[STR_ROW_KEY_TITLE]
+        )
+        self.rowkeytext.set_visible(False, True, False)
+        self.colkeytext = KeyGroup(
+            TYPE_KEY, 0, None, text=self.data[STR_COL_KEY_TITLE]
+        )
+        self.colkeytext.set_visible(False, True, False)
 
     def update(self, row_open_list, col_open_list):
         for i in range(KEY_NUMBER):
-            self.widget_row[i].set_all_visible(i in row_open_list)
-            self.widget_col[i].set_all_visible(i in col_open_list)
+            self.rows[i].set_all_visible(i in row_open_list)
+            self.cols[i].set_all_visible(i in col_open_list)
 
     def save(self):
-        save_data = {}
-        save_data[STR_ROW_KEY_TITLE] = self.row_title
-        save_data[STR_ROW_KEY_TITLE_SIZE] = self.row_title_size
-        rows = [keys.get_text() for keys in self.widget_row]
-        save_data[STR_ROW_KEY] = rows
-        save_data[STR_ROW_KEY_SIZE] = self.row_key_size
-        save_data[STR_COL_KEY_TITLE] = self.col_title
-        save_data[STR_COL_KEY_TITLE_SIZE] = self.col_title_size
-        cols = [keys.get_text() for keys in self.widget_col]
-        save_data[STR_COL_KEY] = cols
-        save_data[STR_COL_KEY_SIZE] = self.col_key_size
-        save_data[KEY_NAME_LENGTH] = self.key_name_length
-        return save_data
+        self.data[STR_ROW_KEY] = [w.save() for w in self.rows]
+        self.data[STR_COL_KEY] = [w.save() for w in self.cols]
+        return self.data
 
-    def load(self, load_data):
-        self.row_title = load_data[STR_ROW_KEY_TITLE]
-        self.row_title_size = load_data[STR_ROW_KEY_TITLE_SIZE]
-        row_key = load_data[STR_ROW_KEY]
+    def load(self, data):
+        self.data = data
         for i in range(KEY_NUMBER):
-            self.widget_row[i].set_text(*row_key[i])
-        self.row_key_size = load_data[STR_ROW_KEY_SIZE]
-        self.col_title = load_data[STR_COL_KEY_TITLE]
-        self.col_title_size = load_data[STR_COL_KEY_TITLE_SIZE]
-        col_key = load_data[STR_COL_KEY]
-        for i in range(KEY_NUMBER):
-            self.widget_col[i].set_text(*col_key[i])
-        self.col_key_size = load_data[STR_COL_KEY_SIZE]
-        self.key_name_length = load_data[KEY_NAME_LENGTH]
-
-        self.setting_update()
+            self.rows[i].load(self.data[STR_ROW_KEY][i])
+            self.cols[i].load(self.data[STR_COL_KEY][i])
 
     def get_visible_list(self):
         ret = []
         ret.append(self.rowkeytext)
-        for kg in self.widget_row:
+        for kg in self.rows:
             if kg.is_visible:
                 ret.append(kg)
         ret.append(self.colkeytext)
-        for kg in self.widget_col:
+        for kg in self.cols:
             if kg.is_visible:
                 ret.append(kg)
         return ret
@@ -131,9 +124,16 @@ class KeyWidget(QWidget):
         for kg in [self.rowkeytext, self.colkeytext]:
             kg.set_black(black)
             kg.set_visible(False, True, False)
-        for kg in self.widget_row + self.widget_col:
+        for kg in self.rows + self.cols:
             kg.set_black(black)
             kg.set_visible(key, text, answer)
+
+    def check_all_answers(self):
+        data = self.rows + self.cols
+        for w in data:
+            txt = w.answer.get_text()
+            if w.isVisible and txt != "":
+                w.notify(txt)
 
     def notify(self, tp, num, text):
         if tp == TYPE_ROW:
@@ -156,6 +156,16 @@ class BlackOutText(EditableTextWidget):
         self.black = 0
         self.del_ghost()
 
+    def save(self):
+        data = [super().save()]
+        data.extend(self.get_square())
+        return data
+
+    def load(self, data):
+        text = data[0]
+        super().load(text)
+        self.reset_square(data[1:])
+
     def set_black(self, black):
         # 黒塗りするなら1
         self.black = black
@@ -175,6 +185,10 @@ class BlackOutText(EditableTextWidget):
     def add_squares(self, squares):
         for square in squares:
             self.data.append(square)
+        self.update()
+
+    def reset_square(self, squares):
+        self.data = squares
         self.update()
 
     def get_square(self):
@@ -231,6 +245,10 @@ class KeyGroup(QWidget):
     カギ一個分(カギ名、指示、回答)
     """
 
+    KEY_NAME = "key_name"
+    TEXT = "text"
+    ANSWER = "answer"
+
     def __init__(self, tp, num, listener=None, keyname="", text="", answer=""):
         super().__init__()
         self.tp = tp
@@ -241,14 +259,37 @@ class KeyGroup(QWidget):
         self.keyname = BlackOutText(keyname)
         self.text = BlackOutText(text)
         self.answer = EditableTextWidget(answer, self)
-        self.widgets: list[QWidget] = [self.keyname, self.text, self.answer]
+        self.widgets: list[EditableTextWidget] = [
+            self.keyname,
+            self.text,
+            self.answer,
+        ]
 
         for key in self.widgets:
             self.base.addWidget(key)
 
+        # マージン設定
+        self.base.setSpacing(8)
+        self.base.update()
+
+    def save(self):
+        data = {}
+        data[KeyGroup.KEY_NAME] = self.keyname.save()
+        data[KeyGroup.TEXT] = self.text.save()
+        data[KeyGroup.ANSWER] = self.answer.save()
+        return data
+
+    def load(self, data):
+        self.keyname.load(data[KeyGroup.KEY_NAME])
+        self.text.load(data[KeyGroup.TEXT])
+        self.answer.load(data[KeyGroup.ANSWER])
+
     def set_text(self, keyname="", text="", answer=""):
         for w, v in zip(self.widgets, [keyname, text, answer]):
             w.set_text(v)
+
+    def read_setting(self, data: WidgetSetting):
+        self.set_font(data.data[WidgetSetting.SIZE])
 
     def set_font(self, font_size):
         for w in self.widgets:
@@ -282,19 +323,6 @@ class KeyGroup(QWidget):
     def set_black(self, black):
         self.keyname.set_black(black)
         self.text.set_black(black)
-
-    # def clone(self):
-    #     kg = KeyGroup(
-    #         self.tp,
-    #         self.num,
-    #         self.listener,
-    #         self.keyname.get_text(),
-    #         self.text.get_text(),
-    #         self.answer.get_text()
-    #     )
-    #     kg.keyname.set
-
-    #     return kg
 
     def notify(self, text):
         if self.listener:
