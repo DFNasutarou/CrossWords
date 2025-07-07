@@ -47,6 +47,7 @@ class CellBoard(QWidget):
         self.listener = listener
 
     def set_margine(self, margine=[0, 0, 0, 0], size=400):
+        margine = [0, 0, 0, 0]
         self.board.setContentsMargins(*margine)
         self.setFixedHeight(size)
         self.resize(self.n)
@@ -143,11 +144,16 @@ class CellBoard(QWidget):
             s = st.pop() if st else ""
             self.widget[r][i].set_char(s)
 
+    def board_black(self, is_black):
+        CellWidget.board_black = is_black
+
 
 class CellWidget(QPushButton):
     """
     クロスワードのセル：クリックで状態を切り替え（0: 白, 1: 黒, 2: 二重四角）。
     """
+
+    board_black = 0
 
     def __init__(self, row, col, parent: QWidget, size=40):
         super().__init__()
@@ -198,29 +204,31 @@ class CellWidget(QPushButton):
             painter.fillRect(self.rect(), Col.white)
             # self.setStyleSheet('background-color: white')
 
-        painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
-        if self.state == Cell_Double:
-            # 二重四角を描画
-            n = self.height() * self.square_par // 100
-            n = max(n, 1)
-            rect = self.rect().adjusted(n, n, -n, -n)
-            painter.drawRect(rect)
+            painter.drawRect(self.rect().adjusted(0, 0, 0, 0))
+            if self.state == Cell_Double:
+                # 二重四角を描画
+                n = self.height() * self.square_par // 100
+                n = max(n, 1)
+                rect = self.rect().adjusted(n, n, -n, -n)
+                painter.drawRect(rect)
 
-        # 数字設定
-        if self.number != None:
-            font = QFont()
-            n = self.height() * self.number_par // 100
-            font.setPointSize(n)
-            painter.setFont(font)
-            painter.drawText(2, n + 2, str(self.number))
+            # 数字設定
+            if self.number != None:
+                font = QFont()
+                n = self.height() * self.number_par // 100
+                font.setPointSize(n)
+                painter.setFont(font)
+                painter.drawText(2, n + 2, str(self.number))
 
-        # 文字設定
-        if self.c != "":
-            font = QFont()
-            n = self.height() * self.char_par // 100
-            font.setPointSize(n)
-            painter.setFont(font)
-            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, self.c)
+            # 文字設定
+            if self.c != "":
+                font = QFont()
+                n = self.height() * self.char_par // 100
+                font.setPointSize(n)
+                painter.setFont(font)
+                painter.drawText(
+                    self.rect(), Qt.AlignmentFlag.AlignCenter, self.c
+                )
 
         painter.end()
 
@@ -234,6 +242,8 @@ class CellWidget(QPushButton):
         self.state = state
 
     def is_black(self):
+        if CellWidget.board_black:
+            return True
         return self.state == Cell_Black
 
     def is_white(self):

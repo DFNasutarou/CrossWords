@@ -3,7 +3,7 @@ from typing import Any, List, Union, Dict
 
 
 # 再帰的に辞書とリストを許容するデータ型
-DataType = Union[int, str, List["DataType"], Dict[str, "DataType"]]
+DataType = Union[int, float, str, List["DataType"], Dict[str, "DataType"]]
 
 
 class JsonFileBuilder:
@@ -45,11 +45,11 @@ class JsonFileBuilder:
     def _validate(self, data: Any) -> None:
         """
         data が許容型かチェックします。
-        - int, str
+        - int, str, float
         - list: 各要素を再帰的チェック
         - dict: キーが str、値を再帰的チェック
         """
-        if isinstance(data, (int, str)):
+        if isinstance(data, (int, str, float)):
             return
 
         if isinstance(data, list):

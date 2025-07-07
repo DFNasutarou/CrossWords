@@ -16,40 +16,48 @@ from .wid_key import KeyGroup, BlackOutText
 class KeyData:
     def __init__(self, keyname: BlackOutText, textstr: BlackOutText):
         super().__init__()
-        num = keyname.get_text()
         text = textstr.get_text()
-        if num != "":
-            disp = num + " " + text[:5]
-        else:
-            disp = text[:5]
+        disp = text[:5]
+
+        if keyname != None:
+            num = keyname.get_text()
+            disp = num + " " + disp
 
         self.disp = disp
         self.keyname = keyname
         self.textstr = textstr
 
-        self.exist_keyname = keyname.get_text() != ""
+        self.exist_keyname = keyname != None
 
     @staticmethod
     def clone_key_data(kg: KeyGroup):
-        keyname = KeyData.clone_blackout_text(kg.keyname)
-        textstr = KeyData.clone_blackout_text(kg.text)
-        keyname.set_black(1)
-        textstr.set_black(1)
+        if isinstance(kg, KeyGroup):
+            keyname = KeyData.clone_blackout_text(kg.keyname)
+            textstr = KeyData.clone_blackout_text(kg.text)
+        else:
+            keyname = None
+            textstr: BlackOutText = KeyData.clone_blackout_text(kg)
+
         return KeyData(keyname, textstr)
 
     @staticmethod
-    def clone_blackout_text(bt: BlackOutText):
+    def clone_blackout_text(bt: BlackOutText) -> BlackOutText:
         nbt = BlackOutText(bt.get_text())
         nbt.add_squares(bt.get_square())
         nbt.set_font(bt.get_font())
+        nbt.set_minimum_length(bt.minimumWidth())
         return nbt
 
     @staticmethod
     def copy_keydata_setting_to_keygroup(kg: KeyGroup, kd: "KeyData"):
-        kg.keyname.reset_square(kd.keyname.get_square())
-        kg.keyname.set_text(kd.keyname.get_text())
-        kg.text.reset_square(kd.textstr.get_square())
-        kg.text.set_text(kd.textstr.get_text())
+        if isinstance(kg, KeyGroup):
+            kg.keyname.reset_square(kd.keyname.get_square())
+            kg.keyname.set_text(kd.keyname.get_text())
+            kg.text.reset_square(kd.textstr.get_square())
+            kg.text.set_text(kd.textstr.get_text())
+        else:
+            kg.reset_square(kd.textstr.get_square())
+            kg.set_text(kd.textstr.get_text())
 
 
 class BlackPanelForm(QDialog):
@@ -118,10 +126,10 @@ class OperatorPanel(QWidget):
             self.key_op.hide()
 
     def set_kg(self, kd: KeyData):
-        self.key_op.set_bk(kd.keyname)
         self.text_op.set_bk(kd.textstr)
 
         if kd.exist_keyname:
+            self.key_op.set_bk(kd.keyname)
             self.key_op.show()
         else:
             self.key_op.hide()

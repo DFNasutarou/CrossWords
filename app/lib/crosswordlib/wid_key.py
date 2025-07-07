@@ -1,10 +1,6 @@
 # widgets.py
-from PyQt5.QtWidgets import (
-    QWidget,
-)
-from PyQt5.QtGui import (
-    QPainter,
-)
+from PyQt5.QtWidgets import QWidget, QLayout
+from PyQt5.QtGui import QPainter, QFontMetrics
 from PyQt5.QtCore import QRect, Qt
 from ..formlib.widgets import EditableTextWidget, WidgetSetting
 from .const_color import Col
@@ -48,14 +44,18 @@ class KeyWidget(QWidget):
         self,
         key_title_setting: WidgetSetting | None = None,
         key_setting: WidgetSetting | None = None,
+        key_text_setting: WidgetSetting | None = None,
+        key_anser_setting: WidgetSetting | None = None,
+        black: bool | None = None,
     ) -> None:
         if key_title_setting != None:
-            self.rowkeytext.read_setting(key_title_setting)
-            self.colkeytext.read_setting(key_title_setting)
+            BlackKeyTitle.setting(key_title_setting)
         if key_setting != None:
-            for i in range(KEY_NUMBER):
-                self.rows[i].read_setting(key_setting)
-                self.cols[i].read_setting(key_setting)
+            BlackKeyNameText.setting(key_setting)
+        if key_text_setting != None:
+            BlackKeyText.setting(key_text_setting)
+        if key_anser_setting != None:
+            BlackKeyAnswer.setting(key_anser_setting)
 
     def default_setting(self):
         self.data[STR_ROW_KEY_TITLE] = "タテのカギ"
@@ -76,34 +76,33 @@ class KeyWidget(QWidget):
         self.data[STR_COL_KEY_SIZE] = -1
         self.data[KEY_NAME_LENGTH] = -1
 
-        key = 32
-        text = 480
-        answer = 100
-        for i in range(KEY_NUMBER):
-            self.rows[i].set_min_size(key, text, answer)
-            self.cols[i].set_min_size(key, text, answer)
+        self.rowkeytext = BlackKeyTitle(self.data[STR_ROW_KEY_TITLE])
+        self.colkeytext = BlackKeyTitle(self.data[STR_COL_KEY_TITLE])
+        # KeyGroup(
+        #     TYPE_KEY, 0, None, text=self.data[STR_ROW_KEY_TITLE]elf.data[STR_ROW_KEY_TITLE]
+        # )
+        # self.rowkeytext.set_visible(False, True, False)
+        # self.colkeytext = KeyGroup(
+        #     TYPE_KEY, 0, None, text=self.data[STR_COL_KEY_TITLE]
+        # )
+        # self.colkeytext.set_visible(False, True, False)
 
-        self.rowkeytext = KeyGroup(
-            TYPE_KEY, 0, None, text=self.data[STR_ROW_KEY_TITLE]
-        )
-        self.rowkeytext.set_visible(False, True, False)
-        self.colkeytext = KeyGroup(
-            TYPE_KEY, 0, None, text=self.data[STR_COL_KEY_TITLE]
-        )
-        self.colkeytext.set_visible(False, True, False)
-
-    def update(self, row_open_list, col_open_list):
+    def visible_update(self, row_open_list, col_open_list):
         for i in range(KEY_NUMBER):
             self.rows[i].set_all_visible(i in row_open_list)
             self.cols[i].set_all_visible(i in col_open_list)
 
     def save(self):
+        self.data[STR_ROW_KEY_TITLE] = self.rowkeytext.save()
+        self.data[STR_COL_KEY_TITLE] = self.colkeytext.save()
         self.data[STR_ROW_KEY] = [w.save() for w in self.rows]
         self.data[STR_COL_KEY] = [w.save() for w in self.cols]
         return self.data
 
     def load(self, data):
         self.data = data
+        self.rowkeytext.load(self.data[STR_ROW_KEY_TITLE])
+        self.colkeytext.load(self.data[STR_COL_KEY_TITLE])
         for i in range(KEY_NUMBER):
             self.rows[i].load(self.data[STR_ROW_KEY][i])
             self.cols[i].load(self.data[STR_COL_KEY][i])
@@ -121,12 +120,13 @@ class KeyWidget(QWidget):
         return ret
 
     def show_setting(self, black, key, text, answer) -> None:
-        for kg in [self.rowkeytext, self.colkeytext]:
-            kg.set_black(black)
-            kg.set_visible(False, True, False)
+        # BlackKeyText.set_black(black)
+        # BlackKeyTitle.set_black(black)
+        # BlackKeyText.set_black(black)
+        BlackOutText.set_black(black)
         for kg in self.rows + self.cols:
-            kg.set_black(black)
             kg.set_visible(key, text, answer)
+        self.update()
 
     def check_all_answers(self):
         data = self.rows + self.cols
@@ -150,10 +150,11 @@ class BlackOutText(EditableTextWidget):
     黒塗り可能なテキスト
     """
 
-    def __init__(self, text="", listner=None, col=Col.black):
-        super().__init__(text, listner, col)
+    black = 0
+
+    def __init__(self, text="", listner=None):
+        super().__init__(text, listner, Col.black)
         self.data = []
-        self.black = 0
         self.del_ghost()
 
     def save(self):
@@ -165,10 +166,6 @@ class BlackOutText(EditableTextWidget):
         text = data[0]
         super().load(text)
         self.reset_square(data[1:])
-
-    def set_black(self, black):
-        # 黒塗りするなら1
-        self.black = black
 
     def set_ghost(self, square: list[list[float]]):
         self.ghost = square
@@ -200,13 +197,13 @@ class BlackOutText(EditableTextWidget):
             self.update()
 
     def square_exchange(self, square):
-        # font = self.label.font()
-        # fm = QFontMetrics(font)
-        # w = fm.averageCharWidth()
-        if self.label.text() != "":
-            w = self.label.width() / len(self.label.text())
-        else:
-            w = 0
+        font = self.label.font()
+        fm = QFontMetrics(font)
+        w = fm.horizontalAdvance("あ")
+        # if self.label.text() != "":
+        #     w = self.label.width() / len(self.label.text())
+        # else:
+        #     w = 0
         h = self.label.height()
 
         x1 = max(0, int(w * square[0][0] / 10))
@@ -218,7 +215,7 @@ class BlackOutText(EditableTextWidget):
 
     def paintEvent(self, event):
         super().paintEvent(event)
-        if self.black:
+        if BlackOutText.black:
             painter = QPainter(self)
             painter.setPen(Qt.PenStyle.NoPen)
             painter.setBrush(Col.black)
@@ -234,10 +231,119 @@ class BlackOutText(EditableTextWidget):
 
     def clone(self):
         ret = BlackOutText(self.get_text())
-        ret.set_black(self.black)
+        # ret.set_black(self.black)
         for square in self.get_square():
             ret.add_square(square)
         return ret
+
+    @classmethod
+    def set_black(cls, black):
+        # 黒塗りするなら1
+        cls.black = black
+
+
+class BlackKeyAnswer(EditableTextWidget):
+    wid = 40
+    font_size = 16
+    margin = [0, 0, 0, 0]
+    col = Col.black
+    _instances: list["BlackKeyAnswer"] = []
+
+    def __init__(self, text, listener):
+        super().__init__(text, listener, BlackKeyAnswer.col)
+        self.configure()
+        self.__class__._instances.append(self)
+
+    def configure(self):
+        self.set_font(BlackKeyAnswer.font_size)
+        self.setContentsMargins(*BlackKeyAnswer.margin)
+        self.set_minimum_length(BlackKeyAnswer.wid)
+
+    @classmethod
+    def setting(cls, setting: WidgetSetting):
+        cls.wid = setting.data[WidgetSetting.WID]
+        cls.font_size = setting.data[WidgetSetting.SIZE]
+        cls.margin = setting.data[WidgetSetting.MARGIN]
+        for inst in cls._instances:
+            inst.configure()
+
+
+class BlackKeyTitle(BlackOutText):
+    wid = 40
+    font_size = 40
+    margin = [0, 0, 0, 0]
+    col = Col.black
+    _instances: list["BlackKeyTitle"] = []
+
+    def __init__(self, text):
+        super().__init__(text)
+        self.configure()
+        self.__class__._instances.append(self)
+
+    def configure(self):
+        self.set_font(BlackKeyTitle.font_size)
+        self.setContentsMargins(*BlackKeyTitle.margin)
+        self.set_minimum_length(BlackKeyTitle.wid)
+
+    @classmethod
+    def setting(cls, setting: WidgetSetting):
+        cls.wid = setting.data[WidgetSetting.WID]
+        cls.font_size = setting.data[WidgetSetting.SIZE]
+        cls.margin = setting.data[WidgetSetting.MARGIN]
+        for inst in cls._instances:
+            inst.configure()
+
+
+class BlackKeyNameText(BlackOutText):
+    wid = 40
+    font_size = 40
+    margin = [0, 0, 0, 0]
+    col = Col.black
+    _instances: list["BlackKeyNameText"] = []
+
+    def __init__(self, text):
+        super().__init__(text)
+        self.configure()
+        self.__class__._instances.append(self)
+
+    def configure(self):
+        self.set_font(BlackKeyNameText.font_size)
+        self.setContentsMargins(*BlackKeyNameText.margin)
+        self.set_minimum_length(BlackKeyNameText.wid)
+
+    @classmethod
+    def setting(cls, setting: WidgetSetting):
+        cls.wid = setting.data[WidgetSetting.WID]
+        cls.font_size = setting.data[WidgetSetting.SIZE]
+        cls.margin = setting.data[WidgetSetting.MARGIN]
+        for inst in cls._instances:
+            inst.configure()
+
+
+class BlackKeyText(BlackOutText):
+    wid = 40
+    font_size = 40
+    margin = [0, 0, 0, 0]
+    col = Col.black
+    _instances: list["BlackKeyText"] = []
+
+    def __init__(self, text):
+        super().__init__(text)
+        self.configure()
+        self.__class__._instances.append(self)
+
+    def configure(self):
+        self.set_font(BlackKeyText.font_size)
+        self.setContentsMargins(*BlackKeyText.margin)
+        self.set_minimum_length(BlackKeyText.wid)
+
+    @classmethod
+    def setting(cls, setting: WidgetSetting):
+        cls.wid = setting.data[WidgetSetting.WID]
+        cls.font_size = setting.data[WidgetSetting.SIZE]
+        cls.margin = setting.data[WidgetSetting.MARGIN]
+        for inst in cls._instances:
+            inst.configure()
 
 
 class KeyGroup(QWidget):
@@ -256,9 +362,9 @@ class KeyGroup(QWidget):
         self.is_visible = True
         self.listener = listener
         self.base = ColLayout(self)
-        self.keyname = BlackOutText(keyname)
-        self.text = BlackOutText(text)
-        self.answer = EditableTextWidget(answer, self)
+        self.keyname = BlackKeyNameText(keyname)
+        self.text = BlackKeyText(text)
+        self.answer = BlackKeyAnswer(answer, self)
         self.widgets: list[EditableTextWidget] = [
             self.keyname,
             self.text,
@@ -288,12 +394,12 @@ class KeyGroup(QWidget):
         for w, v in zip(self.widgets, [keyname, text, answer]):
             w.set_text(v)
 
-    def read_setting(self, data: WidgetSetting):
-        self.set_font(data.data[WidgetSetting.SIZE])
+    # def read_setting(self, data: WidgetSetting):
+    #     self.set_font(data.data[WidgetSetting.SIZE])
 
-    def set_font(self, font_size):
-        for w in self.widgets:
-            w.set_font(font_size)
+    # def set_font(self, font_size):
+    #     for w in self.widgets:
+    #         w.set_font(font_size)
 
     def get_text(self):
         data = []
@@ -316,13 +422,13 @@ class KeyGroup(QWidget):
         else:
             self.hide()
 
-    def set_min_size(self, key, text, answer):
-        for w, v in zip(self.widgets, [key, text, answer]):
-            w.set_minimum_length(v)
+    # def set_min_size(self, key, text, answer):
+    #     for w, v in zip(self.widgets, [key, text, answer]):
+    #         w.set_minimum_length(v)
 
-    def set_black(self, black):
-        self.keyname.set_black(black)
-        self.text.set_black(black)
+    # def set_black(self, black):
+    #     self.keyname.set_black(black)
+    #     self.text.set_black(black)
 
     def notify(self, text):
         if self.listener:

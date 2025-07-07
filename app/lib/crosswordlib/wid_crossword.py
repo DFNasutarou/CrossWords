@@ -6,7 +6,10 @@ from PyQt5.QtWidgets import (
 )
 from ..formlib.widgets import WidgetSetting, EditableTextWidget
 from .wid_cell import CellBoard
-from .wid_key import KeyWidget, BlackOutText
+from .wid_key import (
+    KeyWidget,
+    BlackOutText,
+)
 from .black_setting_panel import BlackPanelForm, KeyData
 from .format_setting_panel import FormatPanelForm, FormatData
 from ..formlib.layouts import RowLayout, ColLayout
@@ -34,7 +37,7 @@ class CrossWord(QWidget):
         self.setAutoFillBackground(True)
         self.setPalette(palette)
 
-        title = BlackOutText("最終指示をここに表示")
+        title = BlackTitleText("指示文", self)
         base.addWidget(title, alignment=Qt.AlignmentFlag.AlignCenter)
 
         board_widget = QWidget()
@@ -50,7 +53,7 @@ class CrossWord(QWidget):
         key = KeyWidget(self)
         board.addWidget(key)
 
-        key.update(*cell_board.get_num_list())
+        key.visible_update(*cell_board.get_num_list())
 
         self.title = title
         self.cell_board = cell_board
@@ -72,9 +75,10 @@ class CrossWord(QWidget):
     def load(self, data):
         self.cell_board.load(data["cell"])
         self.key.load(data["key"])
-        self.key.update(*self.cell_board.get_num_list())
+        self.key.visible_update(*self.cell_board.get_num_list())
         self.world.load(data["world"])
 
+        self.title.set_text(self.world.data[WorldSetting.TITLE_TEXT])
         self.world_update()
         self.key.check_all_answers()
 
@@ -97,6 +101,7 @@ class CrossWord(QWidget):
     def black_setting_panel(self):
         kg_list = self.key.get_visible_list()
         kd_list = [KeyData.clone_key_data(kg) for kg in kg_list]
+        BlackOutText.set_black(1)
 
         # 子フォームを生成。初期値も渡せる
         dlg = BlackPanelForm(kd_list, parent=self)
@@ -110,11 +115,14 @@ class CrossWord(QWidget):
         for kg, kd in zip(kg_list, kd_list):
             KeyData.copy_keydata_setting_to_keygroup(kg, kd)
 
+        self.world_update()
+
     def format_setting_panel(self):
         fd = FormatData(
             self.world.title,
             self.world.key_title,
             self.world.key_set,
+            self.world.key_text,
             self.world.board,
         )
 
@@ -141,8 +149,9 @@ class CrossWord(QWidget):
     ):
         # 黒塗り、表示を変更
         if board_black != None:
-            pass
-            # self.world.data[WorldSetting.FORMAT_BOARD]
+            self.world.data[WorldSetting.BOARD_BLACK] = not self.world.data[
+                WorldSetting.BOARD_BLACK
+            ]
         if key_black != None:
             self.world.data[WorldSetting.BLACK] = not self.world.data[
                 WorldSetting.BLACK
@@ -165,17 +174,23 @@ class CrossWord(QWidget):
     def world_update(self):
         self.title.set_font(self.world.title.data[WidgetSetting.SIZE])
         bd: WidgetSetting = self.world.board
-        mg: int = bd.data[WidgetSetting.MARGIN]
         self.cell_board.set_margine(
-            [mg, mg, mg, mg], bd.data[WidgetSetting.SIZE]
+            bd.data[WidgetSetting.MARGIN], bd.data[WidgetSetting.SIZE]
         )
-        self.key.setting_update(self.world.key_title, self.world.key_set)
+        self.key.setting_update(
+            self.world.key_title,
+            self.world.key_set,
+            self.world.key_text,
+            self.world.key_answer,
+        )
         self.key.show_setting(
             self.world.data[WorldSetting.BLACK],
             self.world.data[WorldSetting.SHOW_KEY],
             self.world.data[WorldSetting.SHOW_TEXT],
             self.world.data[WorldSetting.SHOW_ANS],
         )
+        self.cell_board.board_black(self.world.data[WorldSetting.BOARD_BLACK])
+        self.update()
 
     def get_capture(self):
         return self.grab()
@@ -186,49 +201,64 @@ class CrossWord(QWidget):
 
     def notify(self, event, data=[]):
         if event == 1:
-            self.key.update(*self.cell_board.get_num_list())
+            self.key.visible_update(*self.cell_board.get_num_list())
         elif event == 2:
             num, text = data
             self.cell_board.set_answer_row(num, text)
         elif event == 3:
             num, text = data
             self.cell_board.set_answer_col(num, text)
+        elif event == 4:
+            self.world.data[WorldSetting.TITLE_TEXT] = data
 
 
 class WorldSetting:
     # 黒塗り・表示設定
     BLACK = "black"
+    BOARD_BLACK = "board_black"
     SHOW_ANS = "show_ans"
     SHOW_KEY = "show_key"
     SHOW_TEXT = "show_text"
+    TITLE_TEXT = "title_text"
     FORMAT_TITLE = "format_title"
     FORMAT_KEY_TITLE = "format_key_title"
     FORMAT_KEY_SET = "format_key_set"
+    FORMAT_KEY_TEXT = "format_key_text"
+    FORMAT_KEY_ANSWER = "format_key_answer"
     FORMAT_BOARD = "format_board"
 
     def __init__(self):
         self.data = {}
         self.data[WorldSetting.BLACK] = 0
+        self.data[WorldSetting.BOARD_BLACK] = 0
         self.data[WorldSetting.SHOW_ANS] = 1
         self.data[WorldSetting.SHOW_KEY] = 1
         self.data[WorldSetting.SHOW_TEXT] = 1
-        self.title = WidgetSetting(60)
-        self.key_title = WidgetSetting(20)
-        self.key_set = WidgetSetting(16)
-        self.board = WidgetSetting(400)
+        self.data[WorldSetting.TITLE_TEXT] = "指示文"
+        self.title = WidgetSetting(60, 600)
+        self.key_title = WidgetSetting(20, 100)
+        self.key_set = WidgetSetting(16, 32)
+        self.key_text = WidgetSetting(16, 480)
+        self.key_answer = WidgetSetting(16, 96)
+        self.board = WidgetSetting(400, 400)
 
     def save(self):
         self.data[WorldSetting.FORMAT_TITLE] = self.title.save()
         self.data[WorldSetting.FORMAT_KEY_TITLE] = self.key_title.save()
         self.data[WorldSetting.FORMAT_KEY_SET] = self.key_set.save()
+        self.data[WorldSetting.FORMAT_KEY_TEXT] = self.key_text.save()
+        self.data[WorldSetting.FORMAT_KEY_ANSWER] = self.key_answer.save()
         self.data[WorldSetting.FORMAT_BOARD] = self.board.save()
         return self.data
 
     def load(self, data):
-        self.data = data
+        for k, v in data.items():
+            self.data[k] = v
         self.title.load(self.data[WorldSetting.FORMAT_TITLE])
         self.key_title.load(self.data[WorldSetting.FORMAT_KEY_TITLE])
         self.key_set.load(self.data[WorldSetting.FORMAT_KEY_SET])
+        self.key_text.load(self.data[WorldSetting.FORMAT_KEY_TEXT])
+        self.key_answer.load(self.data[WorldSetting.FORMAT_KEY_ANSWER])
         self.board.load(self.data[WorldSetting.FORMAT_BOARD])
 
     def show_data(self):
@@ -237,3 +267,34 @@ class WorldSetting:
         text = self.data[WorldSetting.SHOW_TEXT]
         ans = self.data[WorldSetting.SHOW_ANS]
         return [black, key, text, ans]
+
+
+class BlackTitleText(BlackOutText):
+    wid = 40
+    font_size = 40
+    margin = [0, 0, 0, 0]
+    col = Col.black
+    _instances: list["BlackTitleText"] = []
+
+    def __init__(self, text, notify):
+        super().__init__(text, self)
+        self.configure()
+        self.__class__._instances.append(self)
+        self.listener = notify
+
+    def configure(self):
+        self.set_font(BlackTitleText.font_size)
+        self.setContentsMargins(*BlackTitleText.margin)
+        self.set_minimum_length(BlackTitleText.wid)
+
+    @classmethod
+    def setting(cls, setting: WidgetSetting):
+        cls.wid = setting.data[WidgetSetting.WID]
+        cls.font_size = setting.data[WidgetSetting.SIZE]
+        cls.margin = setting.data[WidgetSetting.MARGIN]
+        for inst in cls._instances:
+            inst.configure()
+
+    def notify(self, text):
+        if self.listener:
+            self.listener.notify(4, text)

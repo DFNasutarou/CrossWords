@@ -22,18 +22,21 @@ class WidgetSetting:
     MARGIN = "margin"
     SPACE = "space"
     SIZE = "size"
+    WID = "width"
 
-    def __init__(self, size):
+    def __init__(self, size, wid):
         self.data = {}
-        self.data[WidgetSetting.MARGIN] = 0
+        self.data[WidgetSetting.MARGIN] = [0, 0, 0, 0]
         self.data[WidgetSetting.SPACE] = 0
         self.data[WidgetSetting.SIZE] = size
+        self.data[WidgetSetting.WID] = wid
 
     def save(self):
         return self.data
 
     def load(self, data):
-        self.data = data
+        for r, v in data.items():
+            self.data[r] = v
 
 
 class ClickableLabel(QLabel):
@@ -191,6 +194,21 @@ class EditableTextWidget(QWidget):
         palette.setColor(QPalette.WindowText, col)
         self.label.setPalette(palette)
 
+        self.edit.setStyleSheet(
+            """
+            /* 通常時 */
+            QLineEdit {
+                background-color: white;
+                color: #eeeeee;
+            }
+            /* フォーカス（編集中）時 */
+            QLineEdit:focus {
+                background-color: white;  
+                color: #eeeeee;          
+            }
+            """
+        )
+
     def save(self):
         # 現在の情報を書き出す
         data = self.get_text()
@@ -208,8 +226,7 @@ class EditableTextWidget(QWidget):
         self.edit.setText(text)
 
     def set_font(self, font_size):
-        font = QFont()
-        font.setPointSize(font_size)
+        font = QFont("MS Gothic", font_size)
         self.label.setFont(font)
         self.edit.setFont(font)
 
