@@ -28,7 +28,7 @@ class JsonFileBuilder:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self._data, f, ensure_ascii=ensure_ascii, indent=indent)
 
-    def load(self, path) -> List[DataType] | None:
+    def load(self, path) -> Dict[str, DataType] | None:
         """
         ファイルから読み込んで型チェック後に返します。
         （内部データは上書きしません）

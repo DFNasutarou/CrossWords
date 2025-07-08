@@ -19,8 +19,11 @@ class WorkSpace:
         # 初期設定ファイル読み込み
         builder = JsonFileBuilder()
         data = builder.load(INIT_JSON)
-
+        if data == None:
+            return
         data = data["data"]
+        if type(data) != dict:
+            return
         self.workspace = data[WORK_SPACE]
         self.project = data[PROJECT]
 
