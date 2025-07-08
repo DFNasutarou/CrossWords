@@ -15,7 +15,7 @@ from PyQt5.QtGui import (
     QDoubleValidator,
     QColor,
 )
-from ..formlib.layouts import RowLayout, ColLayout
+from app.lib.formlib.layouts import RowLayout, ColLayout
 
 
 class WidgetSetting:
@@ -60,7 +60,11 @@ class TextWidget(ClickableLabel):
         super().__init__(parent)
         self.setText(text)
         self.setWordWrap(True)
-        self.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        self.setAlignment(
+            Qt.AlignmentFlag(
+                Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop
+            )
+        )
 
 
 class GraphicWidget(ClickableLabel):
@@ -78,7 +82,9 @@ class GraphicWidget(ClickableLabel):
         # 元の pixmap を枠内の大きさに合わせてアスペクト比を保ちつつリサイズ
         if self._original:
             scaled = self._original.scaled(
-                self.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+                self.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
             )
             self.setPixmap(scaled)
         super().resizeEvent(event)
@@ -176,7 +182,7 @@ class EditableTextWidget(QWidget):
 
     guaid = 1
 
-    def __init__(self, text="", listner=None, col=Qt.black):
+    def __init__(self, text="", listner=None, col=Qt.GlobalColor.black):
         super().__init__(None)
         self.listner = listner
         base = ColLayout(self)
@@ -255,7 +261,7 @@ class EditableTextWidget(QWidget):
         self.label.setMinimumWidth(width)
         self.edit.setMinimumWidth(width)
 
-    def _start_edit(self, event) -> None:
+    def _start_edit(self, ev) -> None:
         self.label.hide()
         self.edit.show()
         self.edit.setFocus()

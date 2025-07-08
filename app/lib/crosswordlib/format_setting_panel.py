@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
-from ..formlib.layouts import RowLayout, ColLayout
-from ..formlib.widgets import WidgetSetting, QLineEdit
+from app.lib.formlib.layouts import RowLayout, ColLayout
+from app.lib.formlib.widgets import WidgetSetting, QLineEdit
 
 
 class FormatData:

@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QInputDialog,
 )
-from .lib.formlib.jsonio import JsonFileBuilder
+from app.lib.formlib.jsonio import JsonFileBuilder
 from PyQt5.QtGui import QPixmap
 
 WORK_SPACE = "workspace"
@@ -20,23 +20,17 @@ class WorkSpace:
         builder = JsonFileBuilder()
         data = builder.load(INIT_JSON)
         if data == None:
+            print("data is none")
             return
         data = data["data"]
         if type(data) != dict:
+            print("data is error")
             return
-        self.workspace = data[WORK_SPACE]
-        self.project = data[PROJECT]
+
+        self.workspace = str(data[WORK_SPACE])
+        self.project = str(data[PROJECT])
 
     def make_workspace(self, data):
-        # selected_dir = QFileDialog.getExistingDirectory(
-        #     None,
-        #     "ベースとなるフォルダを選択",
-        #     os.path.expanduser(path),  # 初期表示はホーム
-        #     QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
-        # )
-        # if not selected_dir:
-        #     return
-
         path = self.workspace
 
         folder_name, ok = QInputDialog.getText(

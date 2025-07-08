@@ -1,10 +1,10 @@
 # widgets.py
-from PyQt5.QtWidgets import QWidget, QLayout
+from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
 from PyQt5.QtGui import QPainter, QFontMetrics
 from PyQt5.QtCore import QRect, Qt
-from ..formlib.widgets import EditableTextWidget, WidgetSetting
-from .const_color import Col
-from ..formlib.layouts import RowLayout, ColLayout
+from app.lib.formlib.widgets import EditableTextWidget, WidgetSetting
+from app.lib.crosswordlib.const_color import Col
+from app.lib.formlib.layouts import RowLayout, ColLayout
 
 KEY_NUMBER = 100
 
@@ -30,15 +30,27 @@ class KeyWidget(QWidget):
 
         self.data = {}
         self.default_setting()
-
+        spacer = []
+        for i in range(3):
+            spacer.append(
+                QSpacerItem(
+                    0, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed
+                )
+            )
+        print(spacer)
         base = RowLayout(self)
         base.addWidget(self.rowkeytext)
+        base.addItem(spacer[0])
         for i in range(KEY_NUMBER):
             base.addWidget(self.rows[i])
+        base.addItem(spacer[1])
         base.addWidget(self.colkeytext)
+        base.addItem(spacer[2])
         for i in range(KEY_NUMBER):
             base.addWidget(self.cols[i])
         base.addStretch()
+
+        self.spacer = spacer
 
     def setting_update(
         self,
@@ -61,16 +73,14 @@ class KeyWidget(QWidget):
         self.data[STR_ROW_KEY_TITLE] = "タテのカギ"
         self.data[STR_ROW_KEY_TITLE_SIZE] = -1
         self.rows = [
-            KeyGroup(TYPE_ROW, i, self, str(i), "test")
-            for i in range(KEY_NUMBER)
+            KeyGroup(TYPE_ROW, i, self, str(i), "") for i in range(KEY_NUMBER)
         ]
         self.data[STR_ROW_KEY] = [w.save() for w in self.rows]
         self.data[STR_ROW_KEY_SIZE] = -1
         self.data[STR_COL_KEY_TITLE] = "ヨコのカギ"
         self.data[STR_COL_KEY_TITLE_SIZE] = -1
         self.cols = [
-            KeyGroup(TYPE_COL, i, self, str(i), "test")
-            for i in range(KEY_NUMBER)
+            KeyGroup(TYPE_COL, i, self, str(i), "") for i in range(KEY_NUMBER)
         ]
         self.data[STR_COL_KEY] = [w.save() for w in self.cols]
         self.data[STR_COL_KEY_SIZE] = -1
@@ -78,14 +88,6 @@ class KeyWidget(QWidget):
 
         self.rowkeytext = BlackKeyTitle(self.data[STR_ROW_KEY_TITLE])
         self.colkeytext = BlackKeyTitle(self.data[STR_COL_KEY_TITLE])
-        # KeyGroup(
-        #     TYPE_KEY, 0, None, text=self.data[STR_ROW_KEY_TITLE]elf.data[STR_ROW_KEY_TITLE]
-        # )
-        # self.rowkeytext.set_visible(False, True, False)
-        # self.colkeytext = KeyGroup(
-        #     TYPE_KEY, 0, None, text=self.data[STR_COL_KEY_TITLE]
-        # )
-        # self.colkeytext.set_visible(False, True, False)
 
     def visible_update(self, row_open_list, col_open_list):
         for i in range(KEY_NUMBER):
@@ -246,7 +248,7 @@ class BlackKeyAnswer(EditableTextWidget):
     wid = 40
     font_size = 16
     margin = [0, 0, 0, 0]
-    col = Col.black
+    col = Col.red
     _instances: list["BlackKeyAnswer"] = []
 
     def __init__(self, text, listener):

@@ -10,10 +10,13 @@ from .wid_key import (
     KeyWidget,
     BlackOutText,
 )
-from .black_setting_panel import BlackPanelForm, KeyData
-from .format_setting_panel import FormatPanelForm, FormatData
-from ..formlib.layouts import RowLayout, ColLayout
-from .const_color import Col
+from app.lib.crosswordlib.black_setting_panel import BlackPanelForm, KeyData
+from app.lib.crosswordlib.format_setting_panel import (
+    FormatPanelForm,
+    FormatData,
+)
+from app.lib.formlib.layouts import RowLayout, ColLayout
+from app.lib.crosswordlib.const_color import Col
 from PyQt5.QtGui import QPalette
 from PyQt5.QtCore import Qt
 
@@ -140,6 +143,8 @@ class CrossWord(QWidget):
     def set_world(
         self,
         board_black=None,
+        board_number=None,
+        board_text=None,
         key_black=None,
         show_ans=None,
         title: WidgetSetting | None = None,
@@ -149,17 +154,25 @@ class CrossWord(QWidget):
     ):
         # 黒塗り、表示を変更
         if board_black != None:
-            self.world.data[WorldSetting.BOARD_BLACK] = not self.world.data[
-                WorldSetting.BOARD_BLACK
-            ]
+            self.world.data[WorldSetting.BOARD_BLACK] = (
+                1 - self.world.data[WorldSetting.BOARD_BLACK]
+            )
+        if board_number != None:
+            self.world.data[WorldSetting.BOARD_NUMBER] = (
+                1 - self.world.data[WorldSetting.BOARD_NUMBER]
+            )
+        if board_text != None:
+            self.world.data[WorldSetting.BOARD_TEXT] = (
+                1 - self.world.data[WorldSetting.BOARD_TEXT]
+            )
         if key_black != None:
-            self.world.data[WorldSetting.BLACK] = not self.world.data[
-                WorldSetting.BLACK
-            ]
+            self.world.data[WorldSetting.BLACK] = (
+                1 - self.world.data[WorldSetting.BLACK]
+            )
         if show_ans != None:
-            self.world.data[WorldSetting.SHOW_ANS] = not self.world.data[
-                WorldSetting.SHOW_ANS
-            ]
+            self.world.data[WorldSetting.SHOW_ANS] = (
+                1 - self.world.data[WorldSetting.SHOW_ANS]
+            )
         if title != None:
             self.world.title = title
         if key_title != None:
@@ -190,13 +203,17 @@ class CrossWord(QWidget):
             self.world.data[WorldSetting.SHOW_ANS],
         )
         self.cell_board.board_black(self.world.data[WorldSetting.BOARD_BLACK])
+        self.cell_board.board_number(
+            self.world.data[WorldSetting.BOARD_NUMBER]
+        )
+        self.cell_board.board_text(self.world.data[WorldSetting.BOARD_TEXT])
         self.update()
 
     def get_capture(self):
         return self.grab()
 
     def delete_guaid(self):
-        EditableTextWidget.guaid = not EditableTextWidget.guaid
+        EditableTextWidget.guaid = 1 - EditableTextWidget.guaid
         self.update()
 
     def notify(self, event, data=[]):
@@ -216,6 +233,8 @@ class WorldSetting:
     # 黒塗り・表示設定
     BLACK = "black"
     BOARD_BLACK = "board_black"
+    BOARD_NUMBER = "board_number"
+    BOARD_TEXT = "board_text"
     SHOW_ANS = "show_ans"
     SHOW_KEY = "show_key"
     SHOW_TEXT = "show_text"
@@ -231,6 +250,8 @@ class WorldSetting:
         self.data = {}
         self.data[WorldSetting.BLACK] = 0
         self.data[WorldSetting.BOARD_BLACK] = 0
+        self.data[WorldSetting.BOARD_NUMBER] = 1
+        self.data[WorldSetting.BOARD_TEXT] = 1
         self.data[WorldSetting.SHOW_ANS] = 1
         self.data[WorldSetting.SHOW_KEY] = 1
         self.data[WorldSetting.SHOW_TEXT] = 1

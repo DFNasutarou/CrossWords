@@ -3,9 +3,9 @@ cd 'C:/workspace/github/nasu/CrossWords'
 python -m app
 """
 
-from .lib.formlib import formlib
-from .lib.crosswordlib.wid_crossword import CrossWord
-from .workspace import WorkSpace
+from app.lib.formlib import formlib
+from app.lib.crosswordlib.wid_crossword import CrossWord
+from app.workspace import WorkSpace
 
 size = (1000, 660)
 
@@ -28,6 +28,8 @@ class Notify(formlib.ApplicationNotify):
     MENU_BLACK = "黒塗り"
     # SUB_MENU_BLACK_TITLE = "指示文を塗る"
     SUB_MENU_BLACK_BOARD = "ボードを塗る"
+    SUB_MENU_BOARD_NUMBER = "ボードの数字を消す"
+    SUB_MENU_BOARD_TEXT = "ボードの文字を消す"
     SUB_MENU_BLACK_KEY = "キーを塗る"
     # SUB_MENU_BLACK_TEXT = "テキストを塗る"
     SUB_MENU_HIDE_ANSWER = "答えを隠す"
@@ -46,6 +48,8 @@ class Notify(formlib.ApplicationNotify):
         MENU_BLACK: [
             # SUB_MENU_BLACK_TITLE,
             SUB_MENU_BLACK_BOARD,
+            SUB_MENU_BOARD_NUMBER,
+            SUB_MENU_BOARD_TEXT,
             SUB_MENU_BLACK_KEY,
             # SUB_MENU_BLACK_TEXT,
             SUB_MENU_HIDE_ANSWER,
@@ -87,6 +91,10 @@ class Notify(formlib.ApplicationNotify):
                     # case Notify.SUB_MENU_BLACK_TITLE:
                     case Notify.SUB_MENU_BLACK_BOARD:
                         self.cross.set_world(board_black=True)
+                    case Notify.SUB_MENU_BOARD_NUMBER:
+                        self.cross.set_world(board_number=True)
+                    case Notify.SUB_MENU_BOARD_TEXT:
+                        self.cross.set_world(board_text=True)
                     case Notify.SUB_MENU_BLACK_KEY:
                         self.cross.set_world(key_black=True)
                     # case Notify.SUB_MENU_BLACK_TEXT:

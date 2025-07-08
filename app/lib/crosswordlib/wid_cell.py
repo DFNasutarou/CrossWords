@@ -5,8 +5,8 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QPainter, QPen
-from .const_color import Col
-from ..formlib.layouts import TableLaout
+from app.lib.crosswordlib.const_color import Col
+from app.lib.formlib.layouts import TableLaout
 
 Cell_Default = -1
 Cell_White = 0
@@ -147,6 +147,12 @@ class CellBoard(QWidget):
     def board_black(self, is_black):
         CellWidget.board_black = is_black
 
+    def board_number(self, is_number_show):
+        CellWidget.board_number_show = is_number_show
+
+    def board_text(self, is_text_show):
+        CellWidget.board_text_show = is_text_show
+
 
 class CellWidget(QPushButton):
     """
@@ -154,6 +160,8 @@ class CellWidget(QPushButton):
     """
 
     board_black = 0
+    board_number_show = 1
+    board_text_show = 1
 
     def __init__(self, row, col, parent: QWidget, size=40):
         super().__init__()
@@ -213,7 +221,7 @@ class CellWidget(QPushButton):
                 painter.drawRect(rect)
 
             # 数字設定
-            if self.number != None:
+            if self.number != None and CellWidget.board_number_show:
                 font = QFont()
                 n = self.height() * self.number_par // 100
                 font.setPointSize(n)
@@ -221,13 +229,15 @@ class CellWidget(QPushButton):
                 painter.drawText(2, n + 2, str(self.number))
 
             # 文字設定
-            if self.c != "":
+            if self.c != "" and CellWidget.board_text_show:
                 font = QFont()
                 n = self.height() * self.char_par // 100
                 font.setPointSize(n)
                 painter.setFont(font)
                 painter.drawText(
-                    self.rect(), Qt.AlignmentFlag.AlignCenter, self.c
+                    self.rect().adjusted(4, 4, 4, 4),
+                    Qt.AlignmentFlag.AlignCenter,
+                    self.c,
                 )
 
         painter.end()

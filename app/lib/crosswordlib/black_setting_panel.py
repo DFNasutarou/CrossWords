@@ -8,9 +8,9 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import pyqtSignal
 
-from ..formlib.widgets import SquareSetter
-from ..formlib.layouts import RowLayout, ColLayout
-from .wid_key import KeyGroup, BlackOutText
+from app.lib.formlib.widgets import SquareSetter
+from app.lib.formlib.layouts import RowLayout, ColLayout
+from app.lib.crosswordlib.wid_key import KeyGroup, BlackOutText
 
 
 class KeyData:
