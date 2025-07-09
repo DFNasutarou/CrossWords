@@ -21,42 +21,54 @@ class FormatWidget(QWidget):
     def __init__(self, format: WidgetSetting, parent=None):
         super().__init__(parent)
         base = ColLayout(self)
-        font_txt = QLabel(self)
-        font_txt.setText("サイズ")
-        self.font_size = QLineEdit(self)
-        self.font_size.setText(str(format.data[WidgetSetting.SIZE]))
-        margine_txt = QLabel(self)
-        margine_txt.setText("マージン")
-        self.margin = QLineEdit(self)
-        self.margin.setText(str(format.data[WidgetSetting.MARGIN]))
-        space_txt = QLabel(self)
-        space_txt.setText("スペース")
-        self.space = QLineEdit(self)
-        self.space.setText(str(format.data[WidgetSetting.SPACE]))
-        wid_txt = QLabel(self)
-        wid_txt.setText("幅最小値")
-        self.wid = QLineEdit(self)
-        self.wid.setText(str(format.data[WidgetSetting.WID]))
+        self.font_size = Editter(
+            "サイズ", str(format.data[WidgetSetting.SIZE])
+        )
+        mag = ",".join(map(str, format.data[WidgetSetting.MARGIN]))
+        self.margin = Editter("マージン", mag)
+        self.space = Editter("スペース", str(format.data[WidgetSetting.SPACE]))
+        self.wid = Editter("幅最小値", str(format.data[WidgetSetting.WID]))
+        self.font_color = Editter(
+            "文字色", str(format.data[WidgetSetting.COLOR])
+        )
 
-        base.addWidget(font_txt)
         base.addWidget(self.font_size)
-        base.addWidget(margine_txt)
         base.addWidget(self.margin)
-        base.addWidget(space_txt)
         base.addWidget(self.space)
-        base.addWidget(wid_txt)
         base.addWidget(self.wid)
+        base.addWidget(self.font_color)
 
         self.format = format
 
     def notify(self):
         try:
-            self.format.data[WidgetSetting.SIZE] = int(self.font_size.text())
-            self.format.data[WidgetSetting.MARGIN] = int(self.margin.text())
-            self.format.data[WidgetSetting.SPACE] = int(self.space.text())
-            self.format.data[WidgetSetting.WID] = int(self.wid.text())
+            self.format.data[WidgetSetting.SIZE] = int(
+                self.font_size.get_text()
+            )
+            mag = list(map(int, self.margin.get_text().split(",")))
+            self.format.data[WidgetSetting.MARGIN] = mag
+            self.format.data[WidgetSetting.SPACE] = int(self.space.get_text())
+            self.format.data[WidgetSetting.WID] = int(self.wid.get_text())
+            self.format.data[WidgetSetting.COLOR] = self.font_color.get_text()
         except:
+            print("error")
             pass
+
+
+class Editter(QWidget):
+    def __init__(self, text, data):
+        super().__init__()
+        base = ColLayout(self)
+        txt = QLabel(self)
+        txt.setText(text)
+        self.data = QLineEdit(self)
+        self.data.setText(data)
+        self.data.setFixedWidth(80)
+        base.addWidget(txt)
+        base.addWidget(self.data)
+
+    def get_text(self):
+        return self.data.text()
 
 
 class FormatPanelForm(QDialog):

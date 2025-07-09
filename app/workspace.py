@@ -1,8 +1,9 @@
-import os
+import os, re
 
 from PyQt5.QtWidgets import (
     QMessageBox,
     QInputDialog,
+    QFileDialog,
 )
 from app.lib.formlib.jsonio import JsonFileBuilder
 from PyQt5.QtGui import QPixmap
@@ -85,9 +86,30 @@ class WorkSpace:
         file = os.path.join(self.project, DATA_FILE_NAME)
         data = builder.load(file)
         if type(data) == dict and "data" in data:
+            self.update_init_file()
             return data["data"]
         else:
             return None
+
+    def select_project(self):
+        # 単一ファイル選択ダイアログ
+        file_path, _ = QFileDialog.getOpenFileName(
+            None,
+            "data.jsonを選択",
+            self.workspace,  # 初期ディレクトリ
+            "jsonファイル (*.json);",  # フィルタ
+        )
+        if not file_path:
+            return
+        if self.workspace not in file_path:
+            print("ワークスペース外のファイルは選択できません")
+            return
+        normalized = file_path.replace("\\", "/")
+        file_path = file_path.removeprefix(self.workspace)
+        pattern = rf"({re.escape(self.workspace)}/[^/]+)"
+        m = re.search(pattern, normalized)
+        if m != None:
+            self.project = m.group(1)
 
     def save_capture(self, cap: QPixmap):
         file_name, ok = QInputDialog.getText(
@@ -106,5 +128,24 @@ class WorkSpace:
         else:
             print("保存に失敗しました")
 
+    def load_picture(self):
+        # 画像を読み込む
+        # 単一ファイル選択ダイアログ
+        file_path, ok = QFileDialog.getOpenFileName(
+            None,
+            "画像ファイルを選択",
+            self.workspace,  # 初期ディレクトリ
+            "画像ファイル (*.png *.jpg *.bmp)",  # フィルタ
+        )
+        if not ok:
+            return None
+        return QPixmap(file_path)
+
     def update_init_file(self):
-        pass
+        data = {}
+        data[WORK_SPACE] = self.workspace
+        data[PROJECT] = self.project
+
+        builder = JsonFileBuilder()
+        builder.add("data", data)
+        builder.save(INIT_JSON)

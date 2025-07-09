@@ -5,12 +5,8 @@ from PyQt5.QtWidgets import (
     QMainWindow,
     QWidget,
     QAction,
-    QGridLayout,
-    QVBoxLayout,
-    QBoxLayout,
     QApplication,
     QWidget,
-    QVBoxLayout,
     QMenu,
     QLayout,
 )
@@ -27,59 +23,61 @@ class ApplicationNotify:
     def notify(self, menu, sub):
         pass
 
-    # class WidgetTree:
-    def __init__(self):
-        # ルートコンテナ生成
-        root_widget = QWidget()
-        layout = QVBoxLayout(root_widget)
-        layout.setSpacing(0)
-        size = (100, 100)
-        self.root = WidgetTree.Node(size, root_widget)
 
-    class Node:
-        def __init__(self, size, widget: QWidget):
-            self.size = size  # size: コンテナの場合 (rows, cols)
-            self.widget = widget  # QWidget
-            self.children = []  # 追加された子ノード
+# class WidgetTree:
+#     def __init__(self):
+#         # ルートコンテナ生成
+#         root_widget = QWidget()
+#         layout = QVBoxLayout(root_widget)
+#         layout.setSpacing(0)
+#         size = (100, 100)
+#         self.root = WidgetTree.Node(size, root_widget)
 
-        def add(self, path, size, widget: QWidget):
-            if path:
-                idx = path.pop()
-                return self.children[idx].add(path, size, widget)
+#     class Node:
+#         def __init__(self, size, widget: QWidget):
+#             self.size = size  # size: コンテナの場合 (rows, cols)
+#             self.widget = widget  # QWidget
+#             self.children = []  # 追加された子ノード
 
-            # 子を生成し、適切にレイアウトに追加
-            child = widget
-            layout = self.widget.layout()
-            # QGridLayout なら自動セル配置
-            if isinstance(layout, QGridLayout):
-                rows, cols = self.size
-                idx = len(self.children)
-                r = idx // cols
-                c = idx % cols
-                layout.addWidget(child, r, c)
-            elif isinstance(layout, QBoxLayout):
-                layout.addWidget(child)
-            # 子ノードとして保持
-            self.children.append(MainWindow.Node(size, child))
-            return
+#         def add(self, path, size, widget: QWidget):
+#             if path:
+#                 idx = path.pop()
+#                 return self.children[idx].add(path, size, widget)
 
-    def add(self, path, widget: QWidget, size=-1):
-        # パスを逆順にして渡す
-        return
-        widget = self.root.add(list(path)[::-1], size, widget)
-        return widget
+#             # 子を生成し、適切にレイアウトに追加
+#             child = widget
+#             layout = self.widget.layout()
+#             # QGridLayout なら自動セル配置
+#             if isinstance(layout, QGridLayout):
+#                 rows, cols = self.size
+#                 idx = len(self.children)
+#                 r = idx // cols
+#                 c = idx % cols
+#                 layout.addWidget(child, r, c)
+#             elif isinstance(layout, QBoxLayout):
+#                 layout.addWidget(child)
+#             # 子ノードとして保持
+#             self.children.append(MainWindow.Node(size, child))
+#             return
+
+#     def add(self, path, widget: QWidget, size=-1):
+#         # パスを逆順にして渡す
+#         return
+#         widget = self.root.add(list(path)[::-1], size, widget)
+#         return widget
 
 
 class MainWindow(QMainWindow):
 
-    def __init__(self, size):
+    def __init__(self):
         super().__init__()
         self.setWindowTitle("フォーム")
-        # self.setFixedSize(size[0], size[1])
 
     def set_widget(self, widget: QWidget):
         # ルートコンテナ生成
         self.setCentralWidget(widget)
+        self.wid = widget
+
         lay = self.layout()
         if lay:
             lay.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
@@ -105,16 +103,18 @@ class MainWindow(QMainWindow):
             for v in value:
                 m.addAction(v)
 
+    def set_title(self, title):
+        self.setWindowTitle(title)
+
 
 class Application:
     """
     QApplication を生成し、MainWindow を表示するラッパー。
     """
 
-    def __init__(self, size):
+    def __init__(self):
         self.app = QApplication(sys.argv)
-        # デフォルトサイズ 800x600
-        self.window = MainWindow(size)
+        self.window = MainWindow()
 
     def run(self):
         self.window.show()

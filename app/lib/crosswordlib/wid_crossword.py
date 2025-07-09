@@ -15,6 +15,7 @@ from app.lib.crosswordlib.format_setting_panel import (
     FormatPanelForm,
     FormatData,
 )
+from app.lib.formlib.widgets import GraphicWidget
 from app.lib.formlib.layouts import RowLayout, ColLayout
 from app.lib.crosswordlib.const_color import Col
 from PyQt5.QtGui import QPalette
@@ -33,7 +34,10 @@ class CrossWord(QWidget):
         self.cell_size = DEFAULT_CELL_SIZE
 
         base = RowLayout(self)
-        base.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+        # base.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+
+        self.pic = GraphicWidget()
+        base.addWidget(self.pic)
 
         palette = self.palette()
         palette.setColor(QPalette.Window, Col.white)  # RGB値で指定
@@ -48,9 +52,7 @@ class CrossWord(QWidget):
 
         base.addWidget(board_widget)
 
-        cell_board = CellBoard(
-            self.board_size, size[1] - DEFAULT_TITLE_SIZE, self
-        )
+        cell_board = CellBoard(self.board_size, self)
 
         board.addWidget(cell_board)
         key = KeyWidget(self)
@@ -100,6 +102,19 @@ class CrossWord(QWidget):
         if not ok:
             return  # キャンセル
         self.cell_board.resize(size)
+
+    def trans_board(self):
+        self.cell_board.trans()
+        self.key.trans_key()
+
+    def sort_key(self):
+        self.key.sort_key()
+
+    def switch_title(self):
+        self.world.data[WorldSetting.SHOW_TITLE] = (
+            1 - self.world.data[WorldSetting.SHOW_TITLE]
+        )
+        self.world_update()
 
     def black_setting_panel(self):
         kg_list = self.key.get_visible_list()
@@ -186,10 +201,15 @@ class CrossWord(QWidget):
 
     def world_update(self):
         self.title.set_font(self.world.title.data[WidgetSetting.SIZE])
+        if self.world.data[WorldSetting.SHOW_TITLE]:
+            self.title.show()
+        else:
+            self.title.hide()
         bd: WidgetSetting = self.world.board
         self.cell_board.set_margine(
             bd.data[WidgetSetting.MARGIN], bd.data[WidgetSetting.SIZE]
         )
+        self.cell_board.set_board_color(bd.data[WidgetSetting.COLOR])
         self.key.setting_update(
             self.world.key_title,
             self.world.key_set,
@@ -216,15 +236,20 @@ class CrossWord(QWidget):
         EditableTextWidget.guaid = 1 - EditableTextWidget.guaid
         self.update()
 
+    def set_picture(self, pic=None) -> None:
+        # 画像をセットする
+        # 読み込まなければ削除する
+        self.pic.set_pixmap(pic)
+
     def notify(self, event, data=[]):
         if event == 1:
             self.key.visible_update(*self.cell_board.get_num_list())
         elif event == 2:
             num, text = data
-            self.cell_board.set_answer_row(num, text)
+            # self.cell_board.set_answer_row(num, text)
         elif event == 3:
             num, text = data
-            self.cell_board.set_answer_col(num, text)
+            # self.cell_board.set_answer_col(num, text)
         elif event == 4:
             self.world.data[WorldSetting.TITLE_TEXT] = data
 
@@ -235,6 +260,7 @@ class WorldSetting:
     BOARD_BLACK = "board_black"
     BOARD_NUMBER = "board_number"
     BOARD_TEXT = "board_text"
+    SHOW_TITLE = "show_title"
     SHOW_ANS = "show_ans"
     SHOW_KEY = "show_key"
     SHOW_TEXT = "show_text"
@@ -252,16 +278,17 @@ class WorldSetting:
         self.data[WorldSetting.BOARD_BLACK] = 0
         self.data[WorldSetting.BOARD_NUMBER] = 1
         self.data[WorldSetting.BOARD_TEXT] = 1
+        self.data[WorldSetting.SHOW_TITLE] = 1
         self.data[WorldSetting.SHOW_ANS] = 1
         self.data[WorldSetting.SHOW_KEY] = 1
         self.data[WorldSetting.SHOW_TEXT] = 1
         self.data[WorldSetting.TITLE_TEXT] = "指示文"
-        self.title = WidgetSetting(60, 600)
-        self.key_title = WidgetSetting(20, 100)
-        self.key_set = WidgetSetting(16, 32)
-        self.key_text = WidgetSetting(16, 480)
-        self.key_answer = WidgetSetting(16, 96)
-        self.board = WidgetSetting(400, 400)
+        self.title = WidgetSetting(60, 600, "#0000000")
+        self.key_title = WidgetSetting(20, 100, "#0000000")
+        self.key_set = WidgetSetting(16, 32, "#0000000")
+        self.key_text = WidgetSetting(16, 480, "#0000000")
+        self.key_answer = WidgetSetting(16, 96, "#0000000")
+        self.board = WidgetSetting(400, 400, "#0000000")
 
     def save(self):
         self.data[WorldSetting.FORMAT_TITLE] = self.title.save()

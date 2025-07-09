@@ -23,13 +23,15 @@ class WidgetSetting:
     SPACE = "space"
     SIZE = "size"
     WID = "width"
+    COLOR = "color"
 
-    def __init__(self, size, wid):
+    def __init__(self, size, wid, color):
         self.data = {}
         self.data[WidgetSetting.MARGIN] = [0, 0, 0, 0]
         self.data[WidgetSetting.SPACE] = 0
         self.data[WidgetSetting.SIZE] = size
         self.data[WidgetSetting.WID] = wid
+        self.data[WidgetSetting.COLOR] = color
 
     def save(self):
         return self.data
@@ -72,11 +74,17 @@ class GraphicWidget(ClickableLabel):
     画像を表示し、表示領域に合わせてアスペクト比を保ったリサイズとクリック応答が可能。
     """
 
-    def __init__(self, pixmap: QPixmap, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self._original = pixmap
+        self._original = QPixmap()
         self.setScaledContents(True)
+        self.setPixmap(self._original)
+
+    def set_pixmap(self, pixmap: QPixmap | None = None):
+        if pixmap == None:
+            pixmap = QPixmap()
         self.setPixmap(pixmap)
+        self._original = pixmap
 
     def resizeEvent(self, event):
         # 元の pixmap を枠内の大きさに合わせてアスペクト比を保ちつつリサイズ
@@ -180,9 +188,9 @@ class EditableTextWidget(QWidget):
     ラベル表示から QLineEdit に切り替えて編集できる。
     """
 
-    guaid = 1
+    guaid = 0
 
-    def __init__(self, text="", listner=None, col=Qt.GlobalColor.black):
+    def __init__(self, text="", listner=None, col="#000000"):
         super().__init__(None)
         self.listner = listner
         base = ColLayout(self)
@@ -197,7 +205,7 @@ class EditableTextWidget(QWidget):
         self.edit.editingFinished.connect(self._finish_edit)
 
         palette = self.label.palette()
-        palette.setColor(QPalette.WindowText, col)
+        palette.setColor(QPalette.WindowText, QColor(col))
         self.label.setPalette(palette)
 
         self.edit.setStyleSheet(
@@ -228,6 +236,8 @@ class EditableTextWidget(QWidget):
         return self.label.text()
 
     def set_text(self, text):
+        if text == None:
+            return
         self.label.setText(text)
         self.edit.setText(text)
 
@@ -238,6 +248,12 @@ class EditableTextWidget(QWidget):
 
     def get_font(self):
         return self.label.font().pointSize()
+
+    def set_color(self, col):
+        palette = self.label.palette()
+        palette.setColor(QPalette.WindowText, QColor(col))
+        self.label.setPalette(palette)
+        self.edit.setPalette(palette)
 
     def paintEvent(self, event):
         super().paintEvent(event)
