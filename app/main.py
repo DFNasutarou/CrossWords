@@ -1,6 +1,9 @@
 """
 cd 'C:/workspace/github/nasu/CrossWords'
 python -m app
+
+cd D:/project/github/CrossWords
+"C:/Users/nasut/AppData/Local/Programs/Python/Python313/python" -m app
 """
 
 from app.lib.formlib import formlib
