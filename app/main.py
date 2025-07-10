@@ -143,6 +143,8 @@ class Notify(formlib.ApplicationNotify):
         # プロジェクト新規作成
         data = self.cross.save()
         self.work.make_workspace(data)
+        txt = self.work.project
+        self.app.window.set_title(txt)
         self.save()
 
     def resize_board(self):

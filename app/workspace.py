@@ -82,6 +82,7 @@ class WorkSpace:
         builder.save(file)
 
     def load_project(self):
+        # self.projectに指定されているデータを読み込み
         builder = JsonFileBuilder()
         file = os.path.join(self.project, DATA_FILE_NAME)
         data = builder.load(file)
@@ -92,7 +93,7 @@ class WorkSpace:
             return None
 
     def select_project(self):
-        # 単一ファイル選択ダイアログ
+        # プロジェクトを選択
         file_path, _ = QFileDialog.getOpenFileName(
             None,
             "data.jsonを選択",
@@ -142,6 +143,7 @@ class WorkSpace:
         return QPixmap(file_path)
 
     def update_init_file(self):
+        # initファイルを更新
         data = {}
         data[WORK_SPACE] = self.workspace
         data[PROJECT] = self.project

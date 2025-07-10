@@ -34,7 +34,6 @@ class CrossWord(QWidget):
         self.cell_size = DEFAULT_CELL_SIZE
 
         base = RowLayout(self)
-        # base.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
 
         self.pic = GraphicWidget()
         base.addWidget(self.pic)
@@ -75,13 +74,20 @@ class CrossWord(QWidget):
         data["cell"] = self.cell_board.save()
         data["key"] = self.key.save()
         data["world"] = self.world.save()
+        data["title_text"] = self.title.save()
         return data
 
     def load(self, data):
-        self.cell_board.load(data["cell"])
-        self.key.load(data["key"])
-        self.key.visible_update(*self.cell_board.get_num_list())
-        self.world.load(data["world"])
+        try:
+            self.cell_board.load(data["cell"])
+            self.key.load(data["key"])
+            self.key.visible_update(*self.cell_board.get_num_list())
+            self.world.load(data["world"])
+            self.title.load(data["title_text"])
+        except:
+            print(
+                "バージョンが異なるかjsonファイルが破損しています。デフォルト値を読み取りました。"
+            )
 
         self.title.set_text(self.world.data[WorldSetting.TITLE_TEXT])
         self.world_update()
@@ -117,8 +123,9 @@ class CrossWord(QWidget):
         self.world_update()
 
     def black_setting_panel(self):
-        kg_list = self.key.get_visible_list()
+        kg_list = [self.title] + self.key.get_visible_list()
         kd_list = [KeyData.clone_key_data(kg) for kg in kg_list]
+
         BlackOutText.set_black(1)
 
         # 子フォームを生成。初期値も渡せる
@@ -141,6 +148,7 @@ class CrossWord(QWidget):
             self.world.key_title,
             self.world.key_set,
             self.world.key_text,
+            self.world.key_answer,
             self.world.board,
         )
 

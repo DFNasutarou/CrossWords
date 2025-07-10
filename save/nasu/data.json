@@ -2670,7 +2670,7 @@
       "show_ans": 1,
       "show_key": 1,
       "show_text": 1,
-      "title_text": "",
+      "title_text": "あああいいい",
       "format_title": {
         "margin": [
           0,
@@ -2743,6 +2743,19 @@
         "width": 96,
         "color": "#ff8888"
       }
-    }
+    },
+    "title_text": [
+      "あああいいい",
+      [
+        [
+          0.0,
+          15.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ]
+    ]
   }
 }

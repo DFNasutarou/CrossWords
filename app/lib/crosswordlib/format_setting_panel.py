@@ -9,11 +9,12 @@ from app.lib.formlib.widgets import WidgetSetting, QLineEdit
 
 
 class FormatData:
-    def __init__(self, title, key_title, key_set, key_text, board):
+    def __init__(self, title, key_title, key_set, key_text, key_answer, board):
         self.title = title
         self.key_title = key_title
         self.key_set = key_set
         self.key_text = key_text
+        self.key_answer = key_answer
         self.board = board
 
 
@@ -82,14 +83,17 @@ class FormatPanelForm(QDialog):
         title_txt.setText("指示文")
         self.title = FormatWidget(format.title)
         key_title_txt = QLabel(self)
-        key_title_txt.setText("キー名")
+        key_title_txt.setText("キー種類（タテ/ヨコ）")
         self.key_title = FormatWidget(format.key_title)
         key_set_txt = QLabel(self)
-        key_set_txt.setText("キー")
+        key_set_txt.setText("キー番号")
         self.key_set = FormatWidget(format.key_set)
         key_txt = QLabel(self)
         key_txt.setText("キーテキスト")
         self.key_txt = FormatWidget(format.key_text)
+        key_answer = QLabel(self)
+        key_answer.setText("答え")
+        self.key_answer = FormatWidget(format.key_answer)
         board_txt = QLabel(self)
         board_txt.setText("ボード")
         self.board = FormatWidget(format.board)
@@ -102,6 +106,8 @@ class FormatPanelForm(QDialog):
         base.addWidget(self.key_set)
         base.addWidget(key_txt)
         base.addWidget(self.key_txt)
+        base.addWidget(key_answer)
+        base.addWidget(self.key_answer)
         base.addWidget(board_txt)
         base.addWidget(self.board)
 
@@ -110,6 +116,7 @@ class FormatPanelForm(QDialog):
         self.key_title.notify()
         self.key_set.notify()
         self.key_txt.notify()
+        self.key_answer.notify()
         self.board.notify()
         super().closeEvent(event)  # これが内部で reject() を呼ぶ
 

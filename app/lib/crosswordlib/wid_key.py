@@ -2,7 +2,11 @@
 from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
 from PyQt5.QtGui import QPainter, QFontMetrics, QColor
 from PyQt5.QtCore import QRect, Qt
-from app.lib.formlib.widgets import EditableTextWidget, WidgetSetting
+from app.lib.formlib.widgets import (
+    EditableTextWidget,
+    WidgetSetting,
+    LabelWidget,
+)
 from app.lib.crosswordlib.const_color import Col
 from app.lib.formlib.layouts import RowLayout, ColLayout
 
@@ -44,7 +48,7 @@ class KeyWidget(QWidget):
         key_title_setting: WidgetSetting | None = None,
         key_setting: WidgetSetting | None = None,
         key_text_setting: WidgetSetting | None = None,
-        key_anser_setting: WidgetSetting | None = None,
+        key_anwser_setting: WidgetSetting | None = None,
     ) -> None:
         if key_title_setting != None:
             BlackKeyTitle.setting(key_title_setting)
@@ -52,8 +56,8 @@ class KeyWidget(QWidget):
             BlackKeyNameText.setting(key_setting)
         if key_text_setting != None:
             BlackKeyText.setting(key_text_setting)
-        if key_anser_setting != None:
-            BlackKeyAnswer.setting(key_anser_setting)
+        if key_anwser_setting != None:
+            BlackKeyAnswer.setting(key_anwser_setting)
 
     def default_setting(self):
         self.data[STR_ROW_KEY_TITLE] = "タテのカギ"
@@ -61,6 +65,9 @@ class KeyWidget(QWidget):
         self.rows = [
             KeyGroup(TYPE_ROW, i, self, str(i), "") for i in range(KEY_NUMBER)
         ]
+        for w in self.rows:
+            w.hide()  # いったん全部消す
+
         self.data[STR_ROW_KEY] = [w.save() for w in self.rows]
         self.data[STR_ROW_KEY_SIZE] = -1
         self.data[STR_COL_KEY_TITLE] = "ヨコのカギ"
@@ -68,6 +75,8 @@ class KeyWidget(QWidget):
         self.cols = [
             KeyGroup(TYPE_COL, i, self, str(i), "") for i in range(KEY_NUMBER)
         ]
+        for w in self.cols:
+            w.hide()  # いったん全部消す
         self.data[STR_COL_KEY] = [w.save() for w in self.cols]
         self.data[STR_COL_KEY_SIZE] = -1
         self.data[KEY_NAME_LENGTH] = -1
@@ -154,7 +163,6 @@ class KeyWidget(QWidget):
             w = item.widget()
             if w:
                 self.base.removeWidget(w)
-
         # ウィジェットを付けなおす
         fkt = self.rowkeytext
         skt = self.colkeytext
@@ -251,10 +259,6 @@ class BlackOutText(EditableTextWidget):
         font = self.label.font()
         fm = QFontMetrics(font)
         w = fm.horizontalAdvance("あ")
-        # if self.label.text() != "":
-        #     w = self.label.width() / len(self.label.text())
-        # else:
-        #     w = 0
         h = self.label.height()
 
         x1 = max(0, int(w * square[0][0] / 10))
@@ -293,31 +297,29 @@ class BlackOutText(EditableTextWidget):
         cls.black = black
 
 
-class BlackKeyAnswer(EditableTextWidget):
+class BlackKeyAnswer(LabelWidget):
     wid = 40
-    font_size = 16
-    margin = [0, 0, 0, 0]
+    font_size = 10
+    marg = [0, 0, 0, 0]
     col = "#000000"
     _instances: list["BlackKeyAnswer"] = []
 
-    def __init__(self, text, listener, col=None):
-        if col == None:
-            col = BlackKeyAnswer.col
-        super().__init__(text, listener, col)
+    def __init__(self, text, listener):
+        super().__init__(text, listener)
         self.configure()
         self.__class__._instances.append(self)
 
     def configure(self):
         self.set_font(BlackKeyAnswer.font_size)
-        self.setContentsMargins(*BlackKeyAnswer.margin)
-        self.set_minimum_length(BlackKeyAnswer.wid)
+        # self.setContentsMargins(*BlackKeyAnswer.margin)
+        # self.set_minimum_length(BlackKeyAnswer.wid)
         self.set_color(BlackKeyAnswer.col)
 
     @classmethod
     def setting(cls, setting: WidgetSetting):
         cls.wid = setting.data[WidgetSetting.WID]
         cls.font_size = setting.data[WidgetSetting.SIZE]
-        cls.margin = setting.data[WidgetSetting.MARGIN]
+        cls.marg = setting.data[WidgetSetting.MARGIN]
         cls.col = setting.data[WidgetSetting.COLOR]
         for inst in cls._instances:
             inst.configure()
@@ -325,7 +327,7 @@ class BlackKeyAnswer(EditableTextWidget):
 
 class BlackKeyTitle(BlackOutText):
     wid = 40
-    font_size = 40
+    font_size = 10
     margin = [0, 0, 0, 0]
     col = Col.black
     _instances: list["BlackKeyTitle"] = []
@@ -353,7 +355,7 @@ class BlackKeyTitle(BlackOutText):
 
 class BlackKeyNameText(BlackOutText):
     wid = 40
-    font_size = 40
+    font_size = 10
     margin = [0, 0, 0, 0]
     col = Col.black
     _instances: list["BlackKeyNameText"] = []
@@ -381,7 +383,7 @@ class BlackKeyNameText(BlackOutText):
 
 class BlackKeyText(BlackOutText):
     wid = 40
-    font_size = 40
+    font_size = 10
     margin = [0, 0, 0, 0]
     col = Col.black
     _instances: list["BlackKeyText"] = []

@@ -160,15 +160,21 @@ class BlackOperation(QWidget):
         el.addWidget(all_btn)
         el.addWidget(add_btn)
 
-        self.bl = BlackList()
+        self.bl = BlackList(self)
+        op_list = QWidget()
+        eli = ColLayout(op_list)
+        update_btn = QPushButton("更新")
+        update_btn.clicked.connect(self.on_update_btn)
         remove_btn = QPushButton("削除")
         remove_btn.clicked.connect(self.on_remove_btn)
+        eli.addWidget(update_btn)
+        eli.addWidget(remove_btn)
 
         base.addWidget(label)
         base.addWidget(self.setter)
         base.addWidget(edit)
         base.addWidget(self.bl)
-        base.addWidget(remove_btn)
+        base.addWidget(op_list)
 
     def set_bk(self, bk: BlackOutText):
         self.bk = bk
@@ -195,6 +201,12 @@ class BlackOperation(QWidget):
         square = [[0.0, w], [0.0, h]]
         self.setter.set_square(square)
 
+    def on_update_btn(self):
+        square = self.setter.get_square()
+        d, a = self.bl.update_selected_item(square)
+        self.bk.remove_square(d)
+        self.bk.add_square(a)
+
     def on_remove_btn(self):
         ret = self.bl.pop_selected_item()
         self.bk.remove_square(ret)
@@ -203,11 +215,17 @@ class BlackOperation(QWidget):
         ans = self.setter.get_square()
         self.bk.set_ghost(ans)
 
+    def notify_square(self, square):
+        self.setter.set_square(square)
+        self.notify()
+
 
 class BlackList(QListWidget):
-    def __init__(self):
+    def __init__(self, listener):
         super().__init__()
         self.init()
+        self.listener = listener
+        self.currentRowChanged.connect(self._select)
 
     def init(self):
         self.clear()
@@ -221,12 +239,24 @@ class BlackList(QListWidget):
         self.takeItem(n)
         return self.list.pop(n)
 
+    def update_selected_item(self, square):
+        n = self.currentRow()
+        if n == len(self.list) - 1:
+            return [[0.0, 0.0], [0.0, 0.0]], [[0.0, 0.0], [0.0, 0.0]]
+        self.takeItem(n)
+        d = self.list.pop(n)
+        self.insert_item(square, n)
+        return d, square
+
     def set_item(self, square_list):
         self.init()
         for square in square_list:
             self.add_item(square)
 
     def add_item(self, square):
+        return self.insert_item(square)
+
+    def insert_item(self, square, n=0):
         if square in self.list:
             return False
         s = (
@@ -238,9 +268,13 @@ class BlackList(QListWidget):
             + ","
             + str(square[1][1])
         )
-        self.list.insert(0, square)
-        self.insertItem(0, s)
+        self.list.insert(n, square)
+        self.insertItem(n, s)
         return True
+
+    def _select(self):
+        square = self.list[self.currentRow()]
+        self.listener.notify_square(square)
 
 
 class BlackEditor(QWidget):

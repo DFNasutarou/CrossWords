@@ -77,7 +77,8 @@ class GraphicWidget(ClickableLabel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._original = QPixmap()
-        self.setScaledContents(True)
+        # self.setScaledContents(True)
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setPixmap(self._original)
 
     def set_pixmap(self, pixmap: QPixmap | None = None):
@@ -88,6 +89,8 @@ class GraphicWidget(ClickableLabel):
 
     def resizeEvent(self, event):
         # 元の pixmap を枠内の大きさに合わせてアスペクト比を保ちつつリサイズ
+        if self._original.isNull():
+            return  # 画像がセットされていない間は何もしない
         if self._original:
             scaled = self._original.scaled(
                 self.size(),
@@ -119,7 +122,7 @@ class RangeSetter(QWidget):
         self.lf.textChanged.connect(self.on_text_changed)
         self.rg.textChanged.connect(self.on_text_changed)
         txt = QLabel(self)
-        txt.setText("～")
+        txt.setText("-")
         base.addWidget(self.lf)
         base.addWidget(txt)
         base.addWidget(self.rg)
@@ -182,6 +185,40 @@ class SquareSetter(QWidget):
         self.yrange.set_range(square[1])
 
 
+class LabelWidget(QLabel):
+    """
+    テキスト表示のみを受け付けるウィジェット
+    """
+
+    guaid = 0
+
+    def save(self):
+        # 現在の情報を書き出す
+        data = self.get_text()
+        return data
+
+    def load(self, data):
+        # 情報を読み取る
+        self.set_text(data)
+
+    def get_text(self):
+        return self.text()
+
+    def set_text(self, text):
+        if text == None:
+            return
+        self.setText(text)
+
+    def set_font(self, font_size):
+        font = QFont("MS Gothic", font_size)
+        self.setFont(font)
+
+    def set_color(self, col):
+        palette = self.palette()
+        palette.setColor(QPalette.WindowText, QColor(col))
+        self.setPalette(palette)
+
+
 class EditableTextWidget(QWidget):
     """
     クリックするとテキスト入力可能になるウィジェット。
@@ -213,12 +250,12 @@ class EditableTextWidget(QWidget):
             /* 通常時 */
             QLineEdit {
                 background-color: white;
-                color: #eeeeee;
+                color: #555555;
             }
             /* フォーカス（編集中）時 */
             QLineEdit:focus {
                 background-color: white;  
-                color: #eeeeee;          
+                color: #555555;          
             }
             """
         )
