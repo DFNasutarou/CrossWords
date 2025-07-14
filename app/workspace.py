@@ -6,7 +6,10 @@ from PyQt5.QtWidgets import (
     QFileDialog,
 )
 from app.lib.formlib.jsonio import JsonFileBuilder
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QPainter, QPageSize
+from PyQt5.QtSvg import QSvgGenerator
+from PyQt5.QtPrintSupport import QPrinter
+from PyQt5.QtCore import QSizeF
 
 WORK_SPACE = "workspace"
 PROJECT = "project"
@@ -113,6 +116,7 @@ class WorkSpace:
             self.project = m.group(1)
 
     def save_capture(self, cap: QPixmap):
+        # pngでスクリーンキャプチャ取得
         file_name, ok = QInputDialog.getText(
             None,
             "ファイル名を指定",
@@ -129,6 +133,60 @@ class WorkSpace:
         else:
             print("保存に失敗しました")
 
+    def save_svg(self, widget):
+        # svgでスクリーンキャプチャ取得
+        file = self.select_output_file()
+        if file == None:
+            return
+        svg_file = file + ".svg"
+
+        generator = QSvgGenerator()
+        generator.setFileName(svg_file)  # 出力ファイル名
+        generator.setSize(widget.size())  # 出力サイズ(px単位)
+        generator.setViewBox(widget.rect())  # 座標系 (0,0)-(width,height)
+        generator.setTitle("PyQt5 Widget SVG Export")
+        generator.setDescription("Exported from a PyQt5 widget")
+
+        # ペインタでウィジェットを SVG に描画
+        painter = QPainter(generator)
+        widget.render(painter)
+        painter.end()
+
+    def select_output_file(self):
+        file_name, ok = QInputDialog.getText(
+            None,
+            "ファイル名を指定",
+            "作成するファイル名を入力してください：",
+        )
+        if not ok or not file_name.strip():
+            return  # キャンセルまたは空文字
+
+        picture_dir: str = os.path.join(self.project, PICTURE_FOLDER_NAME)
+        picture_file = os.path.join(picture_dir, file_name)
+
+        return picture_file
+
+    def save_widget_as_pdf(self, widget):
+        file = self.select_output_file()
+        if file == None:
+            return
+        filename = file + ".pdf"
+        printer = QPrinter(QPrinter.HighResolution)
+        printer.setOutputFormat(QPrinter.PdfFormat)
+        printer.setOutputFileName(filename)
+        size = QSizeF(widget.size())
+        printer.setPageSize(QPageSize(size, QPageSize.Point, "MyCustom"))
+        # .setPageSize(QPrinter.Letter)  # 用紙サイズなども設定可能
+        painter = QPainter(printer)
+        w_rect = widget.rect()
+        p_rect = printer.pageRect()
+        # X, Y それぞれ別にスケーリング
+        sx = p_rect.width() / w_rect.width()
+        sy = p_rect.height() / w_rect.height()
+        painter.scale(sx, sy)  # 縦横で別スケール指定すると縦横比が変わる
+        widget.render(painter)
+        painter.end()
+
     def load_picture(self):
         # 画像を読み込む
         # 単一ファイル選択ダイアログ
@@ -141,6 +199,19 @@ class WorkSpace:
         if not ok:
             return None
         return QPixmap(file_path)
+
+    def load_picture_pdf(self):
+        # 画像を読み込む
+        # 単一ファイル選択ダイアログ
+        file_path, ok = QFileDialog.getOpenFileName(
+            None,
+            "画像ファイルを選択",
+            self.workspace,  # 初期ディレクトリ
+            "画像ファイル (*.svg *.pdf)",  # フィルタ
+        )
+        if not ok:
+            return None
+        return file_path
 
     def update_init_file(self):
         # initファイルを更新

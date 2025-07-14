@@ -17,6 +17,10 @@ from PyQt5.QtGui import (
 )
 from app.lib.formlib.layouts import RowLayout, ColLayout
 
+# from PyQt5.QtWidgets    import QWidget, QVBoxLayout
+# from PyQt5.QtPdf        import QPdfDocument
+# from PyQt5.QtPdfWidgets import QPdfView  # PyQt5 5.14 以降で利用可能
+
 
 class WidgetSetting:
     MARGIN = "margin"
@@ -224,6 +228,8 @@ class EditableTextWidget(QWidget):
     クリックするとテキスト入力可能になるウィジェット。
     ラベル表示から QLineEdit に切り替えて編集できる。
     """
+
+    __slots__ = ["listener", "label", "edit", "base"]
 
     guaid = 0
 

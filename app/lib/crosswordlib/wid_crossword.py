@@ -1,7 +1,6 @@
 # widgets.py
 from PyQt5.QtWidgets import (
     QWidget,
-    QLayout,
     QInputDialog,
 )
 from ..formlib.widgets import WidgetSetting, EditableTextWidget
@@ -18,8 +17,10 @@ from app.lib.crosswordlib.format_setting_panel import (
 from app.lib.formlib.widgets import GraphicWidget
 from app.lib.formlib.layouts import RowLayout, ColLayout
 from app.lib.crosswordlib.const_color import Col
-from PyQt5.QtGui import QPalette
+from PyQt5.QtGui import QPalette, QPixmap
 from PyQt5.QtCore import Qt
+
+import fitz  # PyMuPDFをインポート
 
 DEFAULT_BOARD_SIZE = 5
 DEFAULT_CELL_SIZE = 40
@@ -37,6 +38,9 @@ class CrossWord(QWidget):
 
         self.pic = GraphicWidget()
         base.addWidget(self.pic)
+
+        # self.pic_pdf = PDFWidget()
+        # base.addWidget(self.pic_pdf)
 
         palette = self.palette()
         palette.setColor(QPalette.Window, Col.white)  # RGB値で指定
@@ -248,6 +252,20 @@ class CrossWord(QWidget):
         # 画像をセットする
         # 読み込まなければ削除する
         self.pic.set_pixmap(pic)
+
+    def set_picture_pdf(self, file_path=None) -> None:
+        # 画像をセットする
+        # 読み込まなければ削除する
+        if file_path == None:
+            self.pic.set_pixmap(None)
+            return
+        return
+        # pdf_file = fitz.open(file_path)
+        # page = pdf_file[0]
+        # pix = page.get_pixmap()
+        # image = QPixmap()
+        # image.loadFromData(pix.tobytes())
+        # self.pic.set_pixmap(image)
 
     def notify(self, event, data=[]):
         if event == 1:

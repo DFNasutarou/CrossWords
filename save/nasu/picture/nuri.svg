@@ -1,0 +1,1777 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="492.478mm" height="214.489mm"
+ viewBox="0 0 1396 608"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.2" baseProfile="tiny">
+<title>PyQt5 Widget SVG Export</title>
+<desc>Exported from a PyQt5 widget</desc>
+<defs>
+</defs>
+<g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" >
+
+<g fill="#ffffff" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="1396" height="608"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,60)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,143)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,226)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,309)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,392)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,10,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,10,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,93,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,93,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,176,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,176,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,259,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,259,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,342,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,342,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<image x="0" y="0" width="83" height="83" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABTCAYAAADjsjsAAAAACXBIWXMAABJ0AAASdAHeZh94AAABoUlEQVR4nO3dsWnDQBxG8b9kcGsVhwyuMkK0SVbwCJ4kI2SFbGKP4M7YCNkLSJciUgipQvJACN6vUvnxuFN7EcIU08fxeHwqiuItIp4joppv0qK855wPTdOcI8aYY8jjdrutUkpRluWsC5dgGIboui4ul8sj59w0TXMuIyKKonjd7XZVXdeG/KWyLCOlFHVdV+ONjqncS1V5s/8ipRTx+Wv8ihmr1WquPYs2dqsivsXU/xkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUHGBBkTZEyQMUFTzEff97MOWarv3aaYp7Zt51mzcPf7PSLiPWKMmXPe3263R9u24Qn9nb7v43q9Tq+uHCJ+vAfUdd3rMAwvOef5Vi7HY71enzabzX56D0igD3HtVpdCaD9mAAAAAElFTkSuQmCC" />
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,425,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,425,475)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="83" height="83"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,22)"
+font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >タテ</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="68" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="102" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >カギ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1206,65)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >からすみ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,65)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >1</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,65)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >日本三大珍味</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >といえば、</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="330" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >ウニ、</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="420" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >このわたと</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="570" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >何？</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,95)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >なめくじ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,95)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >3</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,95)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >漢字</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="60" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >では「</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="150" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >蛞蝓」</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="240" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >と</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="270" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >書</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="300" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >きます。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,125)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >よん</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,125)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >4</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,125)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >IIIIII？VVI</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,155)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >ぶい</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,155)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >6</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,155)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >IIIIIII???I</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,185)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >それから</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,185)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >9</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,185)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >夏目漱石</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="120" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="150" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >前期三部作</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="300" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="330" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >二番目。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1176,215)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >きただけ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,215)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >10</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,215)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >日本</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="60" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >で</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="90" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >一番高</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >い</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="210" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >山</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="240" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >は</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="270" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >富士山。</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="390" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >では</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="450" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >二番目</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="540" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >は？</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1116,245)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >すぎ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,245)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >12</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,245)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >きのこの</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="120" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >山、</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >たけのこの</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="330" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >里、○○</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="450" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >のこ</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="510" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >村</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1326,275)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >しば</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,275)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >13</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,275)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >おじいさんは</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >山</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="210" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >へ○</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="270" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >刈</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="300" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >りに、おばあさんは</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="570" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >川</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="600" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >へ</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="630" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >洗濯</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="690" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >に。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,315)"
+font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >ヨコ</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="68" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="102" y="28" font-family="MS Gothic" font-size="20" font-weight="400" font-style="normal" 
+ >カギ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,358)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >つなよし</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,358)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >2</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,358)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >江戸幕府第5代将軍</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="255" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >は</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="285" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >徳川○○。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1311,388)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >らぶ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,388)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >5</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,388)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >テニス</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="90" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >で0</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="135" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >点</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="165" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >を</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="195" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >表</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="225" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >す</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="255" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >語。語源</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="375" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >には</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="435" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >卵説</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="495" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >や</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="525" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >LOVE</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="585" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >説</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="615" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >がある。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1206,418)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >めん</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,418)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >7</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,418)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >剣道</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="60" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="90" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >防具</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="150" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >は</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >垂→胴→○→甲手</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="420" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="450" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >順</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="480" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >につける。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,448)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >すいそく</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,448)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >8</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,448)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >何</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="30" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >が</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="60" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >入</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="90" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >るか</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="150" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >当</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >ててみよう。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1266,478)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >れじすた</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,478)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >11</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,478)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >キャッシュメモリ</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="240" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >よりも</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="330" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >高速</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="390" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >で</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="420" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >小容量</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="510" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="540" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >記憶装置。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1056,508)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >しか</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,508)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >13</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,508)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >○○のこのこのここしたんたん</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1266,538)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >ぎだ</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,538)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >14</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,538)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >打者</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="60" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >が</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="90" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >犠牲</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="150" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >となる</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="240" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >代</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="270" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >わりに</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="360" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >走者</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="420" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >を</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="450" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >進塁</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="510" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >させる</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="600" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >打撃。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,1266,568)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >いばらき</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,528,568)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >15</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#eeeeee" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,568,568)"
+font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >日本三大瀑布</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="180" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="210" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >一</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="240" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >つ「</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="300" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >袋田</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="360" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >の</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="390" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >滝」</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="450" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >がある</text>
+<text fill="#eeeeee" fill-opacity="1" stroke="none" xml:space="preserve" x="540" y="26" font-family="MS Gothic" font-size="18" font-weight="400" font-style="normal" 
+ >都道府県。</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="MS UI Gothic" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+</g>
+</svg>

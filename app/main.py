@@ -21,7 +21,8 @@ class Notify(formlib.ApplicationNotify):
     SUB_MENU_NEWPRO = "新規プロジェクト"
     SUB_MENU_SAVE = "プロジェクト保存"
     SUB_MENU_LOAD = "プロジェクト読み込み"
-    SUB_PICTURE_SAVE = "画面キャプチャ"
+    SUB_PICTURE_SAVE_PNG = "画面キャプチャ"
+    SUB_PICTURE_SAVE_PDF = "画面キャプチャ(PDF)"
     SUB_MENU_EXIT = "終了"
     MENU_BOARD = "盤面設定"
     SUB_MENU_BOARDSIZE = "【パネル】盤サイズ変更"
@@ -39,13 +40,15 @@ class Notify(formlib.ApplicationNotify):
     SUB_MENU_HIDE_ANSWER = "答えの表示ON/OFF"
     SUB_MENU_DELETE_GUAID = "ガイド線ON/OFF(揮発)"
     SUB_MENU_SHOW_PICTURE = "上部に画像表示(揮発)"
+    SUB_MENU_SHOW_PICTURE_PDF = "上部にPDF画像表示(揮発)"
 
     menu_dict = {
         MENU_FILE: [
             SUB_MENU_NEWPRO,
             SUB_MENU_SAVE,
             SUB_MENU_LOAD,
-            SUB_PICTURE_SAVE,
+            SUB_PICTURE_SAVE_PNG,
+            SUB_PICTURE_SAVE_PDF,
             SUB_MENU_EXIT,
         ],
         MENU_BOARD: [
@@ -66,6 +69,7 @@ class Notify(formlib.ApplicationNotify):
             SUB_MENU_HIDE_ANSWER,
             SUB_MENU_DELETE_GUAID,
             SUB_MENU_SHOW_PICTURE,
+            SUB_MENU_SHOW_PICTURE_PDF,
         ],
     }
 
@@ -84,8 +88,10 @@ class Notify(formlib.ApplicationNotify):
                         self.save()
                     case Notify.SUB_MENU_LOAD:
                         self.load()
-                    case Notify.SUB_PICTURE_SAVE:
+                    case Notify.SUB_PICTURE_SAVE_PNG:
                         self.capture()
+                    case Notify.SUB_PICTURE_SAVE_PDF:
+                        self.capture_pdf()
                     case Notify.SUB_MENU_EXIT:
                         self.end_app()
             case Notify.MENU_BOARD:
@@ -120,6 +126,8 @@ class Notify(formlib.ApplicationNotify):
                         self.cross.delete_guaid()
                     case Notify.SUB_MENU_SHOW_PICTURE:
                         self.show_picture()
+                    case Notify.SUB_MENU_SHOW_PICTURE_PDF:
+                        self.show_picture_pdf()
 
     def save(self):
         # ファイル保存
@@ -163,6 +171,13 @@ class Notify(formlib.ApplicationNotify):
         cap = self.cross.get_capture()
         self.work.save_capture(cap)
 
+    def capture_pdf(self):
+        # SVGでエクスポート
+        txt = self.work.project
+        self.app.window.set_title(txt + " pdf 書き出し中…時間がかかります")
+        self.work.save_widget_as_pdf(self.cross)
+        self.app.window.set_title(txt)
+
     def delete_guaid(self):
         # ガイドを消す
         self.cross.delete_guaid()
@@ -176,8 +191,14 @@ class Notify(formlib.ApplicationNotify):
         self.cross.sort_key()
 
     def show_picture(self):
+        # 画像配置
         pic = self.work.load_picture()
         self.cross.set_picture(pic)
+
+    def show_picture_pdf(self):
+        # 画像配置
+        pic = self.work.load_picture_pdf()
+        self.cross.set_picture_pdf(pic)
 
 
 def main():
