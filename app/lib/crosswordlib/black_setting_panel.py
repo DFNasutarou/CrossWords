@@ -142,6 +142,9 @@ class OperatorPanel(QWidget):
             self.key_op.set_bk(kd.keyname)
             self.key_op.show()
         else:
+            # 前回の bk 参照とドラッグリスナーを残すと、非表示のまま
+            # 旧対象のドラッグイベントを受け取り続ける
+            self.key_op.clear_bk()
             self.key_op.hide()
 
     def on_end(self):
@@ -188,6 +191,11 @@ class BlackOperation(QWidget):
         # kd.keyname が無い対象（タイトル等）は bk=None で生成される
         if self.bk is not None:
             self.bk.set_drag_listener(self.on_drag_square)
+
+    def clear_bk(self):
+        if self.bk is not None:
+            self.bk.set_drag_listener(None)
+        self.bk = None
 
     def set_bk(self, bk: BlackOutText):
         if self.bk is not None:

@@ -67,9 +67,12 @@ class CellBoard(QWidget):
         # 盤面の大きさに合わせてウィジェットの大きさを変える
         self.n = n
 
-        _, top, _, bottom = self.board.getContentsMargins()
+        left, top, right, bottom = self.board.getContentsMargins()
+        # 盤面は高さ size を一辺とする正方形領域に収める。
+        # 左右マージンを考慮しないと盤面がコンテナ幅をはみ出す。
         content_height = max(1, self.height() - top - bottom)
-        cell_size = max(1, content_height // self.n)
+        content_width = max(1, self.height() - left - right)
+        cell_size = max(1, min(content_height, content_width) // self.n)
         for r in range(MAX_BOARD_SIZE):
             for c in range(MAX_BOARD_SIZE):
                 self.widget[r][c].resize(cell_size)
