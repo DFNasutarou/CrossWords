@@ -1,15 +1,15 @@
 import os, re, shutil
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QMessageBox,
     QInputDialog,
     QFileDialog,
 )
 from app.lib.formlib.jsonio import JsonFileBuilder
-from PyQt5.QtGui import QPixmap, QPainter, QPageSize
-from PyQt5.QtSvg import QSvgGenerator
-from PyQt5.QtPrintSupport import QPrinter
-from PyQt5.QtCore import QSizeF
+from PyQt6.QtGui import QPixmap, QPainter, QPageSize
+from PyQt6.QtSvg import QSvgGenerator
+from PyQt6.QtPrintSupport import QPrinter
+from PyQt6.QtCore import QSizeF
 from app.project_format import (
     ProjectFormatError,
     make_project_document,
@@ -197,11 +197,11 @@ class WorkSpace:
         if file == None:
             return
         filename = file + ".pdf"
-        printer = QPrinter(QPrinter.HighResolution)
-        printer.setOutputFormat(QPrinter.PdfFormat)
+        printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+        printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
         printer.setOutputFileName(filename)
         size = QSizeF(widget.size())
-        printer.setPageSize(QPageSize(size, QPageSize.Point, "MyCustom"))
+        printer.setPageSize(QPageSize(size, QPageSize.Unit.Point, "MyCustom"))
         # .setPageSize(QPrinter.Letter)  # 用紙サイズなども設定可能
         painter = QPainter(printer)
         w_rect = widget.rect()

@@ -1,6 +1,6 @@
-from PyQt5.QtCore import QObject, QThread, Qt, pyqtSignal, pyqtSlot
-from PyQt5.QtGui import QColor, QFont, QPainter, QPen
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import QObject, QThread, Qt, pyqtSignal, pyqtSlot
+from PyQt6.QtGui import QColor, QFont, QPainter, QPen
+from PyQt6.QtWidgets import (
     QCheckBox,
     QComboBox,
     QDialog,

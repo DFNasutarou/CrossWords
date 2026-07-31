@@ -1,12 +1,12 @@
 # widgets.py
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QLabel,
     QScrollArea,
     QWidget,
     QLineEdit,
 )
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import (
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import (
     QPixmap,
     QFont,
     QPalette,
@@ -17,9 +17,9 @@ from PyQt5.QtGui import (
 )
 from app.lib.formlib.layouts import RowLayout, ColLayout
 
-# from PyQt5.QtWidgets    import QWidget, QVBoxLayout
-# from PyQt5.QtPdf        import QPdfDocument
-# from PyQt5.QtPdfWidgets import QPdfView  # PyQt5 5.14 以降で利用可能
+# from PyQt6.QtWidgets    import QWidget, QVBoxLayout
+# from PyQt6.QtPdf        import QPdfDocument
+# from PyQt6.QtPdfWidgets import QPdfView  # PyQt5 5.14 以降で利用可能
 
 
 class WidgetSetting:
@@ -219,7 +219,7 @@ class LabelWidget(QLabel):
 
     def set_color(self, col):
         palette = self.palette()
-        palette.setColor(QPalette.WindowText, QColor(col))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(col))
         self.setPalette(palette)
 
 
@@ -248,7 +248,7 @@ class EditableTextWidget(QWidget):
         self.edit.editingFinished.connect(self._finish_edit)
 
         palette = self.label.palette()
-        palette.setColor(QPalette.WindowText, QColor(col))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(col))
         self.label.setPalette(palette)
 
         self.edit.setStyleSheet(
@@ -294,7 +294,7 @@ class EditableTextWidget(QWidget):
 
     def set_color(self, col):
         palette = self.label.palette()
-        palette.setColor(QPalette.WindowText, QColor(col))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(col))
         self.label.setPalette(palette)
         self.edit.setPalette(palette)
 

@@ -3,13 +3,13 @@ cd 'C:/workspace/github/nasu/CrossWords'
 python -m app
 
 cd D:/project/github/CrossWords
-"C:/Users/nasut/AppData/Local/Programs/Python/Python313/python" -m app
+py -3.11 -m app
 """
 
 from app.lib.formlib import formlib
 from app.lib.crosswordlib.wid_crossword import CrossWord
 from app.workspace import WorkSpace
-from PyQt5.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox
 
 size = (600, 400)
 

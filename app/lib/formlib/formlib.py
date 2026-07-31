@@ -1,15 +1,13 @@
 # formlib.py
 import sys
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QApplication,
     QMainWindow,
-    QWidget,
-    QAction,
-    QApplication,
     QWidget,
     QMenu,
     QLayout,
 )
+from PyQt6.QtGui import QAction
 
 PICTURE_FOLDER_NAME = "picture"
 DATA_FILE_NAME = "data.json"
@@ -118,4 +116,4 @@ class Application:
 
     def run(self):
         self.window.show()
-        sys.exit(self.app.exec_())
+        sys.exit(self.app.exec())

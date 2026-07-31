@@ -1,5 +1,5 @@
 # widgets.py
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget,
     QInputDialog,
     QMessageBox,
@@ -25,8 +25,8 @@ from app.lib.crosswordlib.inline_images import (
     IMAGE_ASSETS_KEY,
     normalize_image_assets,
 )
-from PyQt5.QtGui import QPainter, QPalette, QPixmap
-from PyQt5.QtCore import Qt
+from PyQt6.QtGui import QPainter, QPalette, QPixmap
+from PyQt6.QtCore import Qt
 
 DEFAULT_BOARD_SIZE = 5
 DEFAULT_CELL_SIZE = 40
@@ -52,7 +52,7 @@ class CrossWord(QWidget):
         # base.addWidget(self.pic_pdf)
 
         palette = self.palette()
-        palette.setColor(QPalette.Window, Col.white)  # RGB値で指定
+        palette.setColor(QPalette.ColorRole.Window, Col.white)  # RGB値で指定
         self.setAutoFillBackground(True)
         self.setPalette(palette)
 
@@ -143,7 +143,7 @@ class CrossWord(QWidget):
             all_image_widgets=all_image_widgets,
             parent=self,
         )
-        dialog.exec_()
+        dialog.exec()
         self.world_update()
         return True
 
@@ -171,7 +171,7 @@ class CrossWord(QWidget):
             self.apply_enumerated_board,
             parent=self,
         )
-        dialog.exec_()
+        dialog.exec()
 
     def apply_enumerated_board(self, candidate, numbering_mode):
         self.cell_board.apply_black_grid(
@@ -209,7 +209,7 @@ class CrossWord(QWidget):
         # 子フォームからの submitted シグナルを受け取る
         # dlg.submitted.connect(self.receive_from_child)
         # モーダル表示（親を操作不可にしたいなら exec_()）
-        dlg.exec_()
+        dlg.exec()
         # モデルレスなら dlg.show() を使います
 
         # 子フォームを閉じた後の処理
@@ -233,7 +233,7 @@ class CrossWord(QWidget):
         # 子フォームからの submitted シグナルを受け取る
         # dlg.submitted.connect(self.receive_from_child)
         # モーダル表示（親を操作不可にしたいなら exec_()）
-        dlg.exec_()
+        dlg.exec()
         # モデルレスなら dlg.show() を使います
 
         # 子フォームを閉じた後の処理
@@ -323,7 +323,7 @@ class CrossWord(QWidget):
             scale,
         )
         capture = QPixmap(width, height)
-        capture.fill(self.palette().color(QPalette.Window))
+        capture.fill(self.palette().color(QPalette.ColorRole.Window))
 
         painter = QPainter(capture)
         painter.scale(scale, scale)

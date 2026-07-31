@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QDialog,
     QLabel,
     QStackedWidget,
@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
     QWidget,
     QListWidget,
 )
-from PyQt5.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal
 
 from app.lib.formlib.widgets import SquareSetter
 from app.lib.formlib.layouts import RowLayout, ColLayout

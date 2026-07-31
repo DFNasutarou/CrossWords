@@ -2,9 +2,9 @@ import os
 import shutil
 import uuid
 
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFontMetrics, QImage, QPixmap
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QFontMetrics, QImage, QPixmap
+from PyQt6.QtWidgets import (
     QCheckBox,
     QComboBox,
     QDialog,

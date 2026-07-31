@@ -3,9 +3,9 @@ import html
 import os
 import weakref
 
-from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
-from PyQt5.QtGui import QPainter, QFontMetrics, QColor, QImage
-from PyQt5.QtCore import QRect, Qt, QUrl
+from PyQt6.QtWidgets import QWidget, QSpacerItem, QSizePolicy
+from PyQt6.QtGui import QPainter, QFontMetrics, QColor, QImage
+from PyQt6.QtCore import QRect, Qt, QUrl
 from app.lib.formlib.widgets import (
     EditableTextWidget,
     WidgetSetting,
@@ -450,12 +450,12 @@ class BlackOutText(EditableTextWidget):
             return ""
 
         if mode == BLACKOUT_ALL:
-            rendered = QImage(source.size(), QImage.Format_ARGB32)
+            rendered = QImage(source.size(), QImage.Format.Format_ARGB32)
             rendered.fill(QColor("black"))
         elif mode == BLACKOUT_OPAQUE:
-            rendered = source.convertToFormat(QImage.Format_ARGB32)
+            rendered = source.convertToFormat(QImage.Format.Format_ARGB32)
             painter = QPainter(rendered)
-            painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
+            painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceIn)
             painter.fillRect(rendered.rect(), QColor("black"))
             painter.end()
         else:

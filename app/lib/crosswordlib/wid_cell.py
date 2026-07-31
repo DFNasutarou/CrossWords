@@ -1,11 +1,11 @@
 # widgets.py
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QPushButton,
     QWidget,
     QLineEdit,
 )
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QPainter, QPen, QColor
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont, QPainter, QPen, QColor
 from app.lib.crosswordlib.clear_helpers import clear_cells
 from app.lib.crosswordlib.board_enumerator import (
     BLACK,

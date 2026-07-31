@@ -1,5 +1,5 @@
 # formlib.py
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QInputDialog,
 )
 
