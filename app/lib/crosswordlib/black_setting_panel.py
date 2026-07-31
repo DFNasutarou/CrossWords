@@ -44,6 +44,7 @@ class KeyData:
     def clone_blackout_text(bt: BlackOutText) -> BlackOutText:
         nbt = BlackOutText(bt.get_text())
         nbt.add_squares(bt.get_square())
+        nbt.reset_inline_images(bt.get_inline_images())
         nbt.set_font(bt.get_font())
         nbt.set_minimum_length(bt.minimumWidth())
         return nbt
@@ -53,11 +54,14 @@ class KeyData:
         if isinstance(kg, KeyGroup):
             kg.keyname.reset_square(kd.keyname.get_square())
             kg.keyname.set_text(kd.keyname.get_text())
+            kg.keyname.reset_inline_images(kd.keyname.get_inline_images())
             kg.text.reset_square(kd.textstr.get_square())
             kg.text.set_text(kd.textstr.get_text())
+            kg.text.reset_inline_images(kd.textstr.get_inline_images())
         else:
             kg.reset_square(kd.textstr.get_square())
             kg.set_text(kd.textstr.get_text())
+            kg.reset_inline_images(kd.textstr.get_inline_images())
 
 
 class BlackPanelForm(QDialog):
@@ -72,6 +76,12 @@ class BlackPanelForm(QDialog):
         if kd_list == []:
             return
         base = ColLayout(self)
+
+        help_text = QLabel(
+            "黒塗りしたい文字の上を横にドラッグすると、"
+            "文字単位でスナップして追加できます。"
+        )
+        base.addWidget(help_text)
 
         main_panel = QWidget()
         lay = RowLayout(main_panel)
@@ -175,12 +185,24 @@ class BlackOperation(QWidget):
         base.addWidget(edit)
         base.addWidget(self.bl)
         base.addWidget(op_list)
+        # kd.keyname が無い対象（タイトル等）は bk=None で生成される
+        if self.bk is not None:
+            self.bk.set_drag_listener(self.on_drag_square)
 
     def set_bk(self, bk: BlackOutText):
+        if self.bk is not None:
+            self.bk.set_drag_listener(None)
         self.bk = bk
+        self.bk.set_drag_listener(self.on_drag_square)
         ghost = bk.ghost
         self.setter.set_square(ghost)
         self.bl.set_item(self.bk.get_square())
+
+    def on_drag_square(self, square):
+        self.setter.set_square(square)
+        if self.bl.add_item(square):
+            self.bk.add_square(square)
+        self.bk.del_ghost()
 
     def on_add_btn(self):
         square = self.setter.get_square()

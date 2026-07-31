@@ -1,13 +1,33 @@
 # widgets.py
+import html
+import os
+import weakref
+
 from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
-from PyQt5.QtGui import QPainter, QFontMetrics, QColor
-from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtGui import QPainter, QFontMetrics, QColor, QImage
+from PyQt5.QtCore import QRect, Qt, QUrl
 from app.lib.formlib.widgets import (
     EditableTextWidget,
     WidgetSetting,
     LabelWidget,
 )
 from app.lib.crosswordlib.const_color import Col
+from app.lib.crosswordlib.clear_helpers import clear_clue_widgets
+from app.lib.crosswordlib.geometry import (
+    blackout_rect,
+    snapped_blackout_square,
+)
+from app.lib.crosswordlib.inline_images import (
+    BLACKOUT_ALL,
+    BLACKOUT_NONE,
+    BLACKOUT_OPAQUE,
+    InlineImageError,
+    normalize_inline_image,
+    normalize_inline_images,
+    pack_text_content,
+    resolve_asset_path,
+    unpack_text_content,
+)
 from app.lib.formlib.layouts import RowLayout, ColLayout
 
 KEY_NUMBER = 80
@@ -145,6 +165,53 @@ class KeyWidget(QWidget):
         self.key_sort = 1 - self.key_sort
         self._reset_key_position()
 
+    def clear_clues(self):
+        clear_clue_widgets(
+            self.rowkeytext,
+            self.colkeytext,
+            self.rows + self.cols,
+        )
+        self.update()
+
+    def get_inline_image_targets(self):
+        targets = []
+        for direction, groups in (
+            ("タテ", self.rows),
+            ("ヨコ", self.cols),
+        ):
+            for group in groups:
+                if not group.is_visible:
+                    continue
+                number = group.keyname.get_text() or str(group.num)
+                targets.append(
+                    (f"{direction} {number}番のカギ文", group.text)
+                )
+        return targets
+
+    def get_all_inline_image_widgets(self):
+        return [
+            group.text
+            for group in self.rows + self.cols
+        ]
+
+    def get_clue_number_patterns(self):
+        def pattern(groups):
+            values = []
+            for group in groups:
+                if not group.is_visible:
+                    continue
+                if group.keyname.get_square():
+                    values.append(None)
+                    continue
+                text = group.keyname.get_text().strip()
+                try:
+                    values.append(int(text))
+                except ValueError:
+                    values.append(text)
+            return values
+
+        return pattern(self.rows), pattern(self.cols)
+
     def _reset_key_position(self):
         # スペーサー作成
         spacer = []
@@ -210,21 +277,219 @@ class BlackOutText(EditableTextWidget):
     black = 0
     black_color = QColor("000000")
     ghost_color = QColor("#ffcccc")
+    image_assets = {}
+    project_root = ""
+    _image_cache = {}
+    _all_instances = weakref.WeakSet()
 
     def __init__(self, text="", listner=None):
         super().__init__(text, listner, BlackOutText.black_color)
         self.data = []
+        self._plain_text = str(text)
+        self._inline_images = []
+        self._drag_start_x = None
+        self._drag_active = False
+        self._drag_listener = None
+        self.label.mousePressEvent = self._drag_mouse_press
+        self.label.mouseMoveEvent = self._drag_mouse_move
+        self.label.mouseReleaseEvent = self._drag_mouse_release
+        BlackOutText._all_instances.add(self)
+        self._refresh_label()
         self.del_ghost()
 
     def save(self):
-        data = [super().save()]
-        data.extend(self.get_square())
-        return data
+        return pack_text_content(
+            self.get_text(),
+            self.get_square(),
+            self._inline_images,
+        )
 
     def load(self, data):
-        text = data[0]
-        super().load(text)
-        self.reset_square(data[1:])
+        text, squares, inline_images = unpack_text_content(data)
+        self.set_text(text)
+        self.reset_square(squares)
+        self.reset_inline_images(inline_images)
+
+    def get_text(self):
+        return self._plain_text
+
+    def set_text(self, text):
+        if text is None:
+            return
+        self._plain_text = str(text)
+        self.edit.setText(self._plain_text)
+        self._inline_images = normalize_inline_images(
+            self._inline_images,
+            len(self._plain_text),
+        )
+        self._refresh_label()
+
+    def _finish_edit(self):
+        self.set_text(self.edit.text())
+        self.edit.hide()
+        self.label.show()
+        if self.listner:
+            self.listner.notify(self.get_text())
+
+    def get_inline_images(self):
+        return [dict(image) for image in self._inline_images]
+
+    def reset_inline_images(self, images):
+        self._inline_images = normalize_inline_images(
+            images,
+            len(self.get_text()),
+        )
+        self._refresh_label()
+
+    def add_inline_image(self, image):
+        normalized = normalize_inline_image(image, len(self.get_text()))
+        self._inline_images.append(normalized)
+        self._inline_images.sort(
+            key=lambda item: (item["position"], item["id"])
+        )
+        self._refresh_label()
+        return normalized
+
+    def update_inline_image(self, image_id, values):
+        for index, current in enumerate(self._inline_images):
+            if current["id"] != image_id:
+                continue
+            updated = dict(current)
+            updated.update(values)
+            self._inline_images[index] = normalize_inline_image(
+                updated,
+                len(self.get_text()),
+            )
+            self._inline_images.sort(
+                key=lambda item: (item["position"], item["id"])
+            )
+            self._refresh_label()
+            return True
+        return False
+
+    def remove_inline_image(self, image_id):
+        previous_size = len(self._inline_images)
+        self._inline_images = [
+            image
+            for image in self._inline_images
+            if image["id"] != image_id
+        ]
+        if len(self._inline_images) != previous_size:
+            self._refresh_label()
+            return True
+        return False
+
+    def _refresh_label(self):
+        if not self._inline_images:
+            self.label.setTextFormat(Qt.TextFormat.PlainText)
+            self.label.setText(self._plain_text)
+            self.label.updateGeometry()
+            return
+
+        fragments = []
+        text_position = 0
+        for image in self._inline_images:
+            position = image["position"]
+            fragments.append(
+                self._html_text(self._plain_text[text_position:position])
+            )
+            fragments.append(self._image_html(image))
+            text_position = position
+        fragments.append(self._html_text(self._plain_text[text_position:]))
+
+        self.label.setTextFormat(Qt.TextFormat.RichText)
+        self.label.setText("".join(fragments))
+        self.label.updateGeometry()
+
+    @staticmethod
+    def _html_text(text):
+        return (
+            html.escape(text)
+            .replace(" ", "&nbsp;")
+            .replace("\n", "<br>")
+        )
+
+    def _image_html(self, image):
+        mode = image["blackout"] if BlackOutText.black else BLACKOUT_NONE
+        image_source = BlackOutText._image_source(
+            image["asset_id"],
+            mode,
+        )
+        if not image_source:
+            return '<span style="color:#aa0000">［画像なし］</span>'
+        return (
+            f'<img src="{html.escape(image_source, quote=True)}" '
+            f'width="{image["width"]}" height="{image["height"]}" />'
+        )
+
+    @classmethod
+    def _image_source(cls, asset_id, mode):
+        cache_key = (asset_id, mode)
+        if cache_key in cls._image_cache:
+            return cls._image_cache[cache_key]
+
+        asset = cls.image_assets.get(asset_id)
+        if not asset:
+            return ""
+        try:
+            asset_path = resolve_asset_path(
+                cls.project_root,
+                asset.get("path", ""),
+            )
+        except (InlineImageError, OSError):
+            return ""
+        if not os.path.isfile(asset_path):
+            return ""
+        if mode == BLACKOUT_NONE:
+            source = QUrl.fromLocalFile(asset_path).toString()
+            cls._image_cache[cache_key] = source
+            return source
+
+        source = QImage(asset_path)
+        if source.isNull():
+            return ""
+
+        if mode == BLACKOUT_ALL:
+            rendered = QImage(source.size(), QImage.Format_ARGB32)
+            rendered.fill(QColor("black"))
+        elif mode == BLACKOUT_OPAQUE:
+            rendered = source.convertToFormat(QImage.Format_ARGB32)
+            painter = QPainter(rendered)
+            painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
+            painter.fillRect(rendered.rect(), QColor("black"))
+            painter.end()
+        else:
+            return ""
+
+        rendered_directory = os.path.join(
+            cls.project_root,
+            "picture",
+            "inline",
+            ".rendered",
+        )
+        try:
+            os.makedirs(rendered_directory, exist_ok=True)
+            rendered_path = os.path.join(
+                rendered_directory,
+                f"{asset_id}-{mode}.png",
+            )
+            if not rendered.save(rendered_path, "PNG"):
+                return ""
+        except OSError:
+            return ""
+
+        image_source = QUrl.fromLocalFile(rendered_path).toString()
+        cls._image_cache[cache_key] = image_source
+        return image_source
+
+    @classmethod
+    def set_image_assets(cls, assets, project_root=None):
+        cls.image_assets = assets
+        if project_root is not None:
+            cls.project_root = project_root
+        cls._image_cache = {}
+        for instance in list(cls._all_instances):
+            instance._refresh_label()
 
     def set_ghost(self, square: list[list[float]]):
         self.ghost = square
@@ -235,8 +500,9 @@ class BlackOutText(EditableTextWidget):
         self.update()
 
     def add_square(self, square):
-        self.data.append(square)
-        self.update()
+        if square not in self.data:
+            self.data.append(square)
+            self.update()
 
     def add_squares(self, squares):
         for square in squares:
@@ -255,18 +521,106 @@ class BlackOutText(EditableTextWidget):
             self.data.remove(square)
             self.update()
 
+    def set_drag_listener(self, listener):
+        self._drag_listener = listener
+
+    def _snapped_drag_square(self, x):
+        font_metrics = QFontMetrics(self.label.font())
+        unit_width = font_metrics.horizontalAdvance("あ")
+        return snapped_blackout_square(
+            self._text_x_from_display_x(self._drag_start_x, unit_width),
+            self._text_x_from_display_x(x, unit_width),
+            unit_width,
+            len(self.get_text()),
+        )
+
+    def _text_x_from_display_x(self, display_x, unit_width):
+        image_offset = 0
+        for image in self._inline_images:
+            image_start = image["position"] * unit_width + image_offset
+            image_end = image_start + image["width"]
+            if display_x < image_start:
+                break
+            if display_x <= image_end:
+                return image["position"] * unit_width
+            image_offset += image["width"]
+        return display_x - image_offset
+
+    def _drag_mouse_press(self, event):
+        if (
+            not BlackOutText.black
+            or event.button() != Qt.MouseButton.LeftButton
+        ):
+            self._start_edit(event)
+            return
+        self._drag_start_x = event.pos().x()
+        self._drag_active = False
+        event.accept()
+
+    def _drag_mouse_move(self, event):
+        if (
+            self._drag_start_x is None
+            or not event.buttons() & Qt.MouseButton.LeftButton
+        ):
+            return
+        if abs(event.pos().x() - self._drag_start_x) >= 3:
+            self._drag_active = True
+        if self._drag_active:
+            self.set_ghost(self._snapped_drag_square(event.pos().x()))
+        event.accept()
+
+    def _drag_mouse_release(self, event):
+        if (
+            self._drag_start_x is None
+            or event.button() != Qt.MouseButton.LeftButton
+        ):
+            return
+
+        if self._drag_active:
+            square = self._snapped_drag_square(event.pos().x())
+            if square[0][0] != square[0][1]:
+                if self._drag_listener:
+                    self._drag_listener(square)
+                else:
+                    self.add_square(square)
+            self.del_ghost()
+        else:
+            self.del_ghost()
+            self._start_edit(event)
+
+        self._drag_start_x = None
+        self._drag_active = False
+        event.accept()
+
     def square_exchange(self, square):
         font = self.label.font()
         fm = QFontMetrics(font)
         w = fm.horizontalAdvance("あ")
-        h = self.label.height()
+        label_rect = self.label.geometry()
+        rect = blackout_rect(
+            square,
+            unit_width=w,
+            content_width=label_rect.width(),
+            content_height=label_rect.height(),
+            offset_x=label_rect.x(),
+            offset_y=label_rect.y(),
+        )
+        rect[0] += self._image_width_before(square[0][0], True)
+        rect[2] += (
+            self._image_width_before(square[0][1], False)
+            - self._image_width_before(square[0][0], True)
+        )
+        return rect
 
-        x1 = max(0, int(w * square[0][0] / 10))
-        x2 = min(self.label.width(), int(w * square[0][1] / 10))
-        y1 = max(0, int(h * square[1][0] / 10))
-        y2 = min(h, int(h * square[1][1] / 10))
-        # print(square, w, h, x1, x2, y1, y2)
-        return [x1, y1, x2, y2]
+    def _image_width_before(self, text_unit, include_boundary):
+        width = 0
+        for image in self._inline_images:
+            image_unit = image["position"] * 10
+            if image_unit < text_unit or (
+                include_boundary and image_unit == text_unit
+            ):
+                width += image["width"]
+        return width
 
     def paintEvent(self, event):
         super().paintEvent(event)
@@ -289,12 +643,15 @@ class BlackOutText(EditableTextWidget):
         # ret.set_black(self.black)
         for square in self.get_square():
             ret.add_square(square)
+        ret.reset_inline_images(self.get_inline_images())
         return ret
 
     @classmethod
     def set_black(cls, black):
         # 黒塗りするなら1
         cls.black = black
+        for instance in list(cls._all_instances):
+            instance._refresh_label()
 
 
 class BlackKeyAnswer(LabelWidget):

@@ -9,6 +9,7 @@ cd D:/project/github/CrossWords
 from app.lib.formlib import formlib
 from app.lib.crosswordlib.wid_crossword import CrossWord
 from app.workspace import WorkSpace
+from PyQt5.QtWidgets import QMessageBox
 
 size = (600, 400)
 
@@ -21,7 +22,9 @@ class Notify(formlib.ApplicationNotify):
     SUB_MENU_NEWPRO = "新規プロジェクト"
     SUB_MENU_SAVE = "プロジェクト保存"
     SUB_MENU_LOAD = "プロジェクト読み込み"
+    SUB_MENU_CLEAR = "盤面とカギを全部消す"
     SUB_PICTURE_SAVE_PNG = "画面キャプチャ"
+    SUB_PICTURE_SAVE_PNG_HIGH_RESOLUTION = "高画質画面キャプチャ（2倍）"
     SUB_PICTURE_SAVE_PDF = "画面キャプチャ(PDF)"
     SUB_MENU_EXIT = "終了"
     MENU_BOARD = "盤面設定"
@@ -29,10 +32,13 @@ class Notify(formlib.ApplicationNotify):
     SUB_MENU_BOARD_TRANS = "盤の転置（縦横変換）"
     SUB_MENU_KEY_SORT = "タテヨコカギ入れ替え"
     SUB_MENU_FORMAT_SETTING = "【パネル】フォーマット設定"
+    SUB_MENU_BOARD_ENUMERATOR = "【パネル】カギ番号から盤面を列挙"
     MENU_BLACK = "黒塗り"
     SUB_MENU_BLACK_SETTING = "【パネル】黒塗り設定"
     SUB_MENU_BLACK_BOARD = "盤の黒塗りON/OFF"
     SUB_MENU_BLACK_KEY = "カギの黒塗りON/OFF"
+    MENU_IMAGE = "画像"
+    SUB_MENU_INLINE_IMAGE = "【パネル】画像の登録・差し込み"
     MENU_SHOW = "表示設定"
     SUB_MENU_BOARD_NUMBER = "盤の数字ON/OFF"
     SUB_MENU_BOARD_TEXT = "盤の文字ON/OFF"
@@ -47,7 +53,9 @@ class Notify(formlib.ApplicationNotify):
             SUB_MENU_NEWPRO,
             SUB_MENU_SAVE,
             SUB_MENU_LOAD,
+            SUB_MENU_CLEAR,
             SUB_PICTURE_SAVE_PNG,
+            SUB_PICTURE_SAVE_PNG_HIGH_RESOLUTION,
             SUB_PICTURE_SAVE_PDF,
             SUB_MENU_EXIT,
         ],
@@ -56,11 +64,15 @@ class Notify(formlib.ApplicationNotify):
             SUB_MENU_KEY_SORT,
             SUB_MENU_BOARDSIZE,
             SUB_MENU_FORMAT_SETTING,
+            SUB_MENU_BOARD_ENUMERATOR,
         ],
         MENU_BLACK: [
             SUB_MENU_BLACK_BOARD,
             SUB_MENU_BLACK_KEY,
             SUB_MENU_BLACK_SETTING,
+        ],
+        MENU_IMAGE: [
+            SUB_MENU_INLINE_IMAGE,
         ],
         MENU_SHOW: [
             SUB_MENU_BOARD_NUMBER,
@@ -88,8 +100,12 @@ class Notify(formlib.ApplicationNotify):
                         self.save()
                     case Notify.SUB_MENU_LOAD:
                         self.load()
+                    case Notify.SUB_MENU_CLEAR:
+                        self.clear_board_and_keys()
                     case Notify.SUB_PICTURE_SAVE_PNG:
                         self.capture()
+                    case Notify.SUB_PICTURE_SAVE_PNG_HIGH_RESOLUTION:
+                        self.capture_high_resolution()
                     case Notify.SUB_PICTURE_SAVE_PDF:
                         self.capture_pdf()
                     case Notify.SUB_MENU_EXIT:
@@ -104,6 +120,8 @@ class Notify(formlib.ApplicationNotify):
                         self.sort_key()
                     case Notify.SUB_MENU_FORMAT_SETTING:
                         self.format_setting_panel()
+                    case Notify.SUB_MENU_BOARD_ENUMERATOR:
+                        self.board_enumerator_panel()
             case Notify.MENU_BLACK:
                 match sub:
                     case Notify.SUB_MENU_BLACK_BOARD:
@@ -112,6 +130,10 @@ class Notify(formlib.ApplicationNotify):
                         self.cross.set_world(key_black=True)
                     case Notify.SUB_MENU_BLACK_SETTING:
                         self.black_setting_panel()
+            case Notify.MENU_IMAGE:
+                match sub:
+                    case Notify.SUB_MENU_INLINE_IMAGE:
+                        self.inline_image_panel()
             case Notify.MENU_SHOW:
                 match sub:
                     case Notify.SUB_MENU_BOARD_NUMBER:
@@ -142,7 +164,21 @@ class Notify(formlib.ApplicationNotify):
             return
         txt = self.work.project
         self.app.window.set_title(txt)
+        self.cross.set_project_root(self.work.project)
         self.cross.load(data)
+
+    def clear_board_and_keys(self):
+        answer = QMessageBox.question(
+            self.app.window,
+            "盤面とカギを全部消す",
+            "盤面の文字・黒マスと、すべてのカギ文・黒塗り・"
+            "カギ文内の差し込み画像を消します。\n"
+            "この操作を実行しますか？",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if answer == QMessageBox.StandardButton.Yes:
+            self.cross.clear_board_and_keys()
 
     def end_app(self):
         self.app.window.close()
@@ -153,6 +189,7 @@ class Notify(formlib.ApplicationNotify):
         self.work.make_workspace(data)
         txt = self.work.project
         self.app.window.set_title(txt)
+        self.cross.set_project_root(self.work.project)
         self.save()
 
     def resize_board(self):
@@ -163,12 +200,24 @@ class Notify(formlib.ApplicationNotify):
         # 黒塗り設定パネルを開く
         self.cross.black_setting_panel()
 
+    def inline_image_panel(self):
+        self.cross.set_project_root(self.work.project)
+        if self.cross.inline_image_panel():
+            self.save()
+
     def format_setting_panel(self):
         # フォーマット設定パネルを開く
         self.cross.format_setting_panel()
 
+    def board_enumerator_panel(self):
+        self.cross.board_enumerator_panel()
+
     def capture(self):
         cap = self.cross.get_capture()
+        self.work.save_capture(cap)
+
+    def capture_high_resolution(self):
+        cap = self.cross.get_capture(scale=2)
         self.work.save_capture(cap)
 
     def capture_pdf(self):
@@ -214,5 +263,6 @@ def main():
         txt = work.project
         txt = txt.replace("\\", "/")
         app.window.set_title(txt)
+        cross.set_project_root(work.project)
         cross.load(data)
     app.run()

@@ -6,6 +6,13 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QPainter, QPen, QColor
+from app.lib.crosswordlib.clear_helpers import clear_cells
+from app.lib.crosswordlib.board_enumerator import (
+    BLACK,
+    NUMBERING_LEFT_PRIORITY,
+    NUMBERING_MODES,
+    NUMBERING_TOP_PRIORITY,
+)
 from app.lib.formlib.layouts import TableLaout
 
 Cell_Default = -1
@@ -17,6 +24,7 @@ BOARD_SIZE = "board_size"
 GRID_DATA = "grid_data"
 MAX_BOARD_SIZE = 30
 BOARD_TRANS = "board_trans"
+NUMBERING_MODE = "numbering_mode"
 
 
 class CellBoard(QWidget):
@@ -36,6 +44,7 @@ class CellBoard(QWidget):
         ]
 
         self.trans_board = 0
+        self.numbering_mode = NUMBERING_TOP_PRIORITY
         self.board = TableLaout(self)
         self.set_board()
 
@@ -48,7 +57,8 @@ class CellBoard(QWidget):
         self.listener = listener
 
     def set_margine(self, margine=[0, 0, 0, 0], size=400):
-        margine = [0, 0, 0, 0]
+        if len(margine) != 4:
+            margine = [0, 0, 0, 0]
         self.board.setContentsMargins(*margine)
         self.setFixedHeight(size)
         self.resize(self.n)
@@ -57,7 +67,9 @@ class CellBoard(QWidget):
         # 盤面の大きさに合わせてウィジェットの大きさを変える
         self.n = n
 
-        cell_size = self.height() // self.n
+        _, top, _, bottom = self.board.getContentsMargins()
+        content_height = max(1, self.height() - top - bottom)
+        cell_size = max(1, content_height // self.n)
         for r in range(MAX_BOARD_SIZE):
             for c in range(MAX_BOARD_SIZE):
                 self.widget[r][c].resize(cell_size)
@@ -90,54 +102,128 @@ class CellBoard(QWidget):
 
     def reset(self):
         # 盤面リセット
-        num = 1
         self.row_list = []
         self.row_answer = []
         self.col_list = []
         self.col_answer = []
-        # self.row_pos: dict[int, tuple[int, int]] = {}
-        # self.col_pos: dict[int, tuple[int, int]] = {}
+
+        starts = {}
         for i in range(self.n):
             for j in range(self.n):
                 self.widget[i][j].set_number(None)
-                if self.widget[i][j].is_white():
-                    row_pre = i == 0 or self.widget[i - 1][j].is_black()
+                if self.widget[i][j].state != Cell_Black:
+                    row_pre = (
+                        i == 0
+                        or self.widget[i - 1][j].state == Cell_Black
+                    )
                     row_sur = (
-                        i == self.n - 1 or self.widget[i + 1][j].is_black()
+                        i == self.n - 1
+                        or self.widget[i + 1][j].state == Cell_Black
                     )
-                    col_pre = j == 0 or self.widget[i][j - 1].is_black()
+                    col_pre = (
+                        j == 0
+                        or self.widget[i][j - 1].state == Cell_Black
+                    )
                     col_sur = (
-                        j == self.n - 1 or self.widget[i][j + 1].is_black()
+                        j == self.n - 1
+                        or self.widget[i][j + 1].state == Cell_Black
                     )
-                    if (row_pre and not row_sur) or (col_pre and not col_sur):
-                        self.widget[i][j].set_number(num)
-                        if row_pre and not row_sur:
-                            self.row_list.append(num)
-                            txt = ""
-                            n = i
-                            while self.widget[n][j].is_white() and n < self.n:
-                                if self.widget[n][j].c == "":
-                                    txt += " "
-                                else:
-                                    txt += self.widget[n][j].c
-                                n += 1
-                            self.row_answer.append(txt)
-                            # self.row_pos[num] = (i, j)
-                        if col_pre and not col_sur:
-                            self.col_list.append(num)
-                            txt = ""
-                            n = j
-                            while self.widget[i][n].is_white() and n < self.n:
-                                if self.widget[i][n].c == "":
-                                    txt += " "
-                                else:
-                                    txt += self.widget[i][n].c
-                                n += 1
-                            self.col_answer.append(txt)
-                            # self.col_pos[num] = (i, j)
-                        num += 1
+                    starts[(i, j)] = (
+                        row_pre and not row_sur,
+                        col_pre and not col_sur,
+                    )
                 self.widget[i][j].update()
+
+        if self.numbering_mode == NUMBERING_TOP_PRIORITY:
+            traversal = (
+                (row, col)
+                for row in range(self.n)
+                for col in range(self.n)
+            )
+        else:
+            traversal = (
+                (row, col)
+                for col in range(self.n)
+                for row in range(self.n)
+            )
+
+        row_entries = []
+        col_entries = []
+        number = 1
+        for row, col in traversal:
+            starts_row, starts_col = starts.get(
+                (row, col),
+                (False, False),
+            )
+            if not starts_row and not starts_col:
+                continue
+            self.widget[row][col].set_number(number)
+            if starts_row:
+                row_entries.append(
+                    (
+                        number,
+                        self._read_answer(row, col, vertical=True),
+                    )
+                )
+            if starts_col:
+                col_entries.append(
+                    (
+                        number,
+                        self._read_answer(row, col, vertical=False),
+                    )
+                )
+            number += 1
+
+        row_entries.sort()
+        col_entries.sort()
+        self.row_list = [number for number, _ in row_entries]
+        self.row_answer = [answer for _, answer in row_entries]
+        self.col_list = [number for number, _ in col_entries]
+        self.col_answer = [answer for _, answer in col_entries]
         self.listener.notify(1)
+
+    def _read_answer(self, row, col, vertical):
+        answer = ""
+        while (
+            row < self.n
+            and col < self.n
+            and self.widget[row][col].state != Cell_Black
+        ):
+            answer += self.widget[row][col].c or " "
+            if vertical:
+                row += 1
+            else:
+                col += 1
+        return answer
+
+    def set_numbering_mode(self, mode):
+        if mode not in NUMBERING_MODES:
+            raise ValueError(f"未対応の採番方式です: {mode}")
+        self.numbering_mode = mode
+        self.reset()
+
+    def apply_black_grid(self, grid, numbering_mode):
+        size = len(grid)
+        if not 4 <= size <= 9 or any(len(row) != size for row in grid):
+            raise ValueError("盤面は4～9の正方形にしてください")
+        if numbering_mode not in NUMBERING_MODES:
+            raise ValueError(f"未対応の採番方式です: {numbering_mode}")
+
+        self.numbering_mode = numbering_mode
+        self.resize(size)
+        for row in range(size):
+            for col in range(size):
+                state = Cell_Black if grid[row][col] == BLACK else Cell_White
+                self.widget[row][col].set_state(state)
+                if state == Cell_Black:
+                    self.widget[row][col].set_char("")
+        self.reset()
+        self.update()
+
+    def clear(self):
+        clear_cells(self.widget, self.n, Cell_White)
+        self.reset()
+        self.update()
 
     def notify(self):
         self.reset()
@@ -150,6 +236,7 @@ class CellBoard(QWidget):
             for r in range(self.n)
         ]
         save_data[BOARD_TRANS] = self.trans_board
+        save_data[NUMBERING_MODE] = self.numbering_mode
         return save_data
 
     def load(self, load_data):
@@ -159,6 +246,15 @@ class CellBoard(QWidget):
             for c in range(n):
                 self.widget[r][c].load(grid[r][c])
         self.trans_board = load_data[BOARD_TRANS]
+        numbering_mode = load_data.get(
+            NUMBERING_MODE,
+            NUMBERING_TOP_PRIORITY,
+        )
+        self.numbering_mode = (
+            numbering_mode
+            if numbering_mode in NUMBERING_MODES
+            else NUMBERING_TOP_PRIORITY
+        )
         self.resize(n)
         self.reset()
         self.set_board()

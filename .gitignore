@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pnpm-store/
+.venv/
+node_modules/

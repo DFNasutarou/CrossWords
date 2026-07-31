@@ -1,4 +1,4 @@
-import os, re
+import os, re, shutil
 
 from PyQt5.QtWidgets import (
     QMessageBox,
@@ -10,6 +10,11 @@ from PyQt5.QtGui import QPixmap, QPainter, QPageSize
 from PyQt5.QtSvg import QSvgGenerator
 from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtCore import QSizeF
+from app.project_format import (
+    ProjectFormatError,
+    make_project_document,
+    read_project_document,
+)
 
 WORK_SPACE = "workspace"
 PROJECT = "project"
@@ -36,6 +41,7 @@ class WorkSpace:
 
     def make_workspace(self, data):
         path = self.workspace
+        previous_project = self.project
 
         folder_name, ok = QInputDialog.getText(
             None,
@@ -50,6 +56,21 @@ class WorkSpace:
         try:
             os.makedirs(target_dir, exist_ok=False)
             os.makedirs(picture_dir, exist_ok=False)
+            previous_inline_dir = os.path.join(
+                previous_project,
+                PICTURE_FOLDER_NAME,
+                "inline",
+            )
+            target_inline_dir = os.path.join(
+                picture_dir,
+                "inline",
+            )
+            if os.path.isdir(previous_inline_dir):
+                shutil.copytree(
+                    previous_inline_dir,
+                    target_inline_dir,
+                    dirs_exist_ok=True,
+                )
         except OSError as e:
             QMessageBox.critical(
                 None, "エラー", f"フォルダ作成に失敗しました:\n{e}"
@@ -58,9 +79,7 @@ class WorkSpace:
 
         # ⑤ JSON ファイルを書き出し
         json_path = os.path.join(target_dir, DATA_FILE_NAME)
-        builder = JsonFileBuilder()
-        builder.add("data", data)
-        builder.save(json_path)
+        self._save_project_document(json_path, data)
 
         QMessageBox.information(
             None, "完了", f"プロジェクトを作成しました：\n{target_dir}"
@@ -79,21 +98,28 @@ class WorkSpace:
         builder.save(INIT_JSON)
 
     def save_project(self, data):
-        builder = JsonFileBuilder()
-        builder.add("data", data)
         file = os.path.join(self.project, DATA_FILE_NAME)
-        builder.save(file)
+        self._save_project_document(file, data)
 
     def load_project(self):
         # self.projectに指定されているデータを読み込み
         builder = JsonFileBuilder()
         file = os.path.join(self.project, DATA_FILE_NAME)
-        data = builder.load(file)
-        if type(data) == dict and "data" in data:
+        document = builder.load(file)
+        try:
+            data = read_project_document(document)
             self.update_init_file()
-            return data["data"]
-        else:
+            return data
+        except ProjectFormatError as error:
+            print(error)
             return None
+
+    def _save_project_document(self, file, data):
+        document = make_project_document(data)
+        builder = JsonFileBuilder()
+        for key, value in document.items():
+            builder.add(key, value)
+        builder.save(file)
 
     def select_project(self):
         # プロジェクトを選択

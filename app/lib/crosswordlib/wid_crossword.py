@@ -2,6 +2,7 @@
 from PyQt5.QtWidgets import (
     QWidget,
     QInputDialog,
+    QMessageBox,
 )
 from ..formlib.widgets import WidgetSetting, EditableTextWidget
 from .wid_cell import CellBoard
@@ -17,10 +18,15 @@ from app.lib.crosswordlib.format_setting_panel import (
 from app.lib.formlib.widgets import GraphicWidget
 from app.lib.formlib.layouts import RowLayout, ColLayout
 from app.lib.crosswordlib.const_color import Col
-from PyQt5.QtGui import QPalette, QPixmap
+from app.lib.crosswordlib.geometry import scaled_dimensions
+from app.lib.crosswordlib.inline_image_panel import InlineImagePanel
+from app.lib.crosswordlib.board_enumerator_panel import BoardEnumeratorPanel
+from app.lib.crosswordlib.inline_images import (
+    IMAGE_ASSETS_KEY,
+    normalize_image_assets,
+)
+from PyQt5.QtGui import QPainter, QPalette, QPixmap
 from PyQt5.QtCore import Qt
-
-import fitz  # PyMuPDFをインポート
 
 DEFAULT_BOARD_SIZE = 5
 DEFAULT_CELL_SIZE = 40
@@ -33,6 +39,9 @@ class CrossWord(QWidget):
         super().__init__()
         self.board_size = DEFAULT_BOARD_SIZE
         self.cell_size = DEFAULT_CELL_SIZE
+        self.project_root = ""
+        self.image_assets = {}
+        BlackOutText.set_image_assets(self.image_assets, self.project_root)
 
         base = RowLayout(self)
 
@@ -67,6 +76,7 @@ class CrossWord(QWidget):
         self.cell_board = cell_board
         self.key = key
         self.world = WorldSetting()
+        self.cell_board.reset()
 
         # マージン設定
         board.setContentsMargins(10, 10, 10, 10)
@@ -79,10 +89,18 @@ class CrossWord(QWidget):
         data["key"] = self.key.save()
         data["world"] = self.world.save()
         data["title_text"] = self.title.save()
+        data[IMAGE_ASSETS_KEY] = self.image_assets
         return data
 
     def load(self, data):
         try:
+            self.image_assets = normalize_image_assets(
+                data.get(IMAGE_ASSETS_KEY, {})
+            )
+            BlackOutText.set_image_assets(
+                self.image_assets,
+                self.project_root,
+            )
             self.cell_board.load(data["cell"])
             self.key.load(data["key"])
             self.key.visible_update(*self.cell_board.get_num_list())
@@ -96,6 +114,38 @@ class CrossWord(QWidget):
         self.title.set_text(self.world.data[WorldSetting.TITLE_TEXT])
         self.world_update()
         self.key.check_all_answers()
+
+    def set_project_root(self, project_root):
+        self.project_root = str(project_root or "")
+        BlackOutText.set_image_assets(
+            self.image_assets,
+            self.project_root,
+        )
+
+    def inline_image_panel(self):
+        if not self.project_root:
+            QMessageBox.information(
+                self,
+                "画像の登録・差し込み",
+                "先にプロジェクトを作成または読み込んでください。",
+            )
+            return False
+        targets = [("指示文", self.title)]
+        targets.extend(self.key.get_inline_image_targets())
+        all_image_widgets = [self.title]
+        all_image_widgets.extend(
+            self.key.get_all_inline_image_widgets()
+        )
+        dialog = InlineImagePanel(
+            targets,
+            self.image_assets,
+            self.project_root,
+            all_image_widgets=all_image_widgets,
+            parent=self,
+        )
+        dialog.exec_()
+        self.world_update()
+        return True
 
     def resize_board(self):
         # ボードの大きさを変更
@@ -113,12 +163,34 @@ class CrossWord(QWidget):
             return  # キャンセル
         self.cell_board.resize(size)
 
+    def board_enumerator_panel(self):
+        vertical, horizontal = self.key.get_clue_number_patterns()
+        dialog = BoardEnumeratorPanel(
+            vertical,
+            horizontal,
+            self.apply_enumerated_board,
+            parent=self,
+        )
+        dialog.exec_()
+
+    def apply_enumerated_board(self, candidate, numbering_mode):
+        self.cell_board.apply_black_grid(
+            candidate.grid,
+            numbering_mode,
+        )
+        self.world_update()
+
     def trans_board(self):
         self.cell_board.trans()
         self.key.trans_key()
 
     def sort_key(self):
         self.key.sort_key()
+
+    def clear_board_and_keys(self):
+        self.cell_board.clear()
+        self.key.clear_clues()
+        self.world_update()
 
     def switch_title(self):
         self.world.data[WorldSetting.SHOW_TITLE] = (
@@ -241,8 +313,23 @@ class CrossWord(QWidget):
         self.cell_board.board_text(self.world.data[WorldSetting.BOARD_TEXT])
         self.update()
 
-    def get_capture(self):
-        return self.grab()
+    def get_capture(self, scale=1):
+        if scale == 1:
+            return self.grab()
+
+        width, height = scaled_dimensions(
+            self.width(),
+            self.height(),
+            scale,
+        )
+        capture = QPixmap(width, height)
+        capture.fill(self.palette().color(QPalette.Window))
+
+        painter = QPainter(capture)
+        painter.scale(scale, scale)
+        self.render(painter)
+        painter.end()
+        return capture
 
     def delete_guaid(self):
         EditableTextWidget.guaid = 1 - EditableTextWidget.guaid

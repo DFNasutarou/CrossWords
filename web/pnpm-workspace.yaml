@@ -1,0 +1,6 @@
+confirmModulesPurge: false
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd
