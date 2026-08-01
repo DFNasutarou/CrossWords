@@ -4,11 +4,13 @@ from PyQt6.QtWidgets import (
     QScrollArea,
     QWidget,
     QLineEdit,
+    QPlainTextEdit,
 )
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import (
     QPixmap,
     QFont,
+    QFontMetrics,
     QPalette,
     QPainter,
     QPen,
@@ -223,6 +225,52 @@ class LabelWidget(QLabel):
         self.setPalette(palette)
 
 
+class MultilineTextEdit(QPlainTextEdit):
+    """QLineEdit 互換の API を持つ複数行エディタ。
+
+    Enter で改行でき、フォーカスが外れると editingFinished を発行する。
+    高さは入力行数に合わせて自動調整する（最大8行分）。
+    """
+
+    editingFinished = pyqtSignal()
+
+    MAX_VISIBLE_LINES = 8
+
+    def __init__(self, text="", parent=None):
+        super().__init__(text, parent)
+        self.setTabChangesFocus(True)
+        self.textChanged.connect(self._adjust_height)
+        self._adjust_height()
+
+    def text(self):
+        return self.toPlainText()
+
+    def setText(self, text):
+        self.setPlainText(text)
+
+    def setFont(self, font):
+        super().setFont(font)
+        self._adjust_height()
+
+    def focusOutEvent(self, event):
+        super().focusOutEvent(event)
+        self.editingFinished.emit()
+
+    def _adjust_height(self):
+        lines = max(1, self.document().blockCount())
+        lines = min(lines, self.MAX_VISIBLE_LINES)
+        metrics = QFontMetrics(self.font())
+        frame = self.frameWidth() * 2
+        margins = self.contentsMargins()
+        self.setFixedHeight(
+            metrics.height() * lines
+            + frame
+            + margins.top()
+            + margins.bottom()
+            + 10
+        )
+
+
 class EditableTextWidget(QWidget):
     """
     クリックするとテキスト入力可能になるウィジェット。
@@ -233,12 +281,15 @@ class EditableTextWidget(QWidget):
 
     guaid = 0
 
-    def __init__(self, text="", listner=None, col="#000000"):
+    def __init__(self, text="", listner=None, col="#000000", multiline=False):
         super().__init__(None)
         self.listner = listner
         base = ColLayout(self)
         self.label = QLabel(text, self)
-        self.edit = QLineEdit(text, self)
+        if multiline:
+            self.edit = MultilineTextEdit(text, self)
+        else:
+            self.edit = QLineEdit(text, self)
         self.edit.hide()
         base.addWidget(self.label)
         base.addWidget(self.edit)
@@ -251,18 +302,19 @@ class EditableTextWidget(QWidget):
         palette.setColor(QPalette.ColorRole.WindowText, QColor(col))
         self.label.setPalette(palette)
 
+        selector = "QPlainTextEdit" if multiline else "QLineEdit"
         self.edit.setStyleSheet(
-            """
+            f"""
             /* 通常時 */
-            QLineEdit {
+            {selector} {{
                 background-color: white;
                 color: #555555;
-            }
+            }}
             /* フォーカス（編集中）時 */
-            QLineEdit:focus {
-                background-color: white;  
-                color: #555555;          
-            }
+            {selector}:focus {{
+                background-color: white;
+                color: #555555;
+            }}
             """
         )
 

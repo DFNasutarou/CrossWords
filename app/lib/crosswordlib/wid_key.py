@@ -283,7 +283,13 @@ class BlackOutText(EditableTextWidget):
     _all_instances = weakref.WeakSet()
 
     def __init__(self, text="", listner=None):
-        super().__init__(text, listner, BlackOutText.black_color)
+        # 問題文・カギ文は Enter で改行できる複数行編集にする
+        super().__init__(
+            text,
+            listner,
+            BlackOutText.black_color,
+            multiline=True,
+        )
         self.data = []
         self._plain_text = str(text)
         self._inline_images = []

@@ -80,6 +80,11 @@ class PositionLabel(QWidget):
         y = 0
         points = []
         for character in self._text:
+            if character == "\n":
+                points.append((x, y))
+                x = 0
+                y += metrics.height()
+                continue
             width = metrics.horizontalAdvance(character)
             if x + width > usable and x > 0:
                 x = 0
@@ -110,6 +115,8 @@ class PositionLabel(QWidget):
         points = self._boundaries()
         painter.setPen(QColor("#222222"))
         for index, character in enumerate(self._text):
+            if character == "\n":
+                continue
             x, y = points[index]
             painter.drawText(
                 self.PADDING + x,
