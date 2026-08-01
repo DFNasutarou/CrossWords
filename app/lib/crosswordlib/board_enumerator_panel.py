@@ -24,7 +24,9 @@ from app.lib.crosswordlib.board_enumerator import (
     NUMBERING_LEFT_PRIORITY,
     NUMBERING_TOP_PRIORITY,
     BoardEnumerationError,
+    clue_number_cells,
     enumerate_boards,
+    grid_to_rows,
     parse_clue_pattern_text,
 )
 
@@ -41,6 +43,8 @@ class EnumerationWorker(QObject):
         sizes,
         modes,
         limit,
+        require_point_symmetry,
+        allow_unchecked_cells,
     ):
         super().__init__()
         self.vertical = vertical
@@ -48,6 +52,8 @@ class EnumerationWorker(QObject):
         self.sizes = sizes
         self.modes = modes
         self.limit = limit
+        self.require_point_symmetry = require_point_symmetry
+        self.allow_unchecked_cells = allow_unchecked_cells
         self.cancel_requested = False
 
     @pyqtSlot()
@@ -61,6 +67,8 @@ class EnumerationWorker(QObject):
                 limit=self.limit,
                 is_cancelled=lambda: self.cancel_requested,
                 on_progress=self.progress.emit,
+                require_point_symmetry=self.require_point_symmetry,
+                allow_unchecked_cells=self.allow_unchecked_cells,
             )
             self.finished.emit(outcome)
         except BoardEnumerationError as error:
@@ -76,10 +84,21 @@ class BoardPreview(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.candidate = None
+        self.numbers = {}
         self.setMinimumSize(300, 300)
 
-    def set_candidate(self, candidate):
+    def set_candidate(self, candidate, mode=None):
         self.candidate = candidate
+        self.numbers = {}
+        if candidate is not None:
+            if mode is None and candidate.numberings:
+                mode = candidate.numberings[0].mode
+            if mode is not None:
+                self.numbers = clue_number_cells(
+                    grid_to_rows(candidate.grid),
+                    candidate.size,
+                    mode,
+                )
         self.update()
 
     def paintEvent(self, event):
@@ -125,6 +144,24 @@ class BoardPreview(QWidget):
                         QColor("white"),
                     )
                 painter.drawRect(x, y, cell_size, cell_size)
+
+        if self.numbers:
+            number_font = QFont()
+            number_font.setPixelSize(max(8, int(cell_size * 0.32)))
+            painter.setFont(number_font)
+            painter.setPen(QColor("#333333"))
+            pad = max(1, cell_size // 10)
+            for (row, col), number in self.numbers.items():
+                painter.drawText(
+                    left + col * cell_size + pad,
+                    top + row * cell_size + pad,
+                    cell_size - pad,
+                    cell_size - pad,
+                    Qt.AlignmentFlag.AlignLeft
+                    | Qt.AlignmentFlag.AlignTop,
+                    str(number),
+                )
+
         painter.setPen(QPen(QColor("black"), 3))
         painter.drawRect(left, top, board_size, board_size)
         painter.end()
@@ -210,11 +247,20 @@ class BoardEnumeratorPanel(QDialog):
         limit_row.addWidget(self.no_limit)
         limit_row.addStretch()
 
+        self.require_symmetry = QCheckBox("黒マスが点対称の盤面に限る")
+        self.require_symmetry.setChecked(True)
+        self.allow_unchecked = QCheckBox(
+            "クロスしない1文字マスを許可（カギにならないマス）"
+        )
+        self.allow_unchecked.setChecked(True)
+
         form.addRow("タテのカギ番号", self.vertical_input)
         form.addRow("ヨコのカギ番号", self.horizontal_input)
         form.addRow("盤面サイズ", size_widget)
         form.addRow("採番方式", self.numbering_mode)
         form.addRow("結果件数", limit_widget)
+        form.addRow("制約", self.require_symmetry)
+        form.addRow("", self.allow_unchecked)
         base.addWidget(form_widget)
 
         action_row = QHBoxLayout()
@@ -248,6 +294,9 @@ class BoardEnumeratorPanel(QDialog):
         bottom_row = QHBoxLayout()
         bottom_row.addWidget(QLabel("反映時の採番方式"))
         self.apply_mode = QComboBox()
+        self.apply_mode.currentIndexChanged.connect(
+            self.apply_mode_changed
+        )
         bottom_row.addWidget(self.apply_mode)
         bottom_row.addStretch()
         self.apply_button = QPushButton("選択した盤面を反映")
@@ -310,6 +359,8 @@ class BoardEnumeratorPanel(QDialog):
             range(minimum, maximum + 1),
             self.numbering_mode.currentData(),
             limit,
+            self.require_symmetry.isChecked(),
+            self.allow_unchecked.isChecked(),
         )
         self.worker.moveToThread(self.thread)
         self.thread.started.connect(self.worker.run)
@@ -388,6 +439,16 @@ class BoardEnumeratorPanel(QDialog):
         for match in candidate.numberings:
             self.apply_mode.addItem(_mode_name(match.mode), match.mode)
         self.apply_button.setEnabled(True)
+
+    def apply_mode_changed(self, _index):
+        item = self.result_list.currentItem()
+        mode = self.apply_mode.currentData()
+        if item is None or self.outcome is None or mode is None:
+            return
+        candidate = self.outcome.results[
+            item.data(Qt.ItemDataRole.UserRole)
+        ]
+        self.preview.set_candidate(candidate, mode)
 
     def apply_selected(self):
         item = self.result_list.currentItem()

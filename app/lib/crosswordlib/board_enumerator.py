@@ -86,6 +86,8 @@ def enumerate_boards(
     limit: int | None = None,
     is_cancelled: Callable[[], bool] | None = None,
     on_progress: Callable[[int, int, int], None] | None = None,
+    require_point_symmetry: bool = True,
+    allow_unchecked_cells: bool = False,
 ):
     vertical_pattern = normalize_clue_pattern(vertical_clues)
     horizontal_pattern = normalize_clue_pattern(horizontal_clues)
@@ -116,6 +118,215 @@ def enumerate_boards(
         if is_cancelled and is_cancelled():
             cancelled = True
             break
+
+        if not require_point_symmetry or allow_unchecked_cells:
+            if allow_unchecked_cells:
+                masks_all = valid_row_masks_unchecked(size)
+            else:
+                masks_all = valid_row_masks(size)
+            counts_by_mask = {
+                mask: clue_run_count(mask, size) for mask in masks_all
+            }
+            min_count = min(counts_by_mask.values())
+            max_count = max(counts_by_mask.values())
+            if not general_size_feasible(
+                size,
+                vertical_count,
+                horizontal_count,
+                max_known_number,
+                min_count,
+                max_count,
+            ):
+                skipped_sizes.append(size)
+                continue
+            # 上優先のみの探索では、確定済み行のカギ番号を
+            # 期待パターンと突き合わせて枝刈りできる
+            top_only = modes == (NUMBERING_TOP_PRIORITY,)
+
+            rows_stack = []
+            # (割り当て済み番号, 確定タテカギ数, 確定ヨコカギ数)
+            prefix_states = [(0, 0, 0)]
+            stop_size = False
+
+            def process_determined_row(row_index):
+                """row_index 行の開始マスを確定し矛盾を調べる。
+
+                行 row_index のタテ開始判定には次の行が必要なため、
+                次の行を積んだ後（または盤面完成後）に呼ぶこと。
+                矛盾がなければ更新後の状態、あれば None を返す。
+                """
+                number, v_index, h_index = prefix_states[-1]
+                mask = rows_stack[row_index]
+                above = rows_stack[row_index - 1] if row_index else None
+                below = (
+                    rows_stack[row_index + 1]
+                    if row_index + 1 < len(rows_stack)
+                    else None
+                )
+                for col in range(size):
+                    bit = 1 << col
+                    if mask & bit:
+                        continue
+                    is_vertical = (
+                        (row_index == 0 or above & bit)
+                        and row_index + 1 < size
+                        and below is not None
+                        and not below & bit
+                    )
+                    is_horizontal = (
+                        (col == 0 or mask & (bit >> 1))
+                        and col + 1 < size
+                        and not mask & (bit << 1)
+                    )
+                    if not (is_vertical or is_horizontal):
+                        continue
+                    number += 1
+                    if is_vertical:
+                        if v_index >= vertical_count:
+                            return None
+                        expected = vertical_pattern[v_index]
+                        if (
+                            top_only
+                            and expected is not None
+                            and expected != number
+                        ):
+                            return None
+                        v_index += 1
+                    if is_horizontal:
+                        if h_index >= horizontal_count:
+                            return None
+                        expected = horizontal_pattern[h_index]
+                        if (
+                            top_only
+                            and expected is not None
+                            and expected != number
+                        ):
+                            return None
+                        h_index += 1
+                return (number, v_index, h_index)
+
+            def search_general(depth, clue_sum):
+                nonlocal explored_states
+                nonlocal completed_boards
+                nonlocal cancelled
+                nonlocal truncated
+                nonlocal stop_size
+
+                if stop_size:
+                    return
+                explored_states += 1
+                if on_progress and explored_states % 1000 == 0:
+                    on_progress(explored_states, len(results), size)
+                if is_cancelled and is_cancelled():
+                    cancelled = True
+                    stop_size = True
+                    return
+
+                if depth == size:
+                    state = process_determined_row(size - 1)
+                    if state is None:
+                        return
+                    _, v_index, h_index = state
+                    if (
+                        v_index != vertical_count
+                        or h_index != horizontal_count
+                    ):
+                        return
+                    rows = tuple(rows_stack)
+                    if allow_unchecked_cells:
+                        # 1文字マスは許すが、タテヨコ両方とも
+                        # クロスしない孤立マスは禁止
+                        if not no_isolated_white_cells(rows, size):
+                            return
+                    elif not no_single_character_clues(rows, size):
+                        return
+                    if not white_cells_connected(rows, size):
+                        return
+                    completed_boards += 1
+                    matches = matching_numberings(
+                        rows,
+                        size,
+                        vertical_pattern,
+                        horizontal_pattern,
+                        modes,
+                    )
+                    if not matches:
+                        return
+                    grid = tuple(
+                        tuple(
+                            BLACK if row_mask & (1 << col) else WHITE
+                            for col in range(size)
+                        )
+                        for row_mask in rows
+                    )
+                    results.append(
+                        BoardCandidate(
+                            size=size,
+                            grid=grid,
+                            numberings=matches,
+                        )
+                    )
+                    if limit is not None and len(results) >= limit:
+                        truncated = True
+                        stop_size = True
+                    return
+
+                previous = rows_stack[-1] if rows_stack else None
+                previous_previous = (
+                    rows_stack[-2] if len(rows_stack) >= 2 else None
+                )
+                remaining = size - depth - 1
+                mirror = size - 1 - depth
+                if require_point_symmetry and mirror < depth:
+                    # 下半分は上半分の 180 度回転で確定
+                    forced = reverse_mask(rows_stack[mirror], size)
+                    candidates = (
+                        (forced,) if forced in counts_by_mask else ()
+                    )
+                elif require_point_symmetry and mirror == depth:
+                    # 奇数サイズの中央行は自己対称なもののみ
+                    candidates = tuple(
+                        mask
+                        for mask in masks_all
+                        if mask == reverse_mask(mask, size)
+                    )
+                else:
+                    candidates = masks_all
+                for mask in candidates:
+                    new_sum = clue_sum + counts_by_mask[mask]
+                    if new_sum + remaining * min_count > horizontal_count:
+                        continue
+                    if new_sum + remaining * max_count < horizontal_count:
+                        continue
+                    if previous is not None and previous & mask:
+                        continue
+                    if _closes_bad_vertical_cell(
+                        previous_previous,
+                        previous,
+                        mask,
+                        size,
+                        allow_unchecked_cells,
+                    ):
+                        continue
+                    rows_stack.append(mask)
+                    state = (
+                        prefix_states[-1]
+                        if depth == 0
+                        else process_determined_row(depth - 1)
+                    )
+                    if state is not None:
+                        prefix_states.append(state)
+                        search_general(depth + 1, new_sum)
+                        prefix_states.pop()
+                    rows_stack.pop()
+                    if stop_size:
+                        return
+
+            search_general(0, 0)
+            if cancelled or truncated:
+                break
+            continue
+
         if not size_can_match(
             size,
             vertical_count,
@@ -380,6 +591,67 @@ def size_can_match(
     return horizontal_count in _possible_horizontal_counts(size)
 
 
+def general_size_feasible(
+    size,
+    vertical_count,
+    horizontal_count,
+    max_known_number,
+    min_row_count,
+    max_row_count,
+):
+    """汎用探索でサイズが候補になり得るかを返す。
+
+    列マスクにも行マスクと同じ制約が成り立つため、
+    タテのカギ数にも同じ範囲を適用できる。
+    """
+    if max_known_number > vertical_count + horizontal_count:
+        return False
+    return (
+        size * min_row_count <= horizontal_count <= size * max_row_count
+        and size * min_row_count <= vertical_count <= size * max_row_count
+    )
+
+
+def clue_number_cells(rows, size, mode):
+    """採番方式 mode における (row, col) -> カギ番号 の辞書を返す。"""
+    vertical_starts, horizontal_starts = clue_start_cells(rows, size)
+    all_starts = vertical_starts | horizontal_starts
+    if mode == NUMBERING_TOP_PRIORITY:
+        traversal = (
+            (row, col)
+            for row in range(size)
+            for col in range(size)
+        )
+    elif mode == NUMBERING_LEFT_PRIORITY:
+        traversal = (
+            (row, col)
+            for col in range(size)
+            for row in range(size)
+        )
+    else:
+        raise BoardEnumerationError(f"未対応の採番方式です: {mode}")
+
+    numbers = {}
+    next_number = 1
+    for cell in traversal:
+        if cell in all_starts:
+            numbers[cell] = next_number
+            next_number += 1
+    return numbers
+
+
+def grid_to_rows(grid):
+    """BoardCandidate.grid をビットマスクの行タプルへ変換する。"""
+    return tuple(
+        sum(
+            (1 << col)
+            for col, cell in enumerate(row)
+            if cell == BLACK
+        )
+        for row in grid
+    )
+
+
 def matching_numberings(
     rows,
     size,
@@ -580,6 +852,97 @@ def valid_row_masks(size):
             continue
         masks.append(mask)
     return tuple(masks)
+
+
+@lru_cache(maxsize=None)
+def valid_row_masks_unchecked(size):
+    """1文字（クロスしない）白マスを許す場合の有効な行マスク。
+
+    黒マスの左右隣接だけを禁止する。
+    """
+    return tuple(
+        mask
+        for mask in range(1 << size)
+        if not mask & (mask << 1)
+    )
+
+
+def clue_run_count(mask, size):
+    """カギになる（長さ2以上の）白連続の数を返す。"""
+    return sum(
+        1
+        for length in white_run_lengths(mask, size)
+        if length >= 2
+    )
+
+
+def no_isolated_white_cells(rows, size):
+    """タテヨコどちらでもクロスしない孤立白マスが無いことを確認する。"""
+    for row in range(size):
+        for col in range(size):
+            if is_black(rows, row, col):
+                continue
+            horizontal = _run_length_in_mask(rows[row], col, size)
+            if horizontal >= 2:
+                continue
+            column_mask = sum(
+                (1 << index)
+                for index in range(size)
+                if is_black(rows, index, col)
+            )
+            if _run_length_in_mask(column_mask, row, size) < 2:
+                return False
+    return True
+
+
+def _run_length_in_mask(mask, index, size):
+    """mask 中の白マス index が属する白連続の長さを返す。"""
+    if mask & (1 << index):
+        return 0
+    length = 1
+    step = index - 1
+    while step >= 0 and not mask & (1 << step):
+        length += 1
+        step -= 1
+    step = index + 1
+    while step < size and not mask & (1 << step):
+        length += 1
+        step += 1
+    return length
+
+
+def _closes_bad_vertical_cell(
+    previous_previous,
+    previous,
+    current,
+    size,
+    allow_unchecked,
+):
+    """current 行を置くと直前行の白マスが縦1マスで閉じるかを調べる。
+
+    1文字マス禁止時は常に枝刈り。許可時も、そのマスが横方向でも
+    クロスしていなければ孤立マスになるため枝刈りする。
+    """
+    if previous is None:
+        return False
+    for col in range(size):
+        bit = 1 << col
+        if not current & bit:
+            continue
+        if previous & bit:
+            continue
+        starts_at_edge = previous_previous is None
+        starts_after_black = (
+            previous_previous is not None
+            and previous_previous & bit
+        )
+        if not (starts_at_edge or starts_after_black):
+            continue
+        if not allow_unchecked:
+            return True
+        if _run_length_in_mask(previous, col, size) < 2:
+            return True
+    return False
 
 
 @lru_cache(maxsize=None)

@@ -150,6 +150,72 @@ class BoardEnumeratorTest(unittest.TestCase):
 
         self.assertEqual(outcome.results[0].grid[2][2], BLACK)
 
+    def test_unchecked_cells_solve_user_reported_case(self):
+        # タテ1,2,3,6／ヨコ1,4,5,7 はクロスしない1文字マスを
+        # 許可しないと解が存在しない
+        strict = enumerate_boards(
+            [1, 2, 3, 6],
+            [1, 4, 5, 7],
+            sizes=[4],
+        )
+        relaxed = enumerate_boards(
+            [1, 2, 3, 6],
+            [1, 4, 5, 7],
+            sizes=[4],
+            allow_unchecked_cells=True,
+        )
+
+        self.assertEqual(len(strict.results), 0)
+        self.assertGreater(len(relaxed.results), 0)
+        match = relaxed.results[0].numberings[0]
+        self.assertEqual(match.vertical_numbers, (1, 2, 3, 6))
+        self.assertEqual(match.horizontal_numbers, (1, 4, 5, 7))
+
+    def test_general_search_without_point_symmetry(self):
+        outcome = enumerate_boards(
+            [1, 2, 3, 5, 7, 9],
+            [1, 4, 5, 6, 7, 8, 10],
+            sizes=[5],
+            require_point_symmetry=False,
+            allow_unchecked_cells=True,
+            limit=1,
+        )
+
+        self.assertEqual(len(outcome.results), 1)
+
+    def test_unchecked_search_finds_real_board(self):
+        # save/nasu の実盤面（6×6・点対称・1文字マスあり）の
+        # カギ番号から元の盤面が復元できること
+        board = (
+            (0, 1, 0, 0, 0, 0),
+            (0, 0, 1, 0, 0, 1),
+            (0, 0, 0, 0, 1, 0),
+            (0, 1, 0, 0, 0, 0),
+            (1, 0, 0, 1, 0, 0),
+            (0, 0, 0, 0, 1, 0),
+        )
+        outcome = enumerate_boards(
+            [1, 3, 4, 6, 9, 10, 12, 13],
+            [2, 5, 7, 8, 11, 13, 14, 15],
+            sizes=[6],
+            numbering_modes=(NUMBERING_TOP_PRIORITY,),
+            allow_unchecked_cells=True,
+        )
+
+        self.assertIn(board, [c.grid for c in outcome.results])
+
+    def test_isolated_white_cell_is_rejected(self):
+        from app.lib.crosswordlib.board_enumerator import (
+            no_isolated_white_cells,
+        )
+
+        # (0, 2) は横1文字かつ縦1文字の孤立マス
+        isolated = (0b1010, 0b0100, 0, 0)
+        healthy = (0b1010, 0, 0, 0)
+
+        self.assertFalse(no_isolated_white_cells(isolated, 4))
+        self.assertTrue(no_isolated_white_cells(healthy, 4))
+
     def test_applies_result_limit(self):
         outcome = enumerate_boards(
             [None, None, None, None],

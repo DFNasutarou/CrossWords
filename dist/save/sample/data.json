@@ -1,4 +1,5 @@
 {
+  "format_version": 2,
   "data": {
     "cell": {
       "board_size": 6,
@@ -160,11 +161,32 @@
           }
         ]
       ],
-      "board_trans": 0
+      "board_trans": 0,
+      "numbering_mode": "top_priority"
     },
     "key": {
       "row_title": [
-        "タテのカギ"
+        "タテのカギ",
+        [
+          [
+            10.0,
+            40.0
+          ],
+          [
+            0.0,
+            10.0
+          ]
+        ],
+        [
+          [
+            40.0,
+            50.0
+          ],
+          [
+            0.0,
+            10.0
+          ]
+        ]
       ],
       "row_title_size": -1,
       "row_key": [
@@ -1703,6 +1725,20 @@
         "width": 96,
         "color": "#ff8888"
       }
-    }
+    },
+    "title_text": [
+      "指示文を表示",
+      [
+        [
+          10.0,
+          60.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ]
+    ],
+    "image_assets": {}
   }
 }

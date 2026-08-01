@@ -3,7 +3,14 @@ import shutil
 import uuid
 
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFontMetrics, QImage, QPixmap
+from PyQt6.QtGui import (
+    QColor,
+    QFontMetrics,
+    QImage,
+    QPainter,
+    QPen,
+    QPixmap,
+)
 from PyQt6.QtWidgets import (
     QCheckBox,
     QComboBox,
@@ -36,26 +43,106 @@ from app.lib.crosswordlib.inline_images import (
 from app.lib.crosswordlib.wid_key import BlackOutText
 
 
-class PositionLabel(QLabel):
+class PositionLabel(QWidget):
+    """対象の文を表示し、クリックで挿入位置を選べるプレビュー。
+
+    現在の挿入位置は文中に赤いキャレット（縦線）で表示する。
+    """
+
     position_selected = pyqtSignal(int)
+
+    PADDING = 8
+    CARET_WIDTH = 2
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._text = ""
+        self._position = 0
         self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setToolTip("文中をクリックすると、その位置を挿入位置に設定します")
+        self.setMinimumHeight(40)
+
+    def set_content(self, text):
+        self._text = text
+        self._position = min(self._position, len(text))
+        self._update_height()
+        self.update()
+
+    def set_position(self, position):
+        self._position = max(0, min(position, len(self._text)))
+        self.update()
+
+    def _boundaries(self):
+        """文字境界 0～len(text) の描画座標 (x, y) の一覧を返す。"""
+        metrics = QFontMetrics(self.font())
+        usable = max(20, self.width() - self.PADDING * 2)
+        x = 0
+        y = 0
+        points = []
+        for character in self._text:
+            width = metrics.horizontalAdvance(character)
+            if x + width > usable and x > 0:
+                x = 0
+                y += metrics.height()
+            points.append((x, y))
+            x += width
+        points.append((x, y))
+        return points
+
+    def _update_height(self):
+        metrics = QFontMetrics(self.font())
+        last_y = self._boundaries()[-1][1]
+        self.setMinimumHeight(
+            last_y + metrics.height() + self.PADDING * 2
+        )
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._update_height()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.fillRect(self.rect(), QColor("#f3f3f3"))
+        painter.setPen(QColor("#cccccc"))
+        painter.drawRect(self.rect().adjusted(0, 0, -1, -1))
+
+        metrics = QFontMetrics(self.font())
+        points = self._boundaries()
+        painter.setPen(QColor("#222222"))
+        for index, character in enumerate(self._text):
+            x, y = points[index]
+            painter.drawText(
+                self.PADDING + x,
+                self.PADDING + y + metrics.ascent(),
+                character,
+            )
+
+        caret_x, caret_y = points[self._position]
+        painter.setPen(QPen(QColor("#dd0000"), self.CARET_WIDTH))
+        painter.drawLine(
+            self.PADDING + caret_x,
+            self.PADDING + caret_y,
+            self.PADDING + caret_x,
+            self.PADDING + caret_y + metrics.height(),
+        )
+        painter.end()
 
     def mousePressEvent(self, event):
         if event.button() != Qt.MouseButton.LeftButton:
             return super().mousePressEvent(event)
 
-        text = self.text()
-        metrics = QFontMetrics(self.font())
-        x = max(0, event.pos().x() - self.contentsMargins().left())
+        points = self._boundaries()
+        line_height = QFontMetrics(self.font()).height()
+        click_x = event.pos().x() - self.PADDING
+        click_y = event.pos().y() - self.PADDING
+
+        def distance(point):
+            x, y = point
+            return (abs(y + line_height / 2 - click_y), abs(x - click_x))
+
         position = min(
-            range(len(text) + 1),
-            key=lambda index: abs(
-                metrics.horizontalAdvance(text[:index]) - x
-            ),
+            range(len(points)),
+            key=lambda index: distance(points[index]),
         )
         self.position_selected.emit(position)
         event.accept()
@@ -117,16 +204,14 @@ class InlineImagePanel(QDialog):
         form_widget = QWidget()
         form = QFormLayout(form_widget)
         self.target_combo = QComboBox()
-        for name, _ in self.targets:
-            self.target_combo.addItem(name)
+        for name, target in self.targets:
+            self.target_combo.addItem(
+                _target_label(name, target.get_text())
+            )
         self.target_combo.currentIndexChanged.connect(
             self._target_changed
         )
         self.target_preview = PositionLabel()
-        self.target_preview.setWordWrap(True)
-        self.target_preview.setStyleSheet(
-            "padding: 8px; background: #f3f3f3; border: 1px solid #cccccc;"
-        )
 
         self.position = QSpinBox()
         self.position.setMinimum(0)
@@ -134,9 +219,7 @@ class InlineImagePanel(QDialog):
             self.position.setValue
         )
         self.position_hint = QLabel("0文字目")
-        self.position.valueChanged.connect(
-            lambda value: self.position_hint.setText(f"{value}文字目")
-        )
+        self.position.valueChanged.connect(self._position_changed)
         position_widget = QWidget()
         position_row = QHBoxLayout(position_widget)
         position_row.setContentsMargins(0, 0, 0, 0)
@@ -173,6 +256,9 @@ class InlineImagePanel(QDialog):
         self.blackout.addItem(
             "透明部分を含め全体を黒塗り",
             BLACKOUT_ALL,
+        )
+        self.blackout.setCurrentIndex(
+            self.blackout.findData(BLACKOUT_OPAQUE)
         )
 
         form.addRow("差し込み先", self.target_combo)
@@ -492,11 +578,16 @@ class InlineImagePanel(QDialog):
     def _target_changed(self, _index=None):
         target = self._current_target()
         if target is None:
-            self.target_preview.setText("")
+            self.target_preview.set_content("")
             self.position.setMaximum(0)
             return
-        self.target_preview.setText(target.get_text())
+        self.target_preview.set_content(target.get_text())
         self.position.setMaximum(len(target.get_text()))
+        self.target_preview.set_position(self.position.value())
+
+    def _position_changed(self, value):
+        self.position_hint.setText(f"{value}文字目")
+        self.target_preview.set_position(value)
 
     def _asset_changed(self, _index=None):
         asset = self.assets.get(self.asset_combo.currentData())
@@ -605,3 +696,13 @@ class InlineImagePanel(QDialog):
                     os.remove(rendered_path)
             except OSError:
                 pass
+
+
+def _target_label(name, text):
+    """差し込み先プルダウン用に、カギ名と本文の先頭を組み合わせる。"""
+    summary = text.replace("\n", " ").strip()
+    if len(summary) > 16:
+        summary = summary[:16] + "…"
+    if not summary:
+        return name
+    return f"{name}：{summary}"
