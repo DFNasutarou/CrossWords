@@ -52,6 +52,7 @@ def create_inline_image(
     width,
     height,
     blackout=BLACKOUT_NONE,
+    line_break=False,
 ):
     return normalize_inline_image(
         {
@@ -61,6 +62,7 @@ def create_inline_image(
             "width": width,
             "height": height,
             "blackout": blackout,
+            "line_break": line_break,
         }
     )
 
@@ -95,6 +97,8 @@ def normalize_inline_image(value, text_length=None):
         "width": width,
         "height": height,
         "blackout": blackout,
+        # 画像の直後で改行する（旧データには無いので既定 False）
+        "line_break": bool(value.get("line_break", False)),
     }
 
 

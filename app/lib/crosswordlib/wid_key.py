@@ -424,11 +424,16 @@ class BlackOutText(EditableTextWidget):
             image["asset_id"],
             mode,
         )
+        line_break = "<br>" if image.get("line_break") else ""
         if not image_source:
-            return '<span style="color:#aa0000">［画像なし］</span>'
+            return (
+                '<span style="color:#aa0000">［画像なし］</span>'
+                + line_break
+            )
         return (
             f'<img src="{html.escape(image_source, quote=True)}" '
             f'width="{image["width"]}" height="{image["height"]}" />'
+            + line_break
         )
 
     @classmethod

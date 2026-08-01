@@ -55,6 +55,18 @@ class InlineImagesTest(unittest.TestCase):
 
         self.assertEqual(image["blackout"], BLACKOUT_NONE)
 
+    def test_line_break_flag_round_trip(self):
+        # 旧データ（フラグ無し）は False、指定すれば保持される
+        legacy = normalize_inline_image({"asset_id": "asset"})
+        with_break = create_inline_image(
+            "asset", 0, 80, 40, line_break=True
+        )
+        renormalized = normalize_inline_image(with_break)
+
+        self.assertFalse(legacy["line_break"])
+        self.assertTrue(with_break["line_break"])
+        self.assertTrue(renormalized["line_break"])
+
     def test_skips_invalid_entries_and_sorts_by_position(self):
         images = normalize_inline_images(
             [

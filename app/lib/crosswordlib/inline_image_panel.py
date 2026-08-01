@@ -261,6 +261,10 @@ class InlineImagePanel(QDialog):
             self.blackout.findData(BLACKOUT_OPAQUE)
         )
 
+        self.line_break = QCheckBox(
+            "画像の直後で改行する（1行目に画像、2行目から文章）"
+        )
+
         self.after_preview = QLabel()
         self.after_preview.setWordWrap(True)
         self.after_preview.setTextFormat(Qt.TextFormat.RichText)
@@ -273,6 +277,7 @@ class InlineImagePanel(QDialog):
         form.addRow("挿入する文字位置", position_widget)
         form.addRow("表示サイズ", size_widget)
         form.addRow("黒塗り方法", self.blackout)
+        form.addRow("改行", self.line_break)
         form.addRow("挿入後のイメージ", self.after_preview)
 
         self.width.valueChanged.connect(self._refresh_after_preview)
@@ -280,6 +285,7 @@ class InlineImagePanel(QDialog):
         self.blackout.currentIndexChanged.connect(
             self._refresh_after_preview
         )
+        self.line_break.toggled.connect(self._refresh_after_preview)
         base.addWidget(form_widget)
 
         operation_row = QHBoxLayout()
@@ -377,6 +383,7 @@ class InlineImagePanel(QDialog):
             self.width.value(),
             self.height.value(),
             self.blackout.currentData(),
+            self.line_break.isChecked(),
         )
         target.add_inline_image(image)
         self._refresh_placement_list(image["id"])
@@ -465,6 +472,7 @@ class InlineImagePanel(QDialog):
             "width": self.width.value(),
             "height": self.height.value(),
             "blackout": self.blackout.currentData(),
+            "line_break": self.line_break.isChecked(),
         }
         current_target_index = self.target_combo.currentIndex()
         if previous_target is target:
@@ -578,6 +586,8 @@ class InlineImagePanel(QDialog):
                     f"{image['width']}×{image['height']} px｜"
                     f"{blackout_names[image['blackout']]}"
                 )
+                if image.get("line_break"):
+                    text += "｜改行"
                 item = QListWidgetItem(text)
                 item.setData(
                     Qt.ItemDataRole.UserRole,
@@ -625,6 +635,7 @@ class InlineImagePanel(QDialog):
                 "width": self.width.value(),
                 "height": self.height.value(),
                 "blackout": self.blackout.currentData(),
+                "line_break": self.line_break.isChecked(),
             }
             # 差し込み済み項目を編集中ならその項目を置き換えて表示する
             replaced = False
@@ -734,6 +745,7 @@ class InlineImagePanel(QDialog):
         blackout_index = self.blackout.findData(image["blackout"])
         if blackout_index >= 0:
             self.blackout.setCurrentIndex(blackout_index)
+        self.line_break.setChecked(bool(image.get("line_break", False)))
         self._refresh_after_preview()
 
     def _current_target(self):
