@@ -386,20 +386,28 @@ class BlackOutText(EditableTextWidget):
             self.label.updateGeometry()
             return
 
+        self.label.setTextFormat(Qt.TextFormat.RichText)
+        self.label.setText(
+            self.render_rich_text(self._plain_text, self._inline_images)
+        )
+        self.label.updateGeometry()
+
+    @classmethod
+    def render_rich_text(cls, text, images):
+        """本文と差し込み画像一覧から表示用の RichText を生成する。
+
+        images は position 昇順で並んでいること。
+        画像差し込みパネルの「挿入後のイメージ」プレビューでも使う。
+        """
         fragments = []
         text_position = 0
-        for image in self._inline_images:
+        for image in images:
             position = image["position"]
-            fragments.append(
-                self._html_text(self._plain_text[text_position:position])
-            )
-            fragments.append(self._image_html(image))
+            fragments.append(cls._html_text(text[text_position:position]))
+            fragments.append(cls._image_html(image))
             text_position = position
-        fragments.append(self._html_text(self._plain_text[text_position:]))
-
-        self.label.setTextFormat(Qt.TextFormat.RichText)
-        self.label.setText("".join(fragments))
-        self.label.updateGeometry()
+        fragments.append(cls._html_text(text[text_position:]))
+        return "".join(fragments)
 
     @staticmethod
     def _html_text(text):
@@ -409,7 +417,8 @@ class BlackOutText(EditableTextWidget):
             .replace("\n", "<br>")
         )
 
-    def _image_html(self, image):
+    @classmethod
+    def _image_html(cls, image):
         mode = image["blackout"] if BlackOutText.black else BLACKOUT_NONE
         image_source = BlackOutText._image_source(
             image["asset_id"],

@@ -261,11 +261,25 @@ class InlineImagePanel(QDialog):
             self.blackout.findData(BLACKOUT_OPAQUE)
         )
 
+        self.after_preview = QLabel()
+        self.after_preview.setWordWrap(True)
+        self.after_preview.setTextFormat(Qt.TextFormat.RichText)
+        self.after_preview.setStyleSheet(
+            "padding: 8px; background: #ffffff; border: 1px solid #cccccc;"
+        )
+
         form.addRow("差し込み先", self.target_combo)
         form.addRow("対象の文", self.target_preview)
         form.addRow("挿入する文字位置", position_widget)
         form.addRow("表示サイズ", size_widget)
         form.addRow("黒塗り方法", self.blackout)
+        form.addRow("挿入後のイメージ", self.after_preview)
+
+        self.width.valueChanged.connect(self._refresh_after_preview)
+        self.height.valueChanged.connect(self._refresh_after_preview)
+        self.blackout.currentIndexChanged.connect(
+            self._refresh_after_preview
+        )
         base.addWidget(form_widget)
 
         operation_row = QHBoxLayout()
@@ -574,20 +588,67 @@ class InlineImagePanel(QDialog):
                     selected_item = item
         if selected_item:
             self.placement_list.setCurrentItem(selected_item)
+        self._refresh_after_preview()
 
     def _target_changed(self, _index=None):
         target = self._current_target()
         if target is None:
             self.target_preview.set_content("")
             self.position.setMaximum(0)
+            self._refresh_after_preview()
             return
         self.target_preview.set_content(target.get_text())
         self.position.setMaximum(len(target.get_text()))
         self.target_preview.set_position(self.position.value())
+        self._refresh_after_preview()
 
     def _position_changed(self, value):
         self.position_hint.setText(f"{value}文字目")
         self.target_preview.set_position(value)
+        self._refresh_after_preview()
+
+    def _refresh_after_preview(self, _value=None):
+        if not hasattr(self, "after_preview"):
+            return
+        target = self._current_target()
+        if target is None:
+            self.after_preview.setText("")
+            return
+
+        images = target.get_inline_images()
+        asset_id = self.asset_combo.currentData()
+        if asset_id:
+            candidate = {
+                "id": "__preview__",
+                "asset_id": asset_id,
+                "position": self.position.value(),
+                "width": self.width.value(),
+                "height": self.height.value(),
+                "blackout": self.blackout.currentData(),
+            }
+            # 差し込み済み項目を編集中ならその項目を置き換えて表示する
+            replaced = False
+            item = self.placement_list.currentItem()
+            if item is not None:
+                target_index, image_id = item.data(
+                    Qt.ItemDataRole.UserRole
+                )
+                if self.targets[target_index][1] is target:
+                    for index, image in enumerate(images):
+                        if image["id"] == image_id:
+                            candidate["id"] = image_id
+                            images[index] = candidate
+                            replaced = True
+                            break
+            if not replaced:
+                images.append(candidate)
+            images.sort(
+                key=lambda image: (image["position"], str(image["id"]))
+            )
+
+        self.after_preview.setText(
+            BlackOutText.render_rich_text(target.get_text(), images)
+        )
 
     def _asset_changed(self, _index=None):
         asset = self.assets.get(self.asset_combo.currentData())
@@ -616,6 +677,7 @@ class InlineImagePanel(QDialog):
         else:
             self.asset_preview.setPixmap(QPixmap())
             self.asset_preview.setText("画像を登録してください")
+        self._refresh_after_preview()
 
     def _set_default_size(self, asset):
         scale = min(1.0, 160 / max(asset["width"], asset["height"]))
@@ -672,6 +734,7 @@ class InlineImagePanel(QDialog):
         blackout_index = self.blackout.findData(image["blackout"])
         if blackout_index >= 0:
             self.blackout.setCurrentIndex(blackout_index)
+        self._refresh_after_preview()
 
     def _current_target(self):
         index = self.target_combo.currentIndex()
