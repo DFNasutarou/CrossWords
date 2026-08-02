@@ -649,12 +649,18 @@ class BlackOutText(EditableTextWidget):
             painter.setPen(Qt.PenStyle.NoPen)
             painter.setBrush(BlackOutText.black_color)
             for square in self.data:
+                if square[0][0] >= square[0][1]:
+                    continue
                 t = self.square_exchange(square)
                 painter.drawRect(QRect(*t))
 
-            painter.setBrush(BlackOutText.ghost_color)
-            t = self.square_exchange(self.ghost)
-            painter.drawRect(QRect(*t))
+            # 幅0のゴースト（非ドラッグ時）は描かない。描くと文頭に
+            # 画像があるとき画像幅の補正で画像の真上にピンクの矩形が
+            # 出てしまう
+            if self.ghost[0][0] < self.ghost[0][1]:
+                painter.setBrush(BlackOutText.ghost_color)
+                t = self.square_exchange(self.ghost)
+                painter.drawRect(QRect(*t))
 
             painter.end()
 
