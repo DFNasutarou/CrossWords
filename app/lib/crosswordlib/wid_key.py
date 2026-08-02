@@ -813,7 +813,9 @@ class KeyGroup(QWidget):
         ]
 
         for key in self.widgets:
-            self.base.addWidget(key)
+            # 本文が複数行のとき、カギ番号・答えが上下中央に
+            # ずれないよう1行目の高さ（上端）に揃える
+            self.base.addWidget(key, 0, Qt.AlignmentFlag.AlignTop)
 
         # マージン設定
         self.base.setSpacing(8)
