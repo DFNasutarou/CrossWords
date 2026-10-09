@@ -1,0 +1,208 @@
+:root {
+  --bg: #f6f5f2;
+  --panel: #ffffff;
+  --text: #1f1f1f;
+  --muted: #6b6b6b;
+  --line: #d8d6d0;
+  --accent: #2f6fd6;
+  --accent-soft: #dce8fb;
+  --word: #fff4c2;
+  --danger: #c0392b;
+  --cell-line: #222222;
+  color-scheme: light;
+  font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+button, select, input, textarea { font: inherit; color: inherit; }
+
+button, select {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.danger { color: var(--danger); }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.toolbar h1 { font-size: 18px; margin: 0 8px 0 0; }
+.toolbar-group { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.file-name { color: var(--text); font-weight: 600; }
+.dirty { color: var(--danger); font-weight: normal; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(320px, 1fr);
+  gap: 16px;
+  padding: 0 16px 32px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+}
+.column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.panel h2 { font-size: 15px; margin: 0 0 8px; }
+.hint { font-size: 12px; color: var(--muted); margin: 6px 0 10px; line-height: 1.6; }
+kbd {
+  font-family: inherit;
+  background: #f0efeb;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.title-input {
+  width: 100%;
+  font-size: 18px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  resize: vertical;
+}
+
+.board-tools { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.board-tools label { display: flex; gap: 6px; align-items: center; font-size: 13px; }
+.segmented { display: inline-flex; }
+.segmented button { border-radius: 0; margin-left: -1px; }
+.segmented button:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+.segmented button:last-child { border-radius: 0 6px 6px 0; }
+.segmented button.active { background: var(--accent); border-color: var(--accent); color: #fff; position: relative; }
+
+.board-wrap { overflow-x: auto; padding: 2px; }
+.board {
+  display: grid;
+  width: max-content;
+  border: 2px solid var(--cell-line);
+  position: relative;
+  user-select: none;
+}
+.cell {
+  position: relative;
+  border: 1px solid var(--cell-line);
+  margin: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #fff;
+}
+.cell.black { background: var(--cell-line); }
+.cell.in-word { background: var(--word); }
+.cell.selected { background: var(--accent-soft); outline: 3px solid var(--accent); outline-offset: -3px; z-index: 1; }
+.cell.double::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border: 1px solid var(--cell-line);
+  pointer-events: none;
+}
+.cell .number {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 11px;
+  line-height: 1;
+}
+.cell .char { font-size: 26px; line-height: 1; }
+.mode-black .cell, .mode-double .cell { cursor: crosshair; }
+
+.board-input {
+  /* IME の変換候補が選択マスの近くに出るよう、マスの上に透明で重ねる */
+  position: absolute;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.quick-textarea {
+  width: 100%;
+  font-family: "MS Gothic", "Osaka-Mono", monospace;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+  resize: vertical;
+}
+.status-ok { color: #2e7d32; font-size: 13px; margin: 6px 0; }
+.errors { color: var(--danger); font-size: 13px; margin: 6px 0; padding-left: 20px; }
+.row-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.clues { display: flex; flex-direction: column; gap: 18px; }
+.clue-heading {
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-bottom: 6px;
+  width: 100%;
+}
+.clue-heading:hover, .clue-heading:focus { border-color: var(--line); }
+.clue {
+  display: grid;
+  grid-template-columns: 2.4em minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  padding: 4px 0;
+  border-top: 1px dashed #eceae5;
+}
+.clue-number { text-align: right; font-weight: 700; padding-top: 5px; }
+.clue-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.clue-body textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 6px;
+  resize: vertical;
+}
+.clue-answer {
+  padding-top: 5px;
+  color: var(--muted);
+  font-family: "MS Gothic", monospace;
+  letter-spacing: 0.08em;
+  white-space: pre;
+}
+.extras { display: flex; gap: 6px; font-size: 11px; color: var(--muted); }
+.extras span { background: #f0efeb; border-radius: 4px; padding: 0 5px; }
+@media (max-width: 600px) {
+  .toolbar { position: static; }
+  .cell .char { font-size: 20px; }
+}
