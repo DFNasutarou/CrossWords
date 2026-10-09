@@ -21,6 +21,7 @@ from app.lib.crosswordlib.const_color import Col
 from app.lib.crosswordlib.geometry import scaled_dimensions
 from app.lib.crosswordlib.inline_image_panel import InlineImagePanel
 from app.lib.crosswordlib.board_enumerator_panel import BoardEnumeratorPanel
+from app.lib.crosswordlib.clear_helpers import clear_title_widget
 from app.lib.crosswordlib.inline_images import (
     IMAGE_ASSETS_KEY,
     normalize_image_assets,
@@ -190,6 +191,8 @@ class CrossWord(QWidget):
     def clear_board_and_keys(self):
         self.cell_board.clear()
         self.key.clear_clues()
+        clear_title_widget(self.title)
+        self.world.data[WorldSetting.TITLE_TEXT] = ""
         self.world_update()
 
     def switch_title(self):

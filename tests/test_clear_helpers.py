@@ -3,6 +3,7 @@ import unittest
 from app.lib.crosswordlib.clear_helpers import (
     clear_cells,
     clear_clue_widgets,
+    clear_title_widget,
 )
 
 
@@ -73,6 +74,26 @@ class ClearCluesTest(unittest.TestCase):
         self.assertEqual(key_group.text.text, "")
         self.assertEqual(key_group.text.squares, [])
         self.assertEqual(key_group.answer.text, "答え")
+
+
+class FakeTitle(FakeText):
+    def __init__(self, text="指示文"):
+        super().__init__(text)
+        self.images = ["画像"]
+
+    def reset_inline_images(self, images):
+        self.images = images
+
+
+class ClearTitleTest(unittest.TestCase):
+    def test_clears_title_text_blackouts_and_images(self):
+        title = FakeTitle()
+
+        clear_title_widget(title)
+
+        self.assertEqual(title.text, "")
+        self.assertEqual(title.squares, [])
+        self.assertEqual(title.images, [])
 
 
 if __name__ == "__main__":

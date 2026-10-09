@@ -16,3 +16,10 @@ def clear_clue_widgets(row_title, col_title, key_groups):
         if hasattr(key_group.text, "reset_inline_images"):
             key_group.text.reset_inline_images([])
         key_group.text.set_text("")
+
+
+def clear_title_widget(title):
+    title.reset_square([])
+    if hasattr(title, "reset_inline_images"):
+        title.reset_inline_images([])
+    title.set_text("")

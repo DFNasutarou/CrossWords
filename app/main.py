@@ -171,8 +171,8 @@ class Notify(formlib.ApplicationNotify):
         answer = QMessageBox.question(
             self.app.window,
             "盤面とカギを全部消す",
-            "盤面の文字・黒マスと、すべてのカギ文・黒塗り・"
-            "カギ文内の差し込み画像を消します。\n"
+            "盤面の文字・黒マスと、指示文・すべてのカギ文・黒塗り・"
+            "差し込み画像を消します。\n"
             "この操作を実行しますか？",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No,
